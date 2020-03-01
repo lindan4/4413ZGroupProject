@@ -1,0 +1,992 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  title: MUGA Bookstore
+  version: "1.0"
+servers:
+- url: /
+paths:
+  /api/v1/customers:
+    post:
+      operationId: addCustomer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCustomerDTO'
+        required: true
+      responses:
+        "201": {}
+        "409": {}
+        "500": {}
+      summary: Add Customer
+      tags:
+      - customers
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: customers
+  /api/v1/customers/{username}/login:
+    post:
+      operationId: customerLogin
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerLoginDTO'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerLoginResponse'
+      summary: Login
+      tags:
+      - customers
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: customers
+  /api/v1/customers/{username}/logout:
+    delete:
+      operationId: customerLogout
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "401": {}
+      security:
+      - bearer: []
+      summary: Logout
+      tags:
+      - customers
+      x-accepts: application/json
+      x-tags:
+      - tag: customers
+  /api/v1/customers/{username}/shopping-cart:
+    patch:
+      operationId: updateShoppingCart
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateShoppingCartDTO'
+        required: true
+      responses:
+        "204": {}
+        "401": {}
+        "403": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Update Shopping Cart
+      tags:
+      - customers
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: customers
+  /api/v1/books:
+    get:
+      description: List the books from this bookstore
+      operationId: listBooks
+      parameters:
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: order-by
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort-by
+        required: false
+        schema:
+          enum:
+          - title
+          - price
+          - publicationDate
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: price[lte]
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: price[gte]
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: category
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Book'
+                type: array
+      summary: List Books
+      tags:
+      - books
+      x-accepts: application/json
+      x-tags:
+      - tag: books
+  /api/v1/books/{bookId}:
+    get:
+      operationId: getBook
+      parameters:
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        "404": {}
+        "500": {}
+      summary: Get Book
+      tags:
+      - books
+      x-accepts: application/json
+      x-tags:
+      - tag: books
+  /api/v1/books/{bookId}/reviews:
+    get:
+      operationId: listBookReviews
+      parameters:
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: order-by
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort-by
+        required: false
+        schema:
+          enum:
+          - rating
+          - publicationDate
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: rating[lte]
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: rating[gte]
+        required: false
+        schema:
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: category
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BookReview'
+                type: array
+        "500": {}
+      summary: List Book Reviews
+      tags:
+      - book-reviews
+      x-accepts: application/json
+      x-tags:
+      - tag: book-reviews
+    post:
+      operationId: addBookReview
+      parameters:
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddBookReviewDTO'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+        "401": {}
+        "409": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Add Book Review
+      tags:
+      - book-reviews
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: book-reviews
+  /api/v1/books/{bookId}/reviews/{id}:
+    delete:
+      operationId: deleteBookReview
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Delete Book Review
+      tags:
+      - book-reviews
+      x-accepts: application/json
+      x-tags:
+      - tag: book-reviews
+    get:
+      operationId: getBookReview
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookReview'
+        "404": {}
+        "500": {}
+      summary: Get Book Review
+      tags:
+      - book-reviews
+      x-accepts: application/json
+      x-tags:
+      - tag: book-reviews
+    put:
+      operationId: updateBookReview
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBookReviewDTO'
+        required: true
+      responses:
+        "204": {}
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Update Book Review
+      tags:
+      - book-reviews
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: book-reviews
+  /api/v1/orders:
+    get:
+      operationId: listOrders
+      parameters:
+      - explode: true
+        in: query
+        name: order-by
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - ORDERED
+          - PROCESSED
+          - DENIED
+          type: string
+        style: form
+      - description: YYYY-MM-DD
+        explode: true
+        in: query
+        name: is-after
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: YYYY-MM-DD
+        explode: true
+        in: query
+        name: is-before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort-by
+        required: false
+        schema:
+          enum:
+          - date
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Order'
+                type: array
+        "401": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: List Orders
+      tags:
+      - order
+      x-accepts: application/json
+      x-tags:
+      - tag: order
+    post:
+      operationId: addOrder
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOrderDTO'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        "401": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Add Order
+      tags:
+      - order
+      x-contentType: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: order
+  /api/v1/orders/{orderId}:
+    get:
+      operationId: getOrder
+      parameters:
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderItem'
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Get Order
+      tags:
+      - order
+      x-accepts: application/json
+      x-tags:
+      - tag: order
+  /api/v1/orders/{orderId}/cancel:
+    patch:
+      operationId: cancelOrder
+      parameters:
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204": {}
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Cancel Order
+      tags:
+      - order
+      x-accepts: application/json
+      x-tags:
+      - tag: order
+  /api/v1/orders/{orderId}/items:
+    get:
+      operationId: listOrderItems
+      parameters:
+      - explode: true
+        in: query
+        name: order-by
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort-by
+        required: false
+        schema:
+          enum:
+          - price
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrderItem'
+                type: array
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: List Order Items
+      tags:
+      - order-items
+      x-accepts: application/json
+      x-tags:
+      - tag: order-items
+  /api/v1/orders/{orderId}/items/{bookId}:
+    get:
+      operationId: getOrderItem
+      parameters:
+      - explode: false
+        in: path
+        name: bookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: orderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderItem'
+        "401": {}
+        "403": {}
+        "404": {}
+        "500": {}
+      security:
+      - bearer: []
+      summary: Get Order Item
+      tags:
+      - order-items
+      x-accepts: application/json
+      x-tags:
+      - tag: order-items
+components:
+  schemas:
+    AddCustomerDTO:
+      example:
+        firstName: firstName
+        lastName: lastName
+        password: password
+        username: username
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+      required:
+      - firstName
+      - lastName
+      - password
+      - username
+      type: object
+    CustomerLoginDTO:
+      example:
+        password: password
+        username: username
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    CustomerLoginResponse:
+      example:
+        expiresIn: 0.8008281904610115
+        scope: scope
+        accessToken: accessToken
+        tokenType: bearer
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          enum:
+          - bearer
+          type: string
+        expiresIn:
+          type: number
+        scope:
+          type: string
+      required:
+      - accessToken
+      - expiresIn
+      - scope
+      - tokenType
+      type: object
+    UpdateShoppingCartDTO:
+      example:
+        shoppingCart:
+        - shoppingCart
+        - shoppingCart
+      properties:
+        shoppingCart:
+          description: List of book ids
+          items:
+            type: string
+          type: array
+      required:
+      - shoppingCart
+      type: object
+    Book:
+      example:
+        pages: 5.637376656633329
+        reviewCount: 5.962133916683182
+        price: 0.8008281904610115
+        rating: 6.027456183070403
+        description: description
+        publisher: publisher
+        bid: bid
+        title: title
+        ratingCount: 1.4658129805029452
+        category: SCIENCE
+        publicationDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        bid:
+          type: string
+        title:
+          type: string
+        price:
+          type: number
+        rating:
+          type: number
+        ratingCount:
+          type: number
+        reviewCount:
+          type: number
+        pages:
+          type: number
+        description:
+          type: string
+        publisher:
+          type: string
+        publicationDate:
+          format: date-time
+          type: string
+        category:
+          enum:
+          - SCIENCE
+          - FICTION
+          - ENGINEERING
+          type: string
+      required:
+      - bid
+      - category
+      - description
+      - pages
+      - price
+      - publicationDate
+      - publisher
+      - rating
+      - ratingCount
+      - reviewCount
+      - title
+      type: object
+    AddBookReviewDTO:
+      example:
+        rating: 0.8008281904610115
+        title: title
+        content: content
+      properties:
+        title:
+          type: string
+        rating:
+          type: number
+        content:
+          type: string
+      required:
+      - content
+      - rating
+      - title
+      type: object
+    BookReview:
+      example:
+        lastUpdated: 2000-01-23T04:56:07.000+00:00
+        authorCustomerId: authorCustomerId
+        rating: 0.8008281904610115
+        id: id
+        bid: bid
+        title: title
+        publicationDate: 2000-01-23T04:56:07.000+00:00
+        content: content
+      properties:
+        id:
+          type: string
+        bid:
+          type: string
+        title:
+          type: string
+        rating:
+          type: number
+        authorCustomerId:
+          type: string
+        content:
+          type: string
+        publicationDate:
+          format: date-time
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+      required:
+      - authorCustomerId
+      - bid
+      - content
+      - id
+      - lastUpdated
+      - publicationDate
+      - rating
+      - title
+      type: object
+    UpdateBookReviewDTO:
+      example:
+        rating: 0.8008281904610115
+        title: title
+        content: content
+      properties:
+        title:
+          type: string
+        rating:
+          type: number
+        content:
+          type: string
+      required:
+      - content
+      - rating
+      - title
+      type: object
+    Address:
+      example:
+        zip: zip
+        country: country
+        province: province
+        phone: phone
+        street: street
+        id: id
+      properties:
+        id:
+          type: string
+        street:
+          type: string
+        province:
+          type: string
+        country:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+      required:
+      - country
+      - id
+      - province
+      - street
+      - zip
+      type: object
+    AddOrderDTO:
+      example:
+        bids:
+        - bids
+        - bids
+        shippingAddress:
+          zip: zip
+          country: country
+          province: province
+          phone: phone
+          street: street
+          id: id
+        billingAddress:
+          zip: zip
+          country: country
+          province: province
+          phone: phone
+          street: street
+          id: id
+      properties:
+        bids:
+          description: List of book identifiers
+          items:
+            type: string
+          type: array
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+      required:
+      - bids
+      - billingAddress
+      - shippingAddress
+      type: object
+    Order:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        customerId: customerId
+        shippingAddress:
+          zip: zip
+          country: country
+          province: province
+          phone: phone
+          street: street
+          id: id
+        id: id
+        billingAddress:
+          zip: zip
+          country: country
+          province: province
+          phone: phone
+          street: street
+          id: id
+        status: ORDERED
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        status:
+          enum:
+          - ORDERED
+          - PROCESSED
+          - DENIED
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        date:
+          format: date-time
+          type: string
+      required:
+      - billingAddress
+      - customerId
+      - date
+      - id
+      - shippingAddress
+      - status
+      type: object
+    OrderItem:
+      example:
+        orderId: orderId
+        price: 0.8008281904610115
+        bookId: bookId
+      properties:
+        orderId:
+          type: string
+        bookId:
+          type: string
+        price:
+          type: number
+      required:
+      - bookId
+      - orderId
+      - price
+      type: object
+  securitySchemes:
+    bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
