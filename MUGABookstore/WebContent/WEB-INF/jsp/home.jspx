@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>MUGA Bookstore - Main Page</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/res/index.css" type="text/css" title="cse4413" media="screen, print"/>
+	<link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
 </head>
 <body>
 	<div id="navigationBar">
@@ -35,7 +35,7 @@
 		<button>Search</button>
 	</div>
 
-	<div id="news"></div>
+	<div id="news">What is the meaning of life?</div>
 
 	<div id="featuredBooks"></div>
 
