@@ -15,33 +15,32 @@
 	<link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
 </head>
 <body>
-	<div id="navigationBar">
-		<div id="navigationBarLeft">
-			<button>Home</button>
-			<button>Product Catalog</button>
-			<p>${2 + 2}</p>
-			<p>${pageContext.request.contextPath}</p>
+	<section class="homeSection">
+		<div id="navigationBar">
+				<a href="" class="leftNavigation">Home</a>
+				<a href="" class="leftNavigation">Product Catalog</a>
+			
+				<a href="" class="rightNavigation">Login/Register</a>
+				<a href="" class="rightNavigation">Star</a>
+	
 		</div>
-		
-		<div id="navigationBarRight">
-			<button>Login/Register</button>
-			<button>Star</button>
+		<div id="mainpageHeaderDiv">
+			<h1>MUGA BOOKSTORE</h1>
 		</div>
-
-	</div>
-
-	<div id="searchBar">
-		<input type="text" placeholder="Search"></input>
-		<button>Search</button>
-	</div>
-
-	<div id="news">What is the meaning of life?</div>
-
-	<div id="featuredBooks"></div>
-
-
-
-	<hr />
+	
+		<div id="searchBar">
+			<input type="text" placeholder="Search"></input>
+			<button>Search</button>
+		</div>
+	
+		<div id="news">What is the meaning of life?</div>
+	
+		<div id="featuredBooks"></div>
+	
+	
+	
+		<hr />
+	</section>
 
 	</body>
 	</html>
