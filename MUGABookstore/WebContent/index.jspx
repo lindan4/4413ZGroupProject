@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MUGA Bookstore - Main Page</title>
+</head>
+<body>
+	<div id="navigationBar">
+		<button>Home</button>
+		<button>Product Catalog</button>
+		<button>Login/Register</button>
+		<button>Star</button>
+		
+	</div>
+	
+	<div id="searchBar>
+		
+	</div>
+	
+	<div id="news">
+	</div>
+	
+	<div id="featuredBooks">
+	</div>
+	
+	
+	
+	<hr>
+
+	<h2>
+		Spring MVC Sample<br />
+	</h2>
+	<h3>
+		<a href="welcome.html">Click here..</a>(at @RequestMapping("/welcome"))
+	</h3>
+	<h3>
+		<a href="greeting.html">Click here… </a>(at @RequestMapping("/greeting"))
+	</h3>
+
+</body>
+	</html>
+</jsp:root>
