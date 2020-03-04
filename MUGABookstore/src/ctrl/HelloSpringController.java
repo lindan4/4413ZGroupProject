@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloSpringController {
+	
+	@RequestMapping("/")
+	public ModelAndView returnHome() {
+		return new ModelAndView("home");
+	}
+	
 	@RequestMapping("/welcome")
 	public ModelAndView helloWorld() {
 		String message = "Welcome….";

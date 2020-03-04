@@ -20,6 +20,7 @@
 			<button>Home</button>
 			<button>Product Catalog</button>
 			<p>${2 + 2}</p>
+			<p>${pageContext.request.contextPath}</p>
 		</div>
 		
 		<div id="navigationBarRight">
@@ -42,18 +43,6 @@
 
 	<hr />
 
-	<h2>
-		Spring MVC Sample<br />
-	</h2>
-	<h3>
-		<a href="welcome.html">Click here..</a>(at
-		@RequestMapping("/welcome"))
-	</h3>
-	<h3>
-		<a href="greeting.html">Click here… </a>(at
-		@RequestMapping("/greeting"))
-	</h3>
-
-</body>
+	</body>
 	</html>
 </jsp:root>

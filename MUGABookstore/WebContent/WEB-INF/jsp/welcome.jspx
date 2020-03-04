@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>Greetings, ${name}. This message is from Spring SpringHelloController.java via greeeting.jspx view</p>
+<p>Greetings, ${2 + 2}. This message is from Spring SpringHelloController.java via greeeting.jspx view</p>
 
 </body>
 </html>
