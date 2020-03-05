@@ -21,19 +21,19 @@
 				<a href="" class="leftNavigation">Product Catalog</a>
 			
 				<a href="" class="rightNavigation">Login/Register</a>
-				<a href="" class="rightNavigation">Star</a>
+				<a href="" class="rightNavigation">Cart</a>
 	
 		</div>
 		<div id="mainpageHeaderDiv">
 			<h1>MUGA BOOKSTORE</h1>
 		</div>
 	
-		<div id="searchBar">
+		<div id="searchBar" class="mainElements">
 			<input type="text" placeholder="Search"></input>
 			<button>Search</button>
 		</div>
 	
-		<div id="news">What is the meaning of life?</div>
+		<div id="news" class="mainElements">MUGA Bookstore Grand Opening</div>
 	
 		<div id="featuredBooks"></div>
 	
