@@ -35,23 +35,28 @@
 			</form>
 		</div>
 	
-		<div id="bookInfoSection" class="mainElements">
+		<div id="bookMainSection" class="mainElements">
 			
-			<img src="" alt="no_book_pic.png"></img>
-			<div class="bookInfoSection">
-				<p>${bookInformation.title}</p>
-				<p><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
+			<div id="bookOverview">
+				<img id="bookImg" src="" alt="no_book_pic.png"></img>
+				<div class="bookInfoSection">
+					<p>${bookInformation.title}</p>
+					<p><f:formatNumber type="currency">${bookInformation.price}</f:formatNumber></p>
+					
+					<form action="addToCart" method="POST">
+						<button name="bid" class="itemButton" value="${bookInformation.bid}">Add to Cart</button>
+					</form>
+					
 				
-				<button name="bid" class="itemButton" value="${tuple.bid}">Add to Cart</button>
-				
-			
+				</div>
 			</div>
 			
-			<div class="reviewSection">
-				<p>Reviews</p>
-			</div>
 			
 		</div>	
+		<div id="reviewSection" class="mainElements">
+				<p>Reviews:</p>
+				<input type="text" id="reviewContent" placeholder="Type Review Here"></input>
+		</div>
 	
 	
 	</section>
