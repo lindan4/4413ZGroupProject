@@ -4,10 +4,10 @@ public class BookBean {
 	
 	private String bid;
 	private String title;
-	private String price;
+	private int price;
 	private String category;
 	
-	public BookBean(String bid, String title, String price, String category) {
+	public BookBean(String bid, String title, int price, String category) {
 		this.setBid(bid);
 		this.setTitle(title);
 		this.setPrice(price);
@@ -26,10 +26,10 @@ public class BookBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getCategory() {

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.sql.Connection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,18 @@ public class BookDAO {
 
 	public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
 		
-		
+		LinkedList<BookBean> resultBean = new LinkedList<BookBean>();
+
 		String query = "select * from book where title like ?";
 		List<?> results = jdbcTemplate.queryForList(query, "%"+ queryInput + "%");
-		System.out.println(results.toString());
-		
-		LinkedList<BookBean> resultBean = new LinkedList<BookBean>();
-		
-		
+		for (int i = 0; i < results.size(); i++) {
+			Map<String, Object> itemMap = (Map<String, Object>) results.get(i);
+			String bid = (String) itemMap.get("bid");
+			String title = (String) itemMap.get("title");
+			int price = (int) itemMap.get("price");
+			String category = (String) itemMap.get("category");
+			resultBean.add(new BookBean(bid, title, price, category));
+		}
 		
 		return resultBean;
 	}

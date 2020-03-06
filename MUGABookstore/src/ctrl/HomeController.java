@@ -42,15 +42,14 @@ public class HomeController {
 		
 		try {
 			LinkedList<BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
-			mv.addObject(bb);
+			mv.addObject("queryResults", bb);
+			mv.addObject("queryResultCount", bb.size());
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		System.out.println(mv);
-		
+		}		
 		
 		return mv;
 	}

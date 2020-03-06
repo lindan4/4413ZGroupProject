@@ -56,6 +56,32 @@ body {
 	background-color: #333;
 }
 
+#results > p {
+	font-size: 45px;
+}
+
+.itemResult {
+	border-bottom: 3px solid black;
+}
+
+.itemResultLeft {
+	margin-left: 5px;
+	float: left;
+}
+
+.itemResultRight {
+	float: right;
+}
+
+.itemResultLeft > .itemName {
+	padding: 0;
+	font-size: 20px;
+}
+.itemResultLeft > .itemcategory {
+	padding: 0;
+	color: gray;
+}
+
 
 
 #navigationBar > .leftNavigation {
