@@ -24,10 +24,10 @@ import bean.BookBean;
 @Component
 public class BookDAO {
 	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 	
-	public BookDAO() {
+	public BookDAO(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {

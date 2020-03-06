@@ -12,10 +12,10 @@ import bean.BookBean;
 @Component
 public class BookModel {
 	
-	@Autowired
-	private BookDAO bDao;
+	private final BookDAO bDao;
 	
-	public BookModel() {
+	public BookModel(BookDAO bDao) {
+		this.bDao = bDao;
 	}
 
 
