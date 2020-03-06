@@ -31,8 +31,10 @@ public class BookDAO {
 	}
 
 	public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
-		String query = "select * from book where title like %?%";
-		List<?> results = jdbcTemplate.queryForList(query, queryInput);
+		
+		
+		String query = "select * from book where title like ?";
+		List<?> results = jdbcTemplate.queryForList(query, "%"+ queryInput + "%");
 		System.out.println(results.toString());
 		
 		LinkedList<BookBean> resultBean = new LinkedList<BookBean>();

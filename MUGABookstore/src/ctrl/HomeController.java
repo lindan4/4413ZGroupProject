@@ -42,7 +42,7 @@ public class HomeController {
 		
 		try {
 			LinkedList<BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
-			mv.addObject(mv);
+			mv.addObject(bb);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
