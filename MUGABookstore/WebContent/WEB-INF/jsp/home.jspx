@@ -9,6 +9,7 @@
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
+		
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>MUGA Bookstore - Main Page</title>
@@ -29,8 +30,10 @@
 		</div>
 	
 		<div id="searchBar" class="mainElements">
-			<input type="text" placeholder="Search"></input>
-			<button>Search</button>
+			<form action="searchQuery" method="POST">
+				<input type="text" id="searchQuery" name="searchQuery" placeholder="Search"></input>
+				<button>Search</button>
+			</form>
 		</div>
 	
 		<div id="news" class="mainElements">MUGA Bookstore Grand Opening</div>
