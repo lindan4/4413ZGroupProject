@@ -1,6 +1,8 @@
 package model;
 
 import dao.BookDAO;
+
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,10 @@ public class BookModel {
 
 	public LinkedList<BookBean> retrieveBookQuery(String query) throws Exception {
 		return bDao.retrieveBookQuery(query);
+	}
+	
+	public BookBean getBookByID(String bid) throws Exception {
+		return bDao.getBookByID(bid);
 	}
 
 }

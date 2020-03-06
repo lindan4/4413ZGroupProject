@@ -77,9 +77,15 @@ body {
 	padding: 0;
 	font-size: 20px;
 }
-.itemResultLeft > .itemcategory {
+.itemResultLeft > .itemCategory {
 	padding: 0;
 	color: gray;
+}
+
+
+.itemResultRight .itemButton {
+	background-color: black;
+	color: white;
 }
 
 

@@ -10,6 +10,7 @@ import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,21 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/bookinfo", method = RequestMethod.GET)
+	public ModelAndView getBookInfo(@RequestParam String bid) {
+		ModelAndView bookMV = new ModelAndView("book_info");
+		try {
+			BookBean bbSingle = bookModel.getBookByID(bid);
+			bookMV.addObject("bookInformation", bbSingle);
+
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bookMV;
+	}
+	
 	
 }

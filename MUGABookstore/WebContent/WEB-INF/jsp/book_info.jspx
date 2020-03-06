@@ -11,7 +11,7 @@
 		omit-xml-declaration="true" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>MUGA Bookstore - Search Results</title>
+	<title>Book Info - ${bookInformation.title}</title>
 	<link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
 </head>
 <body>
@@ -35,32 +35,27 @@
 			</form>
 		</div>
 	
-		<div id="results" class="mainElements">
-			<p>There are ${queryResultCount} results</p>
-						
-			<c:forEach var="tuple" items="${queryResults}">
-				<div class="itemResult">
-					<div class="itemResultLeft">
-						<p class="itemName">${tuple.title}</p>
-						<p class="itemCategory">Category: ${tuple.category}</p>
-					</div>
-					<div class="itemResultRight">
-						<p class="itemPrice"><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
-						<form action="bookinfo" method="GET">
-							<button name="bid" class="itemButton" value="${tuple.bid}">View</button>
-						</form>
-					</div>
-				</div>
-			</c:forEach>
+		<div id="bookInfoSection" class="mainElements">
 			
+			<img src="" alt="no_book_pic.png"></img>
+			<div class="bookInfoSection">
+				<p>${bookInformation.title}</p>
+				<p><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
+				
+				<button name="bid" class="itemButton" value="${tuple.bid}">Add to Cart</button>
+				
 			
+			</div>
 			
+			<div class="reviewSection">
+				<p>Reviews</p>
+			</div>
 			
 		</div>	
 	
 	
 	</section>
 
-	</body>
-	</html>
+</body>
+</html>
 </jsp:root>

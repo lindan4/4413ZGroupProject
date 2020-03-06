@@ -48,5 +48,19 @@ public class BookDAO {
 		
 		return resultBean;
 	}
+	
+	public BookBean getBookByID(String bid) throws Exception, SQLException {
+		String query = "select * from book where bid=?";
+		
+		List<?> results = jdbcTemplate.queryForList(query, bid);
+		Map<String, Object> itemMap = (Map<String, Object>) results.get(0);
+		
+		String title = (String) itemMap.get("title");
+		int price = (int) itemMap.get("price");
+		String category = (String) itemMap.get("category");
+		
+		return new BookBean(bid, title, price, category);
+		
+	}
 
 }
