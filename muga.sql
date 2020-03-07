@@ -212,7 +212,7 @@ CREATE TABLE BookReview(
     content VARCHAR(8000) NOT NULL,
     reviewDate DATE,
     FOREIGN KEY (bid) REFERENCES Book(bid)
-);
+); 
 
 INSERT INTO BookReview(bid, reviewer_name, rating, content, reviewDate)
 VALUES("b001", "Unknown", 4, "Worth a read", "2020-03-05");
