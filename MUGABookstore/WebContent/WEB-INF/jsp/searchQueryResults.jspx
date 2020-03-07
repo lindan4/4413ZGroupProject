@@ -36,22 +36,38 @@
 		</div>
 	
 		<div id="results" class="mainElements">
-			<p>There are ${queryResultCount} results</p>
-						
-			<c:forEach var="tuple" items="${queryResults}">
-				<div class="itemResult">
-					<div class="itemResultLeft">
-						<p class="itemName">${tuple.title}</p>
-						<p class="itemCategory">Category: ${tuple.category}</p>
+			<c:choose>
+				<c:when test="${queryResultCount le 0 }">
+					<p>There are no results.</p>
+				</c:when>
+				
+				<c:when test="${queryResultCount eq 1 }">
+					<p>There is 1 result.</p>
+				</c:when>
+				
+				<c:otherwise>
+					<p>There are ${queryResultCount} results</p>
+				</c:otherwise>
+				
+			</c:choose>
+			
+			<c:if test="${queryResultCount ge 1}">
+				<c:forEach var="tuple" items="${queryResults}">
+					<div class="itemResult">
+						<div class="itemResultLeft">
+							<p class="itemName">${tuple.title}</p>
+							<p class="itemCategory">Category: ${tuple.category}</p>
+						</div>
+						<div class="itemResultRight">
+							<p class="itemPrice"><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
+							<form action="bookinfo" method="GET">
+								<button name="bid" class="itemButton" value="${tuple.bid}">View</button>
+							</form>
+						</div>
 					</div>
-					<div class="itemResultRight">
-						<p class="itemPrice"><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
-						<form action="bookinfo" method="GET">
-							<button name="bid" class="itemButton" value="${tuple.bid}">View</button>
-						</form>
-					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</c:if>		
+			
 			
 			
 			

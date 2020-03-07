@@ -55,7 +55,10 @@
 		</div>	
 		<div id="reviewSection" class="mainElements">
 				<p>Reviews:</p>
-				<input type="text" id="reviewContent" placeholder="Type Review Here"></input>
+				<form action="submitReview" method="POST">
+					<input type="text" name="reviewContent" id="reviewContent" placeholder="Type Review Here"></input>
+					<button name="submitReview" class="itemButton" value="true">Submit</button>
+				</form>
 		</div>
 	
 	

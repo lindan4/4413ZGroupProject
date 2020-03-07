@@ -60,32 +60,26 @@ body {
 }
 
 .itemResult {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
 	border-bottom: 2px solid black;
 }
 
-.itemResultLeft {
-	margin-left: 5px;
-	float: left;
-}
 
-.itemResultRight {
-	float: right;
-}
 
-.itemResultLeft > .itemName {
-	padding: 0;
+.itemResultLeft > .itemName, .itemResultRight > .itemPrice {
 	font-size: 20px;
 }
 .itemResultLeft > .itemCategory {
-	padding: 0;
 	color: gray;
 }
 
+.itemResultRight {
+	width: 15%;
+}
 
-
-
-
-.itemResultRight .itemButton {
+.itemButton {
 	background-color: black;
 	color: white;
 }
@@ -93,19 +87,23 @@ body {
 #reviewSection {
 	display: block;
 	white-space: nowrap;
-	
-	background-color: green;
 }
 
 #bookOverview {
 	display: flex;
+	justify-content: space-between;
 	flex-direction: row;
 	padding-bottom: 20px;
 	border-bottom: 2px solid black;
 }
+
+.bookInfoSection {
+	width: 60%;
+}
+
 #reviewContent {
-	width: 50%;
-	height: 50%;
+	width: 400px;
+	height: 100px;
 }
 
 
