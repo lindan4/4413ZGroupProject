@@ -19,7 +19,7 @@
 	<section class="homeSection">
 		<div id="navigationBar">
 				<a href="${pageContext.request.contextPath}" class="leftNavigation">Home</a>
-				<a href="" class="leftNavigation">Product Catalog</a>
+				<a href="${pageContext.request.contextPath}/product-catalogue" class="leftNavigation">Product Catalog</a>
 			
 				<a href="" class="rightNavigation">Login/Register</a>
 				<a href="" class="rightNavigation">Cart</a>
