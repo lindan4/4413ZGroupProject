@@ -33,7 +33,7 @@ public class BookDAO {
 		
 		LinkedList<BookBean> resultBean = new LinkedList<BookBean>();
 
-		String query = "select * from book where title like ?";
+		String query = "select * from Book where title like ?";
 		List<?> results = jdbcTemplate.queryForList(query, "%"+ queryInput + "%");
 		for (int i = 0; i < results.size(); i++) {
 			Map<String, Object> itemMap = (Map<String, Object>) results.get(i);
@@ -48,7 +48,7 @@ public class BookDAO {
 	}
 	
 	public BookBean getBookByID(String bid) throws Exception, SQLException {
-		String query = "select * from book where bid=?";
+		String query = "select * from Book where bid=?";
 		
 		List<?> results = jdbcTemplate.queryForList(query, bid);
 		Map<String, Object> itemMap = (Map<String, Object>) results.get(0);
