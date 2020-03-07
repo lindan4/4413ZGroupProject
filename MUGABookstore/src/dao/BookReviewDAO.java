@@ -1,6 +1,8 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import bean.BookBean;
 import bean.BookReviewBean;
@@ -31,10 +33,15 @@ public class BookReviewDAO {
 			String reviewerName = (String) itemMap.get("reviewer_name");
 			int rating = (int) itemMap.get("rating");
 			String content = (String) itemMap.get("content");
-			brb.add(new BookReviewBean(bid, reviewerName, rating, content));
+			Date date = (Date) itemMap.get("reviewDate");
+			String dateString = date.toString();
+			brb.add(new BookReviewBean(bid, reviewerName, rating, content, dateString));
 		}
 
 		return brb;
+	}
+	
+	public void publishReview(String bid, String reviewerName, String content, String dateString) throws SQLException{
 	}
 
 }

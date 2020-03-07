@@ -58,11 +58,11 @@
 				<form action="submitReview" style="display: flex; flex-direction: column" method="POST">
 					<div id="ratingStarsSet">
 						<p>Star rating:</p>
-						<input type="radio" class="ratingBox" name="oneStar" id="oneStar">1</input>
-						<input type="radio" class="ratingBox" name="twoStar" id="twoStar">2</input>
-						<input type="radio" class="ratingBox" name="threeStar" id="threeStar">3</input>
-						<input type="radio" class="ratingBox" name="fourStar" id="fourStar">4</input>
-						<input type="radio" class="ratingBox" name="fiveStar" id="fiveStar">5</input>
+						<input type="radio" class="ratingBox" name="star" value="1" id="oneStar">1</input>
+						<input type="radio" class="ratingBox" name="star" value="2" id="twoStar">2</input>
+						<input type="radio" class="ratingBox" name="star" value="3" id="threeStar">3</input>
+						<input type="radio" class="ratingBox" name="star" value="4" id="fourStar">4</input>
+						<input type="radio" class="ratingBox" name="star" value="5" id="fiveStar">5</input>
 					</div>
 					<input type="text" name="reviewInputContent" id="reviewInputContent" placeholder="Type Review Here"></input>
 					<button name="submitReview" class="itemButton" value="true">Submit</button>
@@ -74,6 +74,7 @@
 								<div class="reviewItemLeft">
 									<p>Reviewer: ${reviewTuple.reviewerName}</p>
 									<p>Rating: ${reviewTuple.rating}</p>
+									<p>Date: ${reviewTuple.date}</p>
 								</div>
 								<div class="reviewItemRight">
 									<p>${reviewTuple.content}</p>
@@ -83,8 +84,6 @@
 					</c:if>
 				</div>
 		</div>
-	
-	
 	</section>
 
 </body>

@@ -77,6 +77,13 @@ public class HomeController {
 		}
 		return bookMV;
 	}
+	@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
+	public String submitReview(@RequestParam String reviewInputContent, @RequestParam int star) {
+		
+		
+		
+		return "book_info";
+	}
 	
 	
 }
