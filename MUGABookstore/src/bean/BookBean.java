@@ -6,7 +6,9 @@ public class BookBean {
 	private String title;
 	private int price;
 	private String category;
-	
+
+    public BookBean() {
+    }
 	public BookBean(String bid, String title, int price, String category) {
 		this.setBid(bid);
 		this.setTitle(title);
