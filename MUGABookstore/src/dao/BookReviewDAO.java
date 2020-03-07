@@ -41,7 +41,12 @@ public class BookReviewDAO {
 		return brb;
 	}
 	
-	public void publishReview(String bid, String reviewerName, String content, String dateString) throws SQLException{
+	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws SQLException {
+		Date publishedDate = Date.valueOf(dateString);
+		
+		String query = "insert into BookReview(bid, reviewer_name, rating, content, reviewDate) values(?, ?, ?, ?, ?)";
+		jdbcTemplate.update(query, bid, reviewerName, rating, content, publishedDate);
+		
 	}
 
 }

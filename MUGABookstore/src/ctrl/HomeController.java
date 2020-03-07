@@ -1,6 +1,7 @@
 package ctrl;
 
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,9 @@ import model.BookModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,11 +82,21 @@ public class HomeController {
 		return bookMV;
 	}
 	@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
-	public String submitReview(@RequestParam String reviewInputContent, @RequestParam int star) {
+	public String submitReview(@RequestParam String submitBid, @RequestParam String reviewInputContent, @RequestParam int star) {
 		
 		
+		try {
+			Date date = new Date(System.currentTimeMillis());
+			String formattedDate = date.toString();
+			
+			//"Unknown is a placeholder until we can get accounts working."
+			bookModel.publishReview(submitBid, "Unknown", star, reviewInputContent, formattedDate);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return "book_info";
+		return "redirect:/bookinfo?bid=" + submitBid;
 	}
 	
 	

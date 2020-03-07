@@ -65,7 +65,7 @@
 						<input type="radio" class="ratingBox" name="star" value="5" id="fiveStar">5</input>
 					</div>
 					<input type="text" name="reviewInputContent" id="reviewInputContent" placeholder="Type Review Here"></input>
-					<button name="submitReview" class="itemButton" value="true">Submit</button>
+					<button name="submitBid" class="itemButton" value="${bookInformation.bid}">Submit</button>
 				</form>
 				<div id="writtenReviews">
 					<c:if test="${bookReviewCount gt 0}">

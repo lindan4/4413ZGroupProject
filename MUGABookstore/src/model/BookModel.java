@@ -36,7 +36,7 @@ public class BookModel {
 		return brDao.retrieveBookReviews(bid);
 	}
 	
-	public void publishReview(String bid, String reviewerName, String content, String dateString) throws Exception {
-		brDao.publishReview(bid, reviewerName, content, dateString);
+	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws Exception {
+		brDao.publishReview(bid, reviewerName, rating, content, dateString);
 	}
 }
