@@ -1,11 +1,5 @@
 @charset "ISO-8859-1";
 
-body {
-	margin: 0px;
-	padding: 0px;
-	
-}
-
 #mainpageHeaderDiv > h1 {
 	font-family: verdana;
 	text-align: center;
@@ -16,28 +10,9 @@ body {
 .homeSection {
 	display: block;
 }
-#navigationBar {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #333;
-  	overflow: hidden;
-}
-
-#navigationBar > a {
-	color: white;
-	text-decoration: none;
-	font-family: serif-sans;
-	
-}
 
 #searchBar > input {
 	width: 90%;
-}
-
-#navigationBar > a:hover {
-	color: #D3D3D3;
-	text-decoration: none;
-	
 }
 
 .mainElements {
@@ -124,14 +99,4 @@ body {
 
 #writtenReviews {
 	margin-top: 10px;
-}
-
-#navigationBar > .leftNavigation {
-	padding: 5px;
-	float: left;
-}
-
-#navigationBar > .rightNavigation {
-	padding: 5px;
-	float: right;
 }

@@ -13,6 +13,8 @@
 <head>
 	<title>MUGA Bookstore - Search Results</title>
 	<link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
+	<link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
+	<link rel="stylesheet" href="resources/common.css" type="text/css"/>
 </head>
 <body>
 	<section class="homeSection">

@@ -19,8 +19,41 @@
     <html>
     <head>
         <title>Product Catalogue</title>
+        <link rel="stylesheet" href="resources/product_catalogue.css" type="text/css" />
+        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
+        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
     </head>
     <body>
+        <section>
+            <div id="navigationBar">
+                <a href="${pageContext.request.contextPath}" class="leftNavigation">Home</a>
+                <a href="${pageContext.request.contextPath}/product-catalogue" class="leftNavigation">Product Catalog</a>
+
+                <a href="" class="rightNavigation">Login/Register</a>
+                <a href="" class="rightNavigation">Cart</a>
+
+            </div>
+            <div class="container">
+                <ul>
+                    <c:forEach var="book" items="${books}">
+                        <li class="product-list-item">
+                            <div class="product-image"></div>
+                            <div class="product-details">
+                                <a class="product-name">${book.title}</a>
+                                <p class="product-description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur elementum.
+                                </p>
+                                <span class="product-cost">
+                                <f:setLocale value="en_US" scope="session"/>
+                                <f:formatNumber value ="${book.price}" type = "currency" minFractionDigits="2" maxFractionDigits="2"/>
+                            </span>
+                            </div>
+
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </section>
     </body>
 
     </html>
