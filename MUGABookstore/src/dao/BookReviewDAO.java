@@ -25,7 +25,7 @@ public class BookReviewDAO {
 		LinkedList<BookReviewBean> brb = new LinkedList<BookReviewBean>();
 		
 		
-		String query = "select * from bookreview where bid=?";
+		String query = "select * from BookReview where bid=?";
 		
 		List<?> results = jdbcTemplate.queryForList(query, bid);
 		for (int i = 0; i < results.size(); i++) {
