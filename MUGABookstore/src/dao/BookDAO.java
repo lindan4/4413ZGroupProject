@@ -25,11 +25,9 @@ import bean.BookBean;
 @Component
 public class BookDAO {
 	
-	private final JdbcTemplate jdbcTemplate;
-	
-	public BookDAO(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
 
 	public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
 		

@@ -19,11 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Controller
 public class HomeController {
 
-	private final BookModel bookModel;
+	@Autowired
+	private BookModel bookModel;
 
-	public HomeController(BookModel bookModel) {
-		this.bookModel = bookModel;
-	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView returnHome() {
@@ -40,17 +38,22 @@ public class HomeController {
 	public ModelAndView returnSearchResults(@RequestParam String searchQuery) {
 		ModelAndView mv = new ModelAndView("searchQueryResults");
 
-		
-		try {
-			LinkedList<BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
-			mv.addObject("queryResults", bb);
-			mv.addObject("queryResultCount", bb.size());
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		if (!searchQuery.isEmpty()) {
+			try {
+				LinkedList<BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
+				mv.addObject("queryResults", bb);
+				mv.addObject("queryResultCount", bb.size());
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			mv.addObject("queryResultCount", 0);
+		}
+				
 		
 		return mv;
 	}

@@ -46,7 +46,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<p>There are ${queryResultCount} results</p>
+					<p>There are ${queryResultCount} results.</p>
 				</c:otherwise>
 				
 			</c:choose>
