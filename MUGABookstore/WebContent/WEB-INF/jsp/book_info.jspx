@@ -36,7 +36,7 @@
 		</div>
 	
 		<div id="bookMainSection" class="mainElements">
-			
+			<p>Book Information</p>
 			<div id="bookOverview">
 				<img id="bookImg" src="" alt="no_book_pic.png"></img>
 				<div class="bookInfoSection">
@@ -55,10 +55,33 @@
 		</div>	
 		<div id="reviewSection" class="mainElements">
 				<p>Reviews:</p>
-				<form action="submitReview" method="POST">
-					<input type="text" name="reviewContent" id="reviewContent" placeholder="Type Review Here"></input>
+				<form action="submitReview" style="display: flex; flex-direction: column" method="POST">
+					<div id="ratingStarsSet">
+						<p>Star rating:</p>
+						<input type="radio" class="ratingBox" name="oneStar" id="oneStar">1</input>
+						<input type="radio" class="ratingBox" name="twoStar" id="twoStar">2</input>
+						<input type="radio" class="ratingBox" name="threeStar" id="threeStar">3</input>
+						<input type="radio" class="ratingBox" name="fourStar" id="fourStar">4</input>
+						<input type="radio" class="ratingBox" name="fiveStar" id="fiveStar">5</input>
+					</div>
+					<input type="text" name="reviewInputContent" id="reviewInputContent" placeholder="Type Review Here"></input>
 					<button name="submitReview" class="itemButton" value="true">Submit</button>
 				</form>
+				<div id="writtenReviews">
+					<c:if test="${bookReviewCount gt 0}">
+						<c:forEach var="reviewTuple" items="${bookReviews}">
+							<div class="reviewItem">
+								<div class="reviewItemLeft">
+									<p>Reviewer: ${reviewTuple.reviewerName}</p>
+									<p>Rating: ${reviewTuple.rating}</p>
+								</div>
+								<div class="reviewItemRight">
+									<p>${reviewTuple.content}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
 		</div>
 	
 	

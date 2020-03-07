@@ -85,8 +85,9 @@ body {
 }
 
 #reviewSection {
-	display: block;
 	white-space: nowrap;
+	display: flex;
+	flex-direction: column;
 }
 
 #bookOverview {
@@ -101,12 +102,29 @@ body {
 	width: 60%;
 }
 
-#reviewContent {
+#reviewInputContent {
 	width: 400px;
 	height: 100px;
 }
 
+.reviewItem {
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	
+	
+}
 
+.reviewItemRight {
+	border-left: 1px solid gray;
+	margin-left: 40px;
+	padding-left: 5px;
+}
+
+#writtenReviews {
+	margin-top: 10px;
+}
 
 #navigationBar > .leftNavigation {
 	padding: 5px;

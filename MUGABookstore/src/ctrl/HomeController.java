@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.BookBean;
+import bean.BookReviewBean;
 import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,7 +64,11 @@ public class HomeController {
 		ModelAndView bookMV = new ModelAndView("book_info");
 		try {
 			BookBean bbSingle = bookModel.getBookByID(bid);
+			LinkedList<BookReviewBean> bbr = bookModel.retrieveBookReviews(bid);
 			bookMV.addObject("bookInformation", bbSingle);
+			bookMV.addObject("bookReviews", bbr);
+			bookMV.addObject("bookReviewCount", bbr.size());
+
 
 		} 
 		catch (Exception e) {
