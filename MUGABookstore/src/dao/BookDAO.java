@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.sql.Connection;
 
+import mappers.BookRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -24,10 +25,19 @@ import bean.BookBean;
 
 @Component
 public class BookDAO {
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
+    private final BookRowMapper bookRowMapper;
+
+    public BookDAO(final JdbcTemplate jdbcTemplate, final BookRowMapper bookRowMapper) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.bookRowMapper = bookRowMapper;
+    }
+
+    public List<BookBean> listBooks() throws Exception {
+        final String query = "SELECT * FROM Book";
+        return jdbcTemplate.query(query, bookRowMapper);
+    }
 
 	public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
 		
