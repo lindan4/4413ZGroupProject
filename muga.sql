@@ -203,3 +203,16 @@ INSERT INTO VisitEvent(DAY, bid, eventtype)
 VALUES('12252015', 'b001', 'PURCHASE');
 #
 #
+
+DROP TABLE IF EXISTS BookReview;
+CREATE TABLE BookReview(
+    bid VARCHAR(20) NOT NULL,
+    reviewer_name VARCHAR(60) NOT NULL,
+    rating INT CHECK (rating >= 1 and rating <= 5),
+    content VARCHAR(8000) NOT NULL,
+    reviewDate DATE,
+    FOREIGN KEY (bid) REFERENCES Book(bid)
+);
+
+INSERT INTO BookReview(bid, reviewer_name, rating, content, reviewDate)
+VALUES("b001", "Unknown", 4, "Worth a read", "2020-03-05");
