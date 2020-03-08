@@ -1,6 +1,8 @@
 package bean;
 
-public class BookBean {
+import java.util.Comparator;
+
+public class BookBean implements Comparable<BookBean> {
 	
 	private String bid;
 	private String title;
@@ -39,6 +41,13 @@ public class BookBean {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	
+	@Override
+	public int compareTo(BookBean arg0) {
+		// TODO Auto-generated method stub
+		return this.getBid().compareTo(arg0.getBid());
 	}
 	
 	

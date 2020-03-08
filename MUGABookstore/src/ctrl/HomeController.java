@@ -1,21 +1,24 @@
 package ctrl;
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.BookBean;
 import bean.BookReviewBean;
+import bean.ShoppingCartBean;
 import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +101,8 @@ public class HomeController {
 		
 		return "redirect:/bookinfo?bid=" + submitBid;
 	}
+	
+	
 	
 	
 }
