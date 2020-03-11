@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="resources/common.css" type="text/css"/>
 	<link rel="stylesheet" href="resources/shopping_cart.css" type="text/css"/>
     <link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+	<script type="text/javascript" src="resources/shopping_cart.js">;</script>
 	
 	
 </head>
@@ -25,33 +26,56 @@
 				<a href="${pageContext.request.contextPath}/product-catalogue" class="leftNavigation">Product Catalog</a>
 			
 				<a href="" class="rightNavigation">Login/Register</a>
-				<a href="" class="rightNavigation">Cart</a>
+				<a href="${pageContext.request.contextPath}/cart" class="rightNavigation">Cart</a>
 	
 		</div>
 		
 		<div class="container">
 			<div class="row">
-				<c:choose>
-					<c:when test="${shoppingCartCount le 0}">
-						<p>There are no items in your cart</p>
-					</c:when>
-					<c:otherwise>
-						<table class="table table-borderless">
-							<tr>
-								<th>Item</th>
-								<th>Quantity</th>
-								<th>Price</th>
-							</tr>
-							<c:forEach var="tuple" items="${shoppingCart.shoppingBean}">
-								<tr>
-									<td>${tuple.key.title}</td>
-									<td>${tuple.value}</td>
-									<td>${tuple.value * tuple.key.price}</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:otherwise>
-				</c:choose>
+				<div class="col">
+					<c:choose>
+						<c:when test="${shoppingCartCount le 0}">
+							<p>There are no items in your cart</p>
+						</c:when>
+						<c:otherwise>
+							<form action="processCart" method="POST">
+								<table class="table table-borderless">
+									<tr>
+										<th>Item</th>
+										<th>Quantity</th>
+										<th>Price</th>
+									</tr>
+									<c:forEach var="tuple" items="${shoppingCart.shoppingBean}">
+										<tr>
+											<td>
+												<div class="col-lg-1">${tuple.key.title}</div>
+											</td>
+											<td>
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<button type="button" onclick="decreaseQuantity('qt_${tuple.key.bid}')" id="qt_${tuple.key.bid}_dec" class="btn btn-outline-secondary">-</button>
+													</div>
+													<div class="d-flex justify-content-end">
+														<input type="text" class="form-control input-sm-2" id="qt_${tuple.key.bid}" value="${tuple.value}"></input>
+													</div>
+													<div class="input-group-append">
+														<button type="button" onclick="increaseQuantity('qt_${tuple.key.bid}')" id="qt_${tuple.key.bid}_inc" class="btn btn-outline-secondary">+</button>
+													</div>
+												</div>
+											</td>
+											<td><f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber></td>
+										</tr>
+									</c:forEach>
+								</table>
+								<div class="btn-group">
+									<button type="button" class="btn btn-dark">UPDATE</button>
+									<button type="button" class="btn btn-dark">CHECKOUT</button>
+								</div>
+								
+							</form>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 </body>
