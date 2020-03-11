@@ -24,6 +24,8 @@
 	
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/webjars/**" location="/webjars/" />
+	
 	
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

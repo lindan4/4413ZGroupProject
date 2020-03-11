@@ -1,7 +1,5 @@
 package bean;
 
-import java.util.Comparator;
-
 public class BookBean implements Comparable<BookBean> {
 	
 	private String bid;

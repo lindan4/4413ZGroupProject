@@ -38,7 +38,6 @@ public class HomeController {
 //		List<?> results = jdbcTemplate.queryForList(query);
 //		System.out.println(results.toString());
 		
-		
 		return new ModelAndView("home");
 	}
 	
