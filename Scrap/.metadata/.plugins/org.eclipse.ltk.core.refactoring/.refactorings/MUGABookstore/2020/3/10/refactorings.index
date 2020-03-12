@@ -1,0 +1,17 @@
+1583293520794	Delete element
+1583293816785	Rename resource 'index,jspx.jsp'
+1583293834849	Delete element
+1583295453139	Move 'main-service.xml' to 'WEB-INF'
+1583295597022	Rename resource 'main-service.xml'
+1583295757326	Move 'jsp' to 'WEB-INF'
+1583296258598	Move 'index.jspx' to 'WebContent'
+1583343292531	Move 'index.jspx' to 'jsp'
+1583343549582	Move 'index.jspx' to 'WEB-INF'
+1583344380777	Move 'index.jspx' to 'WebContent'
+1583348349742	Move 'index.jspx' to 'jsp'
+1583348955220	Move 'index.jspx' to 'WEB-INF'
+1583348968625	Move 'index.jspx' to 'WebContent'
+1583363020011	Rename resource 'res'
+1583428269738	Rename type 'HelloSpringController'
+1583441328805	Rename type 'BookRetrieveDAO'
+1583441346440	Rename type 'BookRetrieve'

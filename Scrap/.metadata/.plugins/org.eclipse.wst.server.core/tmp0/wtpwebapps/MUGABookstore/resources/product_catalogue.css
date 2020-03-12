@@ -1,0 +1,37 @@
+.product-list-item {
+    list-style-type: none;
+}
+
+.product-image {}
+
+.product-details {}
+
+.product-name {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.product-description {
+    font-size: 0.75rem;
+    color: #4d555c;
+}
+
+.product-cost {
+    display: block;
+    text-align: center;
+    font-size: 1.125rem;
+}
+
+@media (min-width: 75rem) {
+    .product-list-item {
+        display: inline-grid;
+        width: 25%;
+    }
+
+    .container {
+        width: 73.125rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
