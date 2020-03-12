@@ -31,7 +31,12 @@
 		</div>
 		
 		<div class="container">
-			<div class="row">
+			<div class="row mt-5">
+				<div class="col">
+					<h1 class="text-center">Your Shopping Cart</h1>
+				</div>
+			</div>
+			<div class="row mt-5">
 				<div class="col">
 					<c:choose>
 						<c:when test="${shoppingCartCount le 0}">
@@ -45,6 +50,7 @@
 										<th>Quantity</th>
 										<th>Price</th>
 									</tr>
+									<c:set var="cartTotal" value="${0}" />
 									<c:forEach var="tuple" items="${shoppingCart.shoppingBean}">
 										<tr>
 											<td>
@@ -53,23 +59,29 @@
 											<td>
 												<div class="input-group">
 													<div class="input-group-prepend">
-														<button type="button" onclick="decreaseQuantity('qt_${tuple.key.bid}')" id="qt_${tuple.key.bid}_dec" class="btn btn-outline-secondary">-</button>
+														<button type="button" onclick="decreaseQuantity('${tuple.key.bid}')" id="qt_${tuple.key.bid}_dec" class="btn btn-outline-secondary">-</button>
 													</div>
 													<div class="d-flex justify-content-end">
-														<input type="text" class="form-control input-sm-2" id="qt_${tuple.key.bid}" value="${tuple.value}"></input>
+														<input type="text" class="form-control input-sm-2" id="${tuple.key.bid}" name="${tuple.key.bid}" value="${tuple.value}"></input>
 													</div>
 													<div class="input-group-append">
-														<button type="button" onclick="increaseQuantity('qt_${tuple.key.bid}')" id="qt_${tuple.key.bid}_inc" class="btn btn-outline-secondary">+</button>
+														<button type="button" onclick="increaseQuantity('${tuple.key.bid}')" id="qt_${tuple.key.bid}_inc" class="btn btn-outline-secondary">+</button>
 													</div>
 												</div>
 											</td>
-											<td><f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber></td>
+											<c:set var="itemTotal" value="${tuple.value * tuple.key.price}" />
+											<td><f:formatNumber type="currency">${itemTotal}</f:formatNumber></td>
 										</tr>
 									</c:forEach>
-								</table>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>Total Cost: <f:formatNumber type="currency">${cartCost}</f:formatNumber></td>
+									</tr>
+								</table>								
 								<div class="btn-toolbar float-right">
-									<button type="button" class="btn mr-2 btn-dark">UPDATE</button>
-									<button type="button" class="btn btn-dark">CHECKOUT</button>
+									<button action="submit" name="updateCart" value="true" class="btn mr-2 btn-dark">UPDATE</button>
+									<button action="submit" name="checkoutCart" value="true" class="btn btn-dark">CHECKOUT</button>
 								</div>
 								
 							</form>

@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class ShoppingCartModel {
 	@Autowired
 	private BookDAO bDao;
 	
+	
 	public void addToShoppingCart(String bid, ShoppingCartBean sb) throws SQLException, Exception {
 		BookBean bb = bDao.getBookByID(bid);
 		//If the user has an account, then they must have a record in the database, add it there
@@ -30,8 +32,36 @@ public class ShoppingCartModel {
 		else {
 			sb.getShoppingBean().put(bb, 1);
 		}
+	}
+	
+	public void updateShoppingCart(Map<String, String> updateQt, ShoppingCartBean sb) throws SQLException, Exception {
+		//If user has account, then also update in database
+		for (String bookId : updateQt.keySet()) {
+			if (!bookId.equals("updateCart") && !bookId.equals("checkoutCart")) {
+				BookBean bb = bDao.getBookByID(bookId);
+				int qty = Integer.parseInt(updateQt.get(bookId));
+				if (qty <= 0) {
+					sb.getShoppingBean().remove(bb);
+
+				}
+				else {
+					sb.getShoppingBean().put(bb, Integer.parseInt(updateQt.get(bookId)));
+
+				}
+			}
+			
+		}
 		
-		
+	}
+	
+	public float calculateTotal(ShoppingCartBean sb) {
+		float total = 0;
+
+		for (BookBean bb : sb.getShoppingBean().keySet()) {
+			total = total + bb.getPrice() * sb.getShoppingBean().get(bb);
+			
+		}
+		return total;
 	}
 	
 
