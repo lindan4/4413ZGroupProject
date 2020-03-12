@@ -71,6 +71,9 @@
 											</td>
 											<c:set var="itemTotal" value="${tuple.value * tuple.key.price}" />
 											<td><f:formatNumber type="currency">${itemTotal}</f:formatNumber></td>
+											<td>
+												<button action="submit" name="removeBookFromCart" value="${tuple.key.bid}" class="btn btn-s btn-outline-secondary">X</button>
+											</td>
 										</tr>
 									</c:forEach>
 									<tr>

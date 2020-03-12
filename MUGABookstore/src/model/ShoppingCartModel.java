@@ -36,20 +36,28 @@ public class ShoppingCartModel {
 	
 	public void updateShoppingCart(Map<String, String> updateQt, ShoppingCartBean sb) throws SQLException, Exception {
 		//If user has account, then also update in database
-		for (String bookId : updateQt.keySet()) {
-			if (!bookId.equals("updateCart") && !bookId.equals("checkoutCart")) {
-				BookBean bb = bDao.getBookByID(bookId);
-				int qty = Integer.parseInt(updateQt.get(bookId));
-				if (qty <= 0) {
-					sb.getShoppingBean().remove(bb);
-
+		if (updateQt.containsKey("updateCart")) {
+			for (String bookId : updateQt.keySet()) {
+				if (!bookId.equals("updateCart")) {
+					BookBean bb = bDao.getBookByID(bookId);
+					int qty = Integer.parseInt(updateQt.get(bookId));
+					if (qty <= 0) {
+						sb.getShoppingBean().remove(bb);
+	
+					}
+					else {
+						sb.getShoppingBean().put(bb, Integer.parseInt(updateQt.get(bookId)));
+	
+					}
 				}
-				else {
-					sb.getShoppingBean().put(bb, Integer.parseInt(updateQt.get(bookId)));
-
-				}
+				
 			}
+		}
+		if (updateQt.containsKey("removeBookFromCart")) {
+			BookBean bb = bDao.getBookByID(updateQt.get("removeBookFromCart"));
+			sb.getShoppingBean().remove(bb);
 			
+
 		}
 		
 	}
