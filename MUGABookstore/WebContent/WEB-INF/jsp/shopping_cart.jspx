@@ -54,7 +54,7 @@
 									<c:forEach var="tuple" items="${shoppingCart.shoppingBean}">
 										<tr>
 											<td>
-												<div class="col-lg-1">${tuple.key.title}</div>
+												<div class="col-lg-5">${tuple.key.title}</div>
 											</td>
 											<td>
 												<div class="input-group">
