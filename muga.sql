@@ -4,13 +4,16 @@
 * author: name of authors
 * category: as specified
 */
+
+
+
 DROP TABLE IF EXISTS
     Book;
 CREATE TABLE Book(
     bid VARCHAR(20) NOT NULL,
     title VARCHAR(60) NOT NULL,
-    price INT NOT NULL,
-    category ENUM('Science', 'Fiction', 'Engineering') NOT NULL,
+    price DOUBLE(20, 2) NOT NULL,
+    category VARCHAR(20) NOT NULL,
     PRIMARY KEY(bid)
 );
 #
@@ -20,16 +23,16 @@ INSERT INTO Book(bid, title, price, category)
 VALUES(
     'b001',
     'Little Prince',
-    20,
+    20.00,
     'Fiction'
 );
 INSERT INTO Book(bid, title, price, category)
-VALUES('b002', 'Physics', 201, 'Science');
+VALUES('b002', 'Physics', 201.00, 'Science');
 INSERT INTO Book(bid, title, price, category)
 VALUES(
     'b003',
     'Mechanics',
-    100,
+    100.00,
     'Engineering'
 );
 #
@@ -37,6 +40,73 @@ VALUES(
 * id: address id
 *
 */
+
+INSERT INTO Book(bid, title, price, category) VALUES
+('b004', 'The Hobbit', 49.99, 'Fantasy'),
+('b005', 'The Two Towers', 11.16, 'Fantasy'),
+('b006', 'Introduction to Algorithms, 3rd Edition', 144.89, 'Educational'),
+('b007', 'Harry Potter and the Order of the Phoenix', 9.52, 'Fantasy'),
+('b008', 'Harry Potter and the Chamber of Secrets', 9.52, 'Fantasy'),
+('b009', 'A Wrinkle in Time', 7.17, 'Fantasy'),
+('b010', 'The Great Alone', 14.34, 'Historical'),
+('b011', 'Still Me: A Novel', 14.09, 'Ramance'),
+('b012', 'Origin', 14.97, 'Mystery'),
+('b013', 'Beneath a Scarlet Sky', 5.99, 'Historical'),
+('b014', 'A Gentleman in Moscow', 14.09, 'Historical'),
+('b015', 'Fire and Fury: Inside the Trump White House', 14.34, 'Historical'),
+('b016', 'Sapiens: A Brief History of Humankind', 15.44, 'Educational'),
+('b017', 'How to Win Friends and Influence People', 11.65, 'Educational'),
+('b018', 'Principles: Life and Work', 18.83, 'Educational'),
+('b019', 'Born a Crime', 12.44, 'Biography'),
+('b020', 'Grant', 19.38, 'Biography'),
+('b021', 'The Power of Habit', 14.95, 'Educational'),
+('b022', 'The 7 Habits of Highly Effective People', 5.96, 'Educational'),
+('b023', 'I\'ll Be Gone in the Dark', 15.72, 'Mystery'),
+('b024', 'You Are a Badass', 10.13, 'Educational'),
+('b025', 'Leonardo da Vinci', 17.03, 'Biography'),
+('b026', 'Educated: A Memoir', 12.45, 'Biography'),
+('b027', 'Hell\'s Princess', 4.88, 'Crime'),
+('b028', 'The Last Black Unicorn', 11.65, 'Biography'),
+('b029', 'Alexander Hamilton', 13.21, 'Biography'),
+('b030', 'Enlightenment Now', 16.74, 'Philosophy'),
+('b031', 'White Rose, Black Forest', 4.99, 'Romance'),
+('b032', 'Eat What You Watch', 16.51, 'Cookbook'),
+('b033', 'The Sous Vide Cookbook', 14.11, 'Cookbook'),
+('b034', 'Learning Python, 5th Edition', 31.24, 'Educational'),
+('b035', 'Python Crash Course', 27.12, 'Educational'),
+('b036', 'Effective Java (3rd Edition)', 47.42, 'Educational'),
+('b037', 'Compilers: Principles, Techniques, and Tools', 22.93, 'Educational'),
+('b038', 'Introduction to the Theory of Computation', 16.54, 'Educational'),
+('b039', 'Computer Systems: A Programmer\'s Perspective ', 12.82, 'Educational'),
+('b040', 'The Algorithm Design Manual', 76.00, 'Educational'),
+('b041', 'C Programming Language, 2nd Edition', 18.44, 'Educational'),
+('b042', 'Types and Programming Languages (MIT Press)', 82.85, 'Educational'),
+('b043', 'Computer Networks (4th Edition)', 12.47, 'Educational'),
+('b044', 'Ready Player One', 8.81, 'Thriller'),
+('b045', 'Oathbringer', 16.14, 'Fantasy'),
+('b046', 'Russian Roulette', 15.59, 'Adventure'),
+('b047', 'A Brief History of Time', 14.09, 'Science'),
+('b048', 'The 5 Love Languages', 6.87, 'Educational'),
+('b049', 'The Bridge at Andau', 2.64, 'Historical'),
+('b050', 'A Thread of Grace: A Novel', 15.86, 'Historical'),
+('b051', 'The Man from St. Petersburg', 12.33, 'Thriller'),
+('b052', 'Crooked House', 1.74, 'Mystery'),
+('b053', 'The Valley of Amazement', 12.13, 'Historical');
+
+DROP TABLE IF EXISTS BookReview;
+
+CREATE TABLE BookReview(
+    bid VARCHAR(20) NOT NULL,
+    reviewer_name VARCHAR(60) NOT NULL,
+    rating INT CHECK (rating >= 1 and rating <= 5),
+    content VARCHAR(8000) NOT NULL,
+    reviewDate DATE,
+    FOREIGN KEY (bid) REFERENCES Book(bid)
+);
+
+INSERT INTO BookReview(bid, reviewer_name, rating, content, reviewDate)
+VALUES("b001", "Unknown", 4, "Worth a read", "2020-03-05");
+
 DROP TABLE IF EXISTS
     Address;
 CREATE TABLE Address(
@@ -203,16 +273,3 @@ INSERT INTO VisitEvent(DAY, bid, eventtype)
 VALUES('12252015', 'b001', 'PURCHASE');
 #
 #
-
-DROP TABLE IF EXISTS BookReview;
-CREATE TABLE BookReview(
-    bid VARCHAR(20) NOT NULL,
-    reviewer_name VARCHAR(60) NOT NULL,
-    rating INT CHECK (rating >= 1 and rating <= 5),
-    content VARCHAR(8000) NOT NULL,
-    reviewDate DATE,
-    FOREIGN KEY (bid) REFERENCES Book(bid)
-); 
-
-INSERT INTO BookReview(bid, reviewer_name, rating, content, reviewDate)
-VALUES("b001", "Unknown", 4, "Worth a read", "2020-03-05");

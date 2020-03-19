@@ -4,12 +4,12 @@ public class BookBean implements Comparable<BookBean> {
 	
 	private String bid;
 	private String title;
-	private int price;
+	private double price;
 	private String category;
 
     public BookBean() {
     }
-	public BookBean(String bid, String title, int price, String category) {
+	public BookBean(String bid, String title, double price, String category) {
 		this.setBid(bid);
 		this.setTitle(title);
 		this.setPrice(price);
@@ -28,10 +28,10 @@ public class BookBean implements Comparable<BookBean> {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getCategory() {

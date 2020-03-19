@@ -62,8 +62,8 @@ public class ShoppingCartModel {
 		
 	}
 	
-	public float calculateTotal(ShoppingCartBean sb) {
-		float total = 0;
+	public double calculateTotal(ShoppingCartBean sb) {
+		double total = 0;
 
 		for (BookBean bb : sb.getShoppingBean().keySet()) {
 			total = total + bb.getPrice() * sb.getShoppingBean().get(bb);

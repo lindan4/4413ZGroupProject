@@ -49,7 +49,7 @@ public class BookDAO {
 			Map<String, Object> itemMap = (Map<String, Object>) results.get(i);
 			String bid = (String) itemMap.get("bid");
 			String title = (String) itemMap.get("title");
-			int price = (int) itemMap.get("price");
+			double price = (double) itemMap.get("price");
 			String category = (String) itemMap.get("category");
 			resultBean.add(new BookBean(bid, title, price, category));
 		}
@@ -64,7 +64,7 @@ public class BookDAO {
 		Map<String, Object> itemMap = (Map<String, Object>) results.get(0);
 		
 		String title = (String) itemMap.get("title");
-		int price = (int) itemMap.get("price");
+		double price = (double) itemMap.get("price");
 		String category = (String) itemMap.get("category");
 		
 		return new BookBean(bid, title, price, category);
