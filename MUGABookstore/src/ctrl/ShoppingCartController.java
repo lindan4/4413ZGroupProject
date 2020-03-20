@@ -47,7 +47,7 @@ public class ShoppingCartController {
 		return "redirect:/cart";
 	}
 	
-	@RequestMapping(value = "/processCart", method = RequestMethod.POST)
+	@RequestMapping(value = "/processCart", params = "updateCart", method = RequestMethod.POST)
 	public String updateCartValue(Model model, @RequestParam Map<String, String> booksToUpdate, @ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
 		shoppingCartModel.updateShoppingCart(booksToUpdate, shoppingCart);
 		return "redirect:/cart";
