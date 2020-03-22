@@ -30,6 +30,10 @@ public class PaymentController {
 		return mv;
 		
 	}
-
+	
+	@RequestMapping(value = "/submitBillInfo", params = "cancelBillingPost", method = RequestMethod.POST)
+	public String returnToShoppingCart() {
+		return "redirect:/cart";
+	}
 
 }

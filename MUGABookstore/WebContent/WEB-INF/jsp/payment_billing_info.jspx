@@ -17,31 +17,42 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row mt-5 d-flex justify-content-around">
-			<div class="col-md-5">
-				<div id="nameInfo" class="d-flex flex-column">
-					<h4 class="border_bottom">Name</h4>
-					<div class="input-group d-flex justify-content-between" >
-						<input type="text" name="orderFirstName" placeholder="First Name"></input>
-						<input type="text" name="orderLastName" placeholder="Last Name"></input>
+		<div class="row mt-5 d-flex justify-content-between">
+			
+			<div class="col-md-5 border border-black">
+				<form action="submitBillInfo" method="POST">
+					<div id="nameInfo" class="d-flex flex-column">
+						<h4 class="border border-black">Name</h4>
+						<div class="input-group d-flex justify-content-between" >
+							<input type="text" name="orderFirstName" placeholder="First Name"></input>
+							<input type="text" name="orderLastName" placeholder="Last Name"></input>
+						</div>
 					</div>
-				</div>
-				<div id="addressInfo" class="input-group mt-3 d-flex flex-column justify-content-between">
-					<h4 class="border_bottom pl-3">Address Information</h4>
-					<input type="text" name="address" placeholder="Address"></input>
-					<input type="text" name="city" placeholder="City"></input>
-					<input type="text" name="state/province" placeholder="State/Province"></input>
-					<input type="text" name="country" placeholder="Country"></input>
-					<input type="text" name="postal/zipcode" placeholder="Postal Code/Zip Code"></input>
-					<input type="number" name="phoneNo" placeholder="Phone Number"></input>
-				</div>
-				<div id="accountInfo" class="input-group mt-3 d-flex flex-column justify-content-between">
-					<h4 class="border_bottom pl-3">Account Information</h4>
-					<input type="email" name="Email" placeholder="Email Address"></input>
-					<input type="password" name="password" placeholder="Password"></input>
-				</div>
-				
+					<div id="addressInfo">
+						<h4 class="border border-black">Address Information</h4>
+						<div class="input-group mt-3 d-flex flex-column">
+							<input type="text" name="address" placeholder="Address"></input>
+							<input type="text" name="city" placeholder="City"></input>
+							<input type="text" name="state/province" placeholder="State/Province"></input>
+							<input type="text" name="country" placeholder="Country"></input>
+							<input type="text" name="postal/zipcode" placeholder="Postal Code/Zip Code"></input>
+							<input type="number" name="phoneNo" placeholder="Phone Number"></input>
+						</div>
+					</div>
+					<div id="accountInfo">
+						<h4 class="border border-black">Account Information</h4>
+						<div class="input-group mt-3 d-flex flex-column">
+							<input type="email" name="email" placeholder="Email Address"></input>
+							<input type="password" name="password" placeholder="Password"></input>
+						</div>
+					</div>
+					<div class="btn-toolbar mt-4">
+						<button action="submit" class="btn btn-dark mr-2" name="cancelBillingPost" value="true">CANCEL</button>
+						<button action="submit" class="btn btn-dark" name="submitBillingPost" value="true">NEXT</button>
+					</div>
+				</form>
 			</div>
+			
 			<div class="col-md-4">
 				<div id="purchaseOrderArea" class="border">
 						<h4 class="bg-light border-bottom border-dark text-center">Purchase Order</h4>
