@@ -13,10 +13,22 @@ import model.ShoppingCartModel;
 
 @Controller
 public class PaymentController {
+	@Autowired
+	private ShoppingCartModel shoppingCartModel;
 	
 	@RequestMapping(value = "/processCart", params = "checkoutCart", method = RequestMethod.POST)
 	public String checkoutSelected() {
 		return "payment_account_type";
+	}
+	
+	@RequestMapping(value = "/orderBillingInfo", method = RequestMethod.POST)
+	public ModelAndView billingInfo(@SessionAttribute("shoppingCart") ShoppingCartBean sb) {
+		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
+		ModelAndView mv = new ModelAndView("payment_billing_info");
+		mv.addObject("sbTotal", totalSbPrice);
+		mv.addObject("sbCart", sb);
+		return mv;
+		
 	}
 
 

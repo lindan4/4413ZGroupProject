@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Checkout - Billing Information</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+	
+</head>
+<body>
+	<div class="container">
+		<div class="row mt-5 d-flex justify-content-around">
+			<div class="col-md-5">
+				<div id="nameInfo" class="d-flex flex-column">
+					<h4 class="border_bottom">Name</h4>
+					<div class="input-group d-flex justify-content-between" >
+						<input type="text" name="orderFirstName" placeholder="First Name"></input>
+						<input type="text" name="orderLastName" placeholder="Last Name"></input>
+					</div>
+				</div>
+				<div id="addressInfo" class="input-group mt-3 d-flex flex-column justify-content-between">
+					<h4 class="border_bottom pl-3">Address Information</h4>
+					<input type="text" name="address" placeholder="Address"></input>
+					<input type="text" name="city" placeholder="City"></input>
+					<input type="text" name="state/province" placeholder="State/Province"></input>
+					<input type="text" name="country" placeholder="Country"></input>
+					<input type="text" name="postal/zipcode" placeholder="Postal Code/Zip Code"></input>
+					<input type="number" name="phoneNo" placeholder="Phone Number"></input>
+				</div>
+				<div id="accountInfo" class="input-group mt-3 d-flex flex-column justify-content-between">
+					<h4 class="border_bottom pl-3">Account Information</h4>
+					<input type="email" name="Email" placeholder="Email Address"></input>
+					<input type="password" name="password" placeholder="Password"></input>
+				</div>
+				
+			</div>
+			<div class="col-md-4">
+				<div id="purchaseOrderArea" class="border">
+						<h4 class="bg-light border-bottom border-dark text-center">Purchase Order</h4>
+						<c:forEach var="tuple" items="${sbCart.shoppingBean}">
+							<div class="pItem d-flex flex-row justify-content-between">
+								<div class="col-md-5">
+									<p>${tuple.key.title}</p>
+								</div>
+								<div class="col-md-3">
+									<p>x${tuple.value}</p>
+								</div>
+								<div class="col-md-5">
+									<p><f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber></p>
+								</div>
+							</div>
+						</c:forEach>
+						<div class="border-top d-flex pt-2 flex-row justify-content-between" id="cartTotal">
+							<div class="col-md-5">
+									<p>Total Price</p>
+							</div>
+							<div class="col-md-3"><p></p></div>
+							<div class="col-md-5">
+								<p><f:formatNumber type="currency">${sbTotal}</f:formatNumber></p>
+							</div>
+						</div>
+							
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html>
+</jsp:root>

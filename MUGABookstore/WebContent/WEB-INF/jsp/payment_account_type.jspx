@@ -11,9 +11,8 @@
 		omit-xml-declaration="true" />
 	<html>
 <head>
-<title>Checkout - Select Account Type</title>
-<link rel="stylesheet"
-	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+	<title>Checkout - Select Account Type</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
 </head>
 <body>
 
@@ -26,13 +25,15 @@
 		<div class="row mt-5 d-flex flex-row justify-content-around">
 			<div class="col-md-4 border rounded">
 				<div id="userLoginCheckout">
-					<h4>Sign In as User</h4>
+					<div id="headerAccArea" class="border-bottom bg-light pt-2">
+						<h4>Sign In as User</h4>
+					</div>
 					<form action="signinUser" method="POST">
 						<div class="input-group mt-3" id="emailArea">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">Email</span>
 							</div>
-							<input type="text" class="form-control" name="email" placeholder="doe@example.com"></input>
+							<input type="email" class="form-control" name="email" placeholder="doe@example.com"></input>
 						
 						
 						</div>
@@ -51,9 +52,11 @@
 			</div>
 			<div class="col-md-4 border rounded">
 				<div id="guestUserCheckout">
-					<h4>Checkout as Guest</h4>
-					<p>You can create an account as you are making your purchase.</p>
-					<form action="fillinPaymentInfo" method="POST">
+					<div id="headerGuestArea" class="border-bottom bg-light pt-2">
+						<h4>Checkout as Guest</h4>	
+					</div>
+					<p class="pt-2">You can create an account as you are making your purchase.</p>
+					<form action="orderBillingInfo" method="POST">
 						<div class="btn-toolbar mt-3">
 							<button action="submit" name="guestContinue" value="true" class="btn mr-2 btn-dark">CONTINUE</button>
 						</div>
