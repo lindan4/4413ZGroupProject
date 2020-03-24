@@ -13,6 +13,9 @@
 <head>
 	<title>Checkout - Billing Information</title>
 	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="resources/payment.css" type="text/css" />
+	<script type="text/javascript" src="resources/payment.js">;</script>
+	
 	
 </head>
 <body>
@@ -21,22 +24,38 @@
 			
 			<div class="col-md-5 border border-black">
 				<form action="submitBillInfo" method="POST">
-					<div id="nameInfo" class="d-flex flex-column">
+					<div id="nameInfo" class="pb-2 d-flex flex-column">
 						<h4 class="border border-black">Name</h4>
 						<div class="input-group d-flex justify-content-between" >
 							<input type="text" name="orderFirstName" placeholder="First Name"></input>
 							<input type="text" name="orderLastName" placeholder="Last Name"></input>
 						</div>
 					</div>
-					<div id="addressInfo">
-						<h4 class="border border-black">Address Information</h4>
+					<div id="shippingAddressInfo" class="pb-2">
+						<h4 class="border border-black">Shipping Address Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
-							<input type="text" name="address" placeholder="Address"></input>
-							<input type="text" name="city" placeholder="City"></input>
-							<input type="text" name="state/province" placeholder="State/Province"></input>
-							<input type="text" name="country" placeholder="Country"></input>
-							<input type="text" name="postal/zipcode" placeholder="Postal Code/Zip Code"></input>
-							<input type="number" name="phoneNo" placeholder="Phone Number"></input>
+							<input type="text" name="shippingAddress" placeholder="Address"></input>
+							<input type="text" name="shippingCity" placeholder="City"></input>
+							<input type="text" name="shippingState/Province" placeholder="State/Province"></input>
+							<input type="text" name="shippingCountry" placeholder="Country"></input>
+							<input type="text" name="shippingPostal/zipcode" placeholder="Postal Code/Zip Code"></input>
+							<input type="number" name="shippingPhoneNo" placeholder="Phone Number"></input>
+							<div>
+								<label for="infoAndDiff" class="pr-2">Billing Information Is Different</label>
+								<input type="checkbox" name="infoAddDiff" id="infoAddDiff" onclick="toggleBilling();"></input>
+							</div>
+							
+						</div>
+					</div>
+					<div id="billingAddressInfo" class="pb-2" style="display: none;">
+						<h4 class="border border-black">Billing Address Information</h4>
+						<div class="input-group mt-3 d-flex flex-column">
+							<input type="text" name="billingAddress" placeholder="Address"></input>
+							<input type="text" name="billingCity" placeholder="City"></input>
+							<input type="text" name="billingState/province" placeholder="State/Province"></input>
+							<input type="text" name="billingCountry" placeholder="Country"></input>
+							<input type="text" name="billingPostal/zipcode" placeholder="Postal Code/Zip Code"></input>
+							<input type="number" name="billingPhoneNo" placeholder="Phone Number"></input>
 						</div>
 					</div>
 					<div id="accountInfo">

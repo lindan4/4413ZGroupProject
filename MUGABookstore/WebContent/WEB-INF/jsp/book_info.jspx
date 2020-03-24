@@ -40,7 +40,7 @@
 		<div id="bookMainSection" class="mainElements">
 			<p>Book Information</p>
 			<div id="bookOverview">
-				<img id="bookImg" src="" alt="no_book_pic.png"></img>
+				<img id="bookImg" src="resources/no_book_pic.png"  width="300" height="450" alt="no_book_pic.png"></img>
 				<div class="bookInfoSection">
 					<p>${bookInformation.title}</p>
 					<p><f:formatNumber type="currency">${bookInformation.price}</f:formatNumber></p>
