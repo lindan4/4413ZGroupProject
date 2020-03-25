@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page language="java"
+		contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+	<jsp:text>
+		<![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
+	</jsp:text>
+	<jsp:text>
+		<![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
+	</jsp:text>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>MUGA Bookstore - Login</title>
+<link rel="stylesheet" href="resources/index.css" type="text/css"
+	title="cse4413" media="screen, print" />
+<link rel="stylesheet" href="resources/navigation.css" type="text/css" />
+<link rel="stylesheet" href="resources/common.css" type="text/css" />
+<link rel="stylesheet" href="resources/min.css" type="text/css" />
+<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+	<div id="navigationBar">
+		<a href="${pageContext.request.contextPath}" class="leftNavigation">Home</a>
+		<a href="${pageContext.request.contextPath}/product-catalogue"
+			class="leftNavigation">Product Catalog</a> <a
+			href="${pageContext.request.contextPath}/login"
+			class="rightNavigation">Login/Register</a> <a
+			href="${pageContext.request.contextPath}/cart"
+			class="rightNavigation">Cart</a>
+
+	</div>
+	
+	<div class="container">
+		
+			<div class="panel panel-primary">
+				<div class="panel-body">
+				<form method="post" action="loginProcess" role="form">
+					<div class="form-group">
+						<h2>Sign in</h2>
+					</div>
+					<div class="form-group">
+						<strong>Email</strong> <input id="email" name="email" type="email"
+							maxlength="50" class="form-control" required="required"
+							placeholder="doe@example.com"></input>
+					</div>
+					<div class="form-group">
+						<strong>Password</strong> <span class="right"><a href="#">Forgot
+								your password?</a></span> <input name="password" id="password" type="password"
+							maxlength="25" class="form-control" required="required"></input>
+					</div>
+					<div class="form-group" style="padding-top: 12px;">
+						<button id="signinSubmit" type="submit"
+							class="btn btn-success btn-block btn-dark">Sign in</button>
+					</div>
+					<div class="form-group text-center">
+						<hr class="left"></hr>
+						Don't have an account? <a
+							href="${pageContext.request.contextPath}/register">Register
+							here</a>
+						<hr class="right"></hr>
+					</div>
+					
+					
+					
+					</form>
+				</div>
+			</div>
+		
+	</div>
+</body>
+	</html>
+</jsp:root>
