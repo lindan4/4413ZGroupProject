@@ -23,7 +23,7 @@
 				<a href="${pageContext.request.contextPath}/product-catalogue" class="leftNavigation">Product Catalog</a>
 			
 				<a href="" class="rightNavigation">Login/Register</a>
-				<a href="" class="rightNavigation">Cart</a>
+				<a href="/${pageContext.request.contextPath}/cart" class="rightNavigation">Cart</a>
 	
 		</div>
 		<div id="mainpageHeaderDiv">

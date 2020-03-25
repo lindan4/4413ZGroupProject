@@ -1,5 +1,13 @@
 @charset "ISO-8859-1";
 
-#shippingAddressInfo input, #billingAddressInfo input {
+#shippingAddressInfo input, #billingAddressInfo input, #accountInfo input, #paymentInfo input {
 	margin-bottom: 10px;
+}
+
+#expiryMonth, #expiryYear {
+	padding-left: 4px;
+}
+
+#expiryYearInfo {
+	margin-left: 25%;
 }
