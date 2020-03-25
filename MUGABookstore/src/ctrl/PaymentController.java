@@ -35,5 +35,11 @@ public class PaymentController {
 	public String returnToShoppingCart() {
 		return "redirect:/cart";
 	}
+	
+	@RequestMapping(value = "/submitBillInfo", params = "submitBillingPost", method = RequestMethod.POST)
+	public ModelAndView goToConfirmation() {
+		ModelAndView mv = new ModelAndView("payment_order_confirmation");
+		return mv;
+	}
 
 }
