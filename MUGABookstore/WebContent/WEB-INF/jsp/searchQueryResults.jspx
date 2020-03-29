@@ -15,15 +15,31 @@
 	<link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
 	<link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
 	<link rel="stylesheet" href="resources/common.css" type="text/css"/>
+	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+	
 </head>
 <body>
 	<section class="homeSection">
 		<div id="navigationBar">
-				<a href="${pageContext.request.contextPath}" class="leftNavigation">Home</a>
-				<a href="${pageContext.request.contextPath}/product-catalogue" class="leftNavigation">Product Catalog</a>
-			
-				<a href="" class="rightNavigation">Login/Register</a>
-				<a href="/${pageContext.request.contextPath}/cart" class="rightNavigation">Cart</a>
+				<nav class="navbar navbar-expand-md navbar-dark bg-black">
+					<a class="navbar-brand" href="#">MUGA</a>
+					<ul class="nav navbar-nav mr-auto">
+						<li class="nav-item">
+							<a href="${pageContext.request.contextPath}" class="nav-link">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="${pageContext.request.contextPath}/product-catalogue" class="nav-link">Product Catalog</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav ml-auto">
+						<li class="nav-item">
+							<a href="${pageContext.request.contextPath}/login" class="nav-link">Login/Register</a>
+						</li>
+						<li class="nav-item">
+							<a href="${pageContext.request.contextPath}/cart" class="nav-link">Cart</a>
+						</li>
+					</ul>
+				</nav>
 	
 		</div>
 		<div id="mainpageHeaderDiv">
