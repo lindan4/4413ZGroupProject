@@ -6,6 +6,22 @@
 */
 
 
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users(
+    firstname VARCHAR(256),
+    lastname VARCHAR(256),
+    email VARCHAR(256) NOT NULL,
+    password VARCHAR(256) NOT NULL,
+    user_type ENUM('Customer', 'Administrator', 'Partner'),
+    PRIMARY KEY(email)
+
+);
+
+INSERT INTO Users(firstname, lastname, email, password, user_type) VALUES
+('Julian', 'Galati', 'firstcust@example.com', '12345678', 'Customer'),
+('Ryan', 'Lee', 'firstadmin@example.com', '12345678', 'Administrator'),
+('Ell', 'Tay', 'firstpartner@example.com', '12345678', 'Partner');
+
 
 DROP TABLE IF EXISTS
     Book;
