@@ -41,8 +41,10 @@ public class BookDAO {
         final List<BookAuthorBean> bookAuthors = jdbcTemplate.query("SELECT * FROM BookAuthor", bookAuthorRowMapper);
 		for (BookAuthorBean bookAuthor : bookAuthors) {
 			final BookBean book = booksMap.get(bookAuthor.getBid());
-			final AuthorBean author = authorsMap.get(bookAuthor.getAuthorId());
-			book.getAuthors().add(author.getAuthorName());
+			if (book != null) {
+                final AuthorBean author = authorsMap.get(bookAuthor.getAuthorId());
+                book.getAuthors().add(author.getAuthorName());
+            }
 		}
 
 		return books.subList(0, limit);
