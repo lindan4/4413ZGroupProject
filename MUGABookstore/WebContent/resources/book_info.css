@@ -1,0 +1,39 @@
+.book-info-container {
+    padding-top: 2rem
+}
+
+.book-cover {
+    object-fit: cover;
+    width: 100%;
+}
+
+.details-panel {
+    margin-top: 1rem;
+}
+
+.book-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.stars-container {
+    margin-bottom: 0.5rem;
+}
+
+.rating-comment-container {
+    margin-top: 0.25rem;
+}
+
+.rating-comment {
+    color: #696969;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.rating {
+    font-size: 0.8rem;
+}
+
+.checked {
+    color: orange;
+}

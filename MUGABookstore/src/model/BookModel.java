@@ -23,8 +23,8 @@ public class BookModel {
 	@Autowired
 	private BookReviewDAO brDao;
 
-	public List<BookBean> listBooks() throws Exception {
-		return this.bDao.listBooks();
+	public List<BookBean> listBooks(int limit) throws Exception {
+		return this.bDao.listBooks(limit);
 	}
 
 	public LinkedList<BookBean> retrieveBookQuery(String query) throws Exception {
