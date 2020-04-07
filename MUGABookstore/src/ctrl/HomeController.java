@@ -1,24 +1,17 @@
 package ctrl;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.BookBean;
 import bean.BookReviewBean;
-import bean.ShoppingCartBean;
 import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,13 +60,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/bookinfo", method = RequestMethod.GET)
 	public ModelAndView getBookInfo(@RequestParam String bid) {
-		ModelAndView bookMV = new ModelAndView("book_info");
+		ModelAndView mv = new ModelAndView("book_info");
 		try {
-			BookBean bbSingle = bookModel.getBookByID(bid);
-			LinkedList<BookReviewBean> bbr = bookModel.retrieveBookReviews(bid);
-			bookMV.addObject("bookInformation", bbSingle);
-			bookMV.addObject("bookReviews", bbr);
-			bookMV.addObject("bookReviewCount", bbr.size());
+			BookBean book = bookModel.getBookByID(bid);
+			LinkedList<BookReviewBean> bookReviews = bookModel.retrieveBookReviews(bid);
+			mv.addObject("bookInformation", book);
+			mv.addObject("bookReviews", bookReviews);
+			mv.addObject("bookReviewCount", bookReviews.size());
 
 
 		} 
@@ -81,7 +74,7 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return bookMV;
+		return mv;
 	}
 	@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
 	public String submitReview(@RequestParam String submitBid, @RequestParam String reviewInputContent, @RequestParam int star) {

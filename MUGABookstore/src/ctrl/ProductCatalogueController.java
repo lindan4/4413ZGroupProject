@@ -19,7 +19,7 @@ public class ProductCatalogueController {
 
     @RequestMapping(value = "/product-catalogue", method = RequestMethod.GET)
     public ModelAndView getPage( ) throws Exception {
-        final List<BookBean> books = this.bookModel.listBooks();
+        final List<BookBean> books = this.bookModel.listBooks(100);
 
         final ModelAndView mv = new ModelAndView("product_catalogue");
         mv.addObject("books", books);
