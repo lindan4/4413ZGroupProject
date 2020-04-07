@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import bean.UserBean;
@@ -26,9 +27,12 @@ public class UserModel {
 		uDAO.registerUser(ub.getFirstname(), ub.getLastname(), ub.getEmail(), ub.getPassword(), ub.getType());
 	}
 	
-	public UserBean getUserByEmail(String email) throws SQLException, Exception {
-		return uDAO.getUserByEmail(email);
+	public UserBean getUserByEmail(String email, String password) throws SQLException, Exception {
+		return uDAO.getUserByEmail(email, password);
+		
 	}
 	
 
+	
+	
 }

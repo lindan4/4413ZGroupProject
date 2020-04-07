@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.stereotype.Component;
 
 import bean.BookBean;
@@ -15,7 +16,7 @@ import mappers.BookRowMapper;
 import mappers.UserRowMapper;
 
 @Component
-public class UserDAO {
+public class UserDAO   {
 
 	@Autowired
 	private final JdbcTemplate jdbcTemplate;
@@ -39,19 +40,23 @@ public class UserDAO {
 
 	}
 
-	public UserBean getUserByEmail(String email) throws Exception, SQLException {
-		String query = "select * from Users where email=?";
+	public UserBean getUserByEmail(String email, String pwd) throws Exception, SQLException {
+		String query = "select * from Users where email=? AND password=?";
 
-		List<?> results = jdbcTemplate.queryForList(query, email);
+		try {
+		List<?> results = jdbcTemplate.queryForList(query, email, pwd);
 		Map<String, Object> itemMap = (Map<String, Object>) results.get(0);
 
 		String firstname = (String) itemMap.get("firstname");
 		String lastname = (String) itemMap.get("lastname");
 		String password = (String) itemMap.get("password");
 		String type = (String) itemMap.get("user_type");
-
-		return results.size() > 0 ? new UserBean(firstname, lastname, email, password, type) : null;
-
+		
+		return new UserBean(firstname, lastname, email, password, type);
+		}
+		catch(Exception e) {
+		return  null;
+		}
 	}
 	
 	

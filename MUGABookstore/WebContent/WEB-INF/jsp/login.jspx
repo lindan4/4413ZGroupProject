@@ -4,7 +4,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 	<jsp:directive.page language="java"
-		contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+		contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="true"/>
 	<jsp:text>
 		<![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
 	</jsp:text>
@@ -52,9 +52,11 @@
 		
 			<div class="panel panel-primary">
 				<div class="panel-body">
-				<form method="post" action="loginProcess" role="form">
+				<form method="post" action="login" >
 					<div class="form-group">
 						<h2>Sign in</h2>
+					<p style="color:red;">${loginError}</p>
+						
 					</div>
 					<div class="form-group">
 						<strong>Email</strong> <input id="email" name="email" type="email"

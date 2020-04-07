@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: 
+Built-By: JVG
+Build-Jdk: 13.0.2
+Created-By: Maven Integration for Eclipse
 
