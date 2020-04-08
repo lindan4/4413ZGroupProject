@@ -14,12 +14,21 @@
                     <a href="${pageContext.request.contextPath}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="${pageContext.request.contextPath}/product-catalogue" class="nav-link">Product Catalog</a>
+                    <a href="${pageContext.request.contextPath}/product-catalogue" class="nav-link">Product Catalogue</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/login" class="nav-link">Login/Register</a>
+                	<c:choose>
+                   <c:when test="${empty loggedInUser.firstname}">
+								<a href="${pageContext.request.contextPath}/login"
+									class="nav-link">Login/Register</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${pageContext.request.contextPath}/user_account"
+									class="nav-link">Account</a>
+							</c:otherwise>
+						</c:choose>
                 </li>
                 <li class="nav-item">
                     <a href="${pageContext.request.contextPath}/cart" class="nav-link">Cart</a>
