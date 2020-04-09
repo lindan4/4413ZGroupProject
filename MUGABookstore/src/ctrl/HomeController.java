@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,8 +41,8 @@ public class HomeController {
 
 		if (!searchQuery.isEmpty()) {
 			try {
-				LinkedList<BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
-				mv.addObject("queryResults", bb);
+				TreeMap<String,BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
+				mv.addObject("queryResults", bb.values());
 				mv.addObject("queryResultCount", bb.size());
 				
 				

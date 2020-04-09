@@ -20,6 +20,7 @@ public class BookBean implements Comparable<BookBean> {
 	private double price;
 
 	private List<String> authors;
+	private List<String> categories;
 
     public BookBean() {
     	this.authors = new ArrayList<>();
@@ -28,7 +29,8 @@ public class BookBean implements Comparable<BookBean> {
 		this.setBid(bid);
 		this.setTitle(title);
 		this.setPrice(price);
-		this.authors = new ArrayList<>();
+		this.setAuthors(new ArrayList<>());
+		this.setCategories(new ArrayList<>());
 	}
 	
 	public String getBid() {
@@ -128,4 +130,12 @@ public class BookBean implements Comparable<BookBean> {
 	public void setAuthors(List<String> authors) {
 		this.authors = authors;
 	}
+	public List<String> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+	
+	
 }

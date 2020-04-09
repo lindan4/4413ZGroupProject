@@ -83,7 +83,13 @@
 					<div class="itemResult">
 						<div class="itemResultLeft">
 							<p class="itemName">${tuple.title}</p>
-							<p class="itemCategory">Category: ${tuple.category}</p>
+							<div class="d-flex flex-row">
+								<p class="itemCategory">Category:  </p>
+								<c:forEach var="category" items="${tuple.categories}">
+									<p class="itemCategory">${category}, </p>
+								</c:forEach>
+							</div>
+							
 						</div>
 						<div class="itemResultRight">
 							<p class="itemPrice"><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>

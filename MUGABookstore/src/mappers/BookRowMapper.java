@@ -28,6 +28,7 @@ public class BookRowMapper implements RowMapper<BookBean> {
         book.setImageUrl(rs.getString("image_url"));
         book.setPrice(rs.getDouble("price"));
         book.setAuthors(new ArrayList<>());
+        book.setCategories(new ArrayList<>());
 
         return book;
     }

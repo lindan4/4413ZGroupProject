@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 
@@ -46,6 +47,15 @@ public class BookDAO {
                 book.getAuthors().add(author.getAuthorName());
             }
 		}
+		List<?> categories = jdbcTemplate.queryForList("select b.bid, category from Book b, BookCategory bc, Category c where b.bid = bc.bid and bc.category_id = c.category_id");
+		
+		for (int j = 0; j < categories.size(); j++) {
+			Map<String, Object> itemMap = (Map<String, Object>) categories.get(j);
+			String bid = (String) itemMap.get("bid");
+			String category = (String) itemMap.get("category");
+			BookBean singleBook =  booksMap.get(bid);
+			singleBook.getCategories().add(category);
+		}
 
 		return books.subList(0, limit);
 /*        for (BookBean book : books) {
@@ -59,18 +69,27 @@ public class BookDAO {
 
     }
 
-    public LinkedList<BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
+    public TreeMap<String, BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
 
-        LinkedList<BookBean> resultBean = new LinkedList<BookBean>();
+        TreeMap<String, BookBean> resultBean = new TreeMap<String, BookBean>();
 
-        String query = "select * from Book where title like ?";
+        String query = "select * from Book b, BookCategory bc, Category c where b.bid = bc.bid and bc.category_id = c.category_id and b.title like ?";
         List<?> results = jdbcTemplate.queryForList(query, "%" + queryInput + "%");
         for (int i = 0; i < results.size(); i++) {
             Map<String, Object> itemMap = (Map<String, Object>) results.get(i);
             String bid = (String) itemMap.get("bid");
             String title = (String) itemMap.get("title");
             double price = (double) itemMap.get("price");
-            resultBean.add(new BookBean(bid, title, price));
+        	String category = (String) itemMap.get("category");
+
+            if (resultBean.containsKey(bid)) {
+            	resultBean.get(bid).getCategories().add(category);
+            }
+            else {
+            	BookBean b = new BookBean(bid, title, price);
+            	b.getCategories().add(category);
+                resultBean.put(bid, b);
+            }
         }
 
         return resultBean;

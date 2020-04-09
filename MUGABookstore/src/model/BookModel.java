@@ -6,6 +6,7 @@ import dao.BookReviewDAO;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ public class BookModel {
 		return this.bDao.listBooks(limit);
 	}
 
-	public LinkedList<BookBean> retrieveBookQuery(String query) throws Exception {
+	public TreeMap<String,BookBean> retrieveBookQuery(String query) throws Exception {
 		return bDao.retrieveBookQuery(query);
 	}
 	
