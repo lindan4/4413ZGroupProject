@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import bean.UserBean;
-import dao.UserDAO;
 import model.UserModel;
 
 @Controller
@@ -57,16 +57,25 @@ public class LoginController {
 			return "login";
 		}
 
-		// session.setAttribute("loggedInUser", user);
 		this.addUserInSession(user, session);
 		return "redirect:/";
 
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		session.invalidate();
+
+		return "redirect:/";
 	}
 
 	private void addUserInSession(UserBean u, HttpSession session) {
 		session.setAttribute("loggedInUser", u);
 		session.setAttribute("userFirstname", u.getFirstname());
 		session.setAttribute("userEmail", u.getEmail());
+		session.setAttribute("userType", u.getType());
 
 	}
 

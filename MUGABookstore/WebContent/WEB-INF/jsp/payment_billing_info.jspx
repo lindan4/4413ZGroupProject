@@ -3,59 +3,81 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
-		pageEncoding="ISO-8859-1" session="false"/>
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="true" />
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-<html xmlns="http://www.w3.org/1999/xhtml">
+	<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Checkout - Billing Information</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="resources/payment.css" type="text/css" />
-	<script type="text/javascript" src="resources/payment.js">;</script>
-	
-	
+<title>Checkout - Billing Information</title>
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/payment.css" type="text/css" />
+<script type="text/javascript" src="resources/payment.js">
+	;
+</script>
+
+
 </head>
 <body>
 	<div class="container">
 		<div class="row mt-5 d-flex justify-content-between pb-5">
-			
+
 			<div class="col-md-5 border border-black">
 				<form action="submitBillInfo" method="POST">
 					<div id="nameInfo" class="border pb-2 d-flex flex-column">
 						<h4 class="bg-light border-bottom">Name</h4>
-						<div class="input-group d-flex justify-content-between" >
-							<input type="text" name="orderFirstName" placeholder="First Name"></input>
-							<input type="text" name="orderLastName" placeholder="Last Name"></input>
+						<div class="input-group d-flex justify-content-between">
+							<c:choose>
+								<c:when test="${empty loggedInUser.firstname}">
+									<input type="text" name="orderFirstName"
+										placeholder="First Name"></input>
+									<input type="text" name="orderLastName" placeholder="Last Name"></input>
+
+								</c:when>
+								<c:otherwise>
+									<input type="text" name="orderFirstName"
+										value=" ${loggedInUser.firstname}"></input>
+									<input type="text" name="orderLastName"
+										value=" ${loggedInUser.lastname}"></input>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div id="shippingAddressInfo" class="pb-2">
-						<h4 class="bg-light border-bottom">Shipping Address Information</h4>
+						<h4 class="bg-light border-bottom">Shipping Address
+							Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
 							<input type="text" name="shippingAddress" placeholder="Address"></input>
 							<input type="text" name="shippingCity" placeholder="City"></input>
-							<input type="text" name="shippingState/Province" placeholder="State/Province"></input>
-							<input type="text" name="shippingCountry" placeholder="Country"></input>
-							<input type="text" name="shippingPostal/zipcode" placeholder="Postal Code/Zip Code"></input>
-							<input type="number" name="shippingPhoneNo" placeholder="Phone Number"></input>
+							<input type="text" name="shippingState/Province"
+								placeholder="State/Province"></input> <input type="text"
+								name="shippingCountry" placeholder="Country"></input> <input
+								type="text" name="shippingPostal/zipcode"
+								placeholder="Postal Code/Zip Code"></input> <input type="number"
+								name="shippingPhoneNo" placeholder="Phone Number"></input>
 							<div>
-								<label for="infoAndDiff" class="pr-2">Billing Information Is Different</label>
-								<input type="checkbox" name="infoAddDiff" id="infoAddDiff" onclick="toggleBilling();"></input>
+								<label for="infoAndDiff" class="pr-2">Billing
+									Information Is Different</label> <input type="checkbox"
+									name="infoAddDiff" id="infoAddDiff" onclick="toggleBilling();"></input>
 							</div>
-							
+
 						</div>
 					</div>
 					<div id="billingAddressInfo" class="pb-2" style="display: none;">
-						<h4 class="bg-light border-bottom">Billing Address Information</h4>
+						<h4 class="bg-light border-bottom">Billing Address
+							Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
 							<input type="text" name="billingAddress" placeholder="Address"></input>
 							<input type="text" name="billingCity" placeholder="City"></input>
-							<input type="text" name="billingState/province" placeholder="State/Province"></input>
-							<input type="text" name="billingCountry" placeholder="Country"></input>
-							<input type="text" name="billingPostal/zipcode" placeholder="Postal Code/Zip Code"></input>
-							<input type="number" name="billingPhoneNo" placeholder="Phone Number"></input>
+							<input type="text" name="billingState/province"
+								placeholder="State/Province"></input> <input type="text"
+								name="billingCountry" placeholder="Country"></input> <input
+								type="text" name="billingPostal/zipcode"
+								placeholder="Postal Code/Zip Code"></input> <input type="number"
+								name="billingPhoneNo" placeholder="Phone Number"></input>
 						</div>
 					</div>
 					<div id="accountInfo">
@@ -70,88 +92,102 @@
 						<div class="input-group mt-3 d-flex flex-column">
 							<input type="text" name="nameOnCard" placeholder="Name on Card"></input>
 							<div>
-								<input type="number" name="ccNum" placeholder="Credit Card Number"></input>
-								<input type="number" name="cardCVV" placeholder="CVV"></input>
+								<input type="number" name="ccNum"
+									placeholder="Credit Card Number"></input> <input type="number"
+									name="cardCVV" placeholder="CVV"></input>
 							</div>
 							<div class="d-flex flex-row">
 								<div id="expiryMonthInfo" class="d-flex flex-column">
-									<label for="expiryMonth">Expiry Month:</label>
-									<select id="expiryMonth" name="expiryMonth" class="browser-default custom-select">
-									  <option selected="selected">MM</option>
-									  <option value="1">01 - Jan</option>
-									  <option value="2">02 - Feb</option>
-									  <option value="3">03 - Mar</option>
-									  <option value="4">04 - Apr</option>
-									  <option value="5">05 - May</option>
-									  <option value="6">06 - Jun</option>
-									  <option value="7">07 - Jul</option>
-									  <option value="8">08 - Aug</option>
-									  <option value="9">09 - Sept</option>
-									  <option value="10">10 - Oct</option>
-									  <option value="11">11 - Nov</option>
-									  <option value="12">12 - Dec</option>
+									<label for="expiryMonth">Expiry Month:</label> <select
+										id="expiryMonth" name="expiryMonth"
+										class="browser-default custom-select">
+										<option selected="selected">MM</option>
+										<option value="1">01 - Jan</option>
+										<option value="2">02 - Feb</option>
+										<option value="3">03 - Mar</option>
+										<option value="4">04 - Apr</option>
+										<option value="5">05 - May</option>
+										<option value="6">06 - Jun</option>
+										<option value="7">07 - Jul</option>
+										<option value="8">08 - Aug</option>
+										<option value="9">09 - Sept</option>
+										<option value="10">10 - Oct</option>
+										<option value="11">11 - Nov</option>
+										<option value="12">12 - Dec</option>
 									</select>
 								</div>
 								<div id="expiryYearInfo" class="d-flex flex-column">
-									<label for="expiryYear">Expiry Year:</label>								
-									<select id="expiryYear" name="expiryYear" class="browser-default custom-select">
-									  <option selected="selected">YYYY</option>
-									  <option value="2020">2020</option>
-									  <option value="2021">2021</option>
-									  <option value="2022">2022</option>
-									  <option value="2023">2023</option>
-									  <option value="2024">2024</option>
-									  <option value="2025">2025</option>
-									  <option value="2026">2026</option>
-									  <option value="2027">2027</option>
-									  <option value="2028">2028</option>
-									  <option value="2029">2029</option>
-									  <option value="2030">2030</option>
-									  <option value="2031">2031</option>
-									</select>			
+									<label for="expiryYear">Expiry Year:</label> <select
+										id="expiryYear" name="expiryYear"
+										class="browser-default custom-select">
+										<option selected="selected">YYYY</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+										<option value="2026">2026</option>
+										<option value="2027">2027</option>
+										<option value="2028">2028</option>
+										<option value="2029">2029</option>
+										<option value="2030">2030</option>
+										<option value="2031">2031</option>
+									</select>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="btn-toolbar mt-4">
-						<button action="submit" class="btn btn-dark mr-2" name="cancelBillingPost" value="true">CANCEL</button>
-						<button action="submit" class="btn btn-dark" name="submitBillingPost" value="true">NEXT</button>
+						<button action="submit" class="btn btn-dark mr-2"
+							name="cancelBillingPost" value="true">CANCEL</button>
+						<button action="submit" class="btn btn-dark"
+							name="submitBillingPost" value="true">NEXT</button>
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="col-md-4">
 				<div id="purchaseOrderArea" class="border">
-						<h4 class="bg-light border-bottom border-dark text-center">Purchase Order</h4>
-						<c:forEach var="tuple" items="${sbCart.shoppingBean}">
-							<div class="pItem d-flex flex-row justify-content-between">
-								<div class="col-md-5">
-									<p>${tuple.key.title}</p>
-								</div>
-								<div class="col-md-3">
-									<p>x${tuple.value}</p>
-								</div>
-								<div class="col-md-5">
-									<p><f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber></p>
-								</div>
-							</div>
-						</c:forEach>
-						<div class="border-top d-flex pt-2 flex-row justify-content-between" id="cartTotal">
+					<h4 class="bg-light border-bottom border-dark text-center">Purchase
+						Order</h4>
+					<c:forEach var="tuple" items="${sbCart.shoppingBean}">
+						<div class="pItem d-flex flex-row justify-content-between">
 							<div class="col-md-5">
-									<p>Total Price</p>
+								<p>${tuple.key.title}</p>
 							</div>
-							<div class="col-md-3"><p></p></div>
+							<div class="col-md-3">
+								<p>x${tuple.value}</p>
+							</div>
 							<div class="col-md-5">
-								<p><f:formatNumber type="currency">${sbTotal}</f:formatNumber></p>
+								<p>
+									<f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber>
+								</p>
 							</div>
 						</div>
-							
+					</c:forEach>
+					<div
+						class="border-top d-flex pt-2 flex-row justify-content-between"
+						id="cartTotal">
+						<div class="col-md-5">
+							<p>Total Price</p>
+						</div>
+						<div class="col-md-3">
+							<p></p>
+						</div>
+						<div class="col-md-5">
+							<p>
+								<f:formatNumber type="currency">${sbTotal}</f:formatNumber>
+							</p>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 </body>
-</html>
+	</html>
 </jsp:root>
