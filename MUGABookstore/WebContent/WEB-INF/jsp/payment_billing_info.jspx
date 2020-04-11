@@ -80,13 +80,15 @@
 								name="billingPhoneNo" placeholder="Phone Number"></input>
 						</div>
 					</div>
-					<div id="accountInfo">
-						<h4 class="bg-light border-bottom">Account Information</h4>
-						<div class="input-group mt-3 d-flex flex-column">
-							<input type="email" name="email" placeholder="Email Address"></input>
-							<input type="password" name="password" placeholder="Password"></input>
+					<c:if test="${hideUserCreate == false}">
+						<div id="accountInfo">
+							<h4 class="bg-light border-bottom">Account Information</h4>
+							<div class="input-group mt-3 d-flex flex-column">
+								<input type="email" name="email" placeholder="Email Address"></input>
+								<input type="password" name="password" placeholder="Password"></input>
+							</div>
 						</div>
-					</div>
+					</c:if>
 					<div id="paymentInfo">
 						<h4 class="bg-light border-bottom">Payment Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">

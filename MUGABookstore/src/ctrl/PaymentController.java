@@ -23,7 +23,7 @@ public class PaymentController {
 	public ModelAndView checkoutSelected(HttpSession session, @SessionAttribute("shoppingCart") ShoppingCartBean sb) {
 
 		if (session.getAttribute("loggedInUser") != null) {
-			return this.billingInfo(sb);
+			return this.billingInfo(sb, session);
 
 		} else {
 			return new ModelAndView("payment_account_type");
@@ -32,11 +32,17 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "/orderBillingInfo", method = RequestMethod.POST)
-	public ModelAndView billingInfo(@SessionAttribute("shoppingCart") ShoppingCartBean sb) {
+	public ModelAndView billingInfo(@SessionAttribute("shoppingCart") ShoppingCartBean sb, HttpSession session) {
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
 		ModelAndView mv = new ModelAndView("payment_billing_info");
 		mv.addObject("sbTotal", totalSbPrice);
 		mv.addObject("sbCart", sb);
+		if (session.getAttribute("loggedInUser") != null) {
+			mv.addObject("hideUserCreate", true);
+		}
+		else {
+			mv.addObject("hideUserCreate", false);
+		}
 		return mv;
 
 	}
