@@ -55,9 +55,12 @@
 						<div id="shippingInfo">
 							<h4 class="bg-light border-bottom">Shipping Information</h4>
 							<div id="shippingDetails" class="input-group mt-3 d-flex flex-column">
-								<p><span class="font-weight-bold">Address: </span></p>
-								<p><span class="font-weight-bold">City: </span></p>
-								<p><span class="font-weight-bold">State/Province: </span></p>
+								<p><span class="font-weight-bold">Address: </span>${addressBean.street}</p>
+								<p><span class="font-weight-bold">City: </span>${addressBean.city}</p>
+								<p><span class="font-weight-bold">State/Province: </span>${addressBean.pvOrSt}</p>
+								<p><span class="font-weight-bold">Country: </span>${addressBean.country}</p>
+								<p><span class="font-weight-bold">Postal/Zip Code: </span>${addressBean.postOrZip}</p>
+								<p><span class="font-weight-bold">Phone Number: </span>${addressBean.phoneNo}</p>
 								
 								
 								
