@@ -53,8 +53,12 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "/submitBillInfo", params = "submitBillingPost", method = RequestMethod.POST)
-	public ModelAndView goToConfirmation() {
+	public ModelAndView goToConfirmation(@SessionAttribute("shoppingCart") ShoppingCartBean sb) {
 		ModelAndView mv = new ModelAndView("payment_order_confirmation");
+		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
+
+		mv.addObject("sbTotal", totalSbPrice);
+		mv.addObject("sbCart", sb);
 		return mv;
 	}
 
