@@ -15,9 +15,7 @@
 <link rel="stylesheet"
 	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
 <link rel="stylesheet" href="resources/payment.css" type="text/css" />
-<script type="text/javascript" src="resources/payment.js">
-	;
-</script>
+<script type="text/javascript" src="resources/payment.js">;</script>
 
 
 </head>
@@ -27,21 +25,25 @@
 
 			<div class="col-md-5 border border-black">
 				<form action="submitBillInfo" method="POST">
-					<div id="nameInfo" class="border pb-2 d-flex flex-column">
+					<div id="nameInfo" class="pb-2 d-flex flex-column">
 						<h4 class="bg-light border-bottom">Name</h4>
 						<div class="input-group d-flex justify-content-between">
 							<c:choose>
 								<c:when test="${empty loggedInUser.firstname}">
-									<input type="text" name="orderFirstName"
-										placeholder="First Name"></input>
-									<input type="text" name="orderLastName" placeholder="Last Name"></input>
-
+									<div class="form-group">
+										<input type="text" class="form-control" name="orderFirstName" id="orderFirstName" placeholder="First Name"></input>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" name="orderLastName" id="orderLastName" placeholder="Last Name"></input>
+									</div>
 								</c:when>
 								<c:otherwise>
-									<input type="text" name="orderFirstName"
-										value=" ${loggedInUser.firstname}"></input>
-									<input type="text" name="orderLastName"
-										value=" ${loggedInUser.lastname}"></input>
+									<div class="form-group">
+										<input type="text" class="form-control" name="orderFirstName" id="orderFirstName" value="${loggedInUser.firstname}"></input>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" name="orderLastName" id="orderLastName" value="${loggedInUser.lastname}"></input>
+									</div>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -50,14 +52,30 @@
 						<h4 class="bg-light border-bottom">Shipping Address
 							Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
-							<input type="text" name="shippingAddress" placeholder="Address"></input>
-							<input type="text" name="shippingCity" placeholder="City"></input>
-							<input type="text" name="shippingState/Province"
-								placeholder="State/Province"></input> <input type="text"
-								name="shippingCountry" placeholder="Country"></input> <input
-								type="text" name="shippingPostal/zipcode"
-								placeholder="Postal Code/Zip Code"></input> <input type="number"
-								name="shippingPhoneNo" placeholder="Phone Number"></input>
+							<div class="form-group">
+								<input type="text" class="form-control" name="shippingAddress" id="shippingAddress" placeholder="Address"></input>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="shippingCity" id="shippingCity" placeholder="City"></input>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="shippingState/Province"
+									id="shippingState/Province"
+									placeholder="State/Province"></input> 
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="shippingCountry" placeholder="Country"></input> 
+							</div>
+							
+							<div class="form-group">
+									<input
+									type="text" class="form-control" name="shippingPostal/zipcode"
+									placeholder="Postal Code/Zip Code"></input> 
+									
+							</div>
+							<div class="form-group">
+								<input type="number" class="form-control" name="shippingPhoneNo" placeholder="Phone Number"></input>
+							</div>
 							<div>
 								<label for="infoAndDiff" class="pr-2">Billing
 									Information Is Different</label> <input type="checkbox"
@@ -70,34 +88,61 @@
 						<h4 class="bg-light border-bottom">Billing Address
 							Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
-							<input type="text" name="billingAddress" placeholder="Address"></input>
-							<input type="text" name="billingCity" placeholder="City"></input>
-							<input type="text" name="billingState/province"
-								placeholder="State/Province"></input> <input type="text"
-								name="billingCountry" placeholder="Country"></input> <input
-								type="text" name="billingPostal/zipcode"
-								placeholder="Postal Code/Zip Code"></input> <input type="number"
-								name="billingPhoneNo" placeholder="Phone Number"></input>
+							<div class="form-group">
+								<input type="text" class="form-control" name="billingAddress" id="billingAddress" placeholder="Address"></input>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="billingCity" id="billingCity" placeholder="City"></input>
+							</div>
+							<div class="form-group">
+							<input type="text" class="form-control" name="billingState/province"
+								id="billingState/province"
+								placeholder="State/Province"></input>
+							</div> 
+							<div class="form-group">
+							<input type="text"
+								name="billingCountry" class="form-control" placeholder="Country"></input>
+							</div> 
+							
+							<div class="form-group">
+							<input
+								type="text" class="form-control" name="billingPostal/zipcode"
+								placeholder="Postal Code/Zip Code"></input>
+							</div>
+							 
+							<div class="form-group">
+							<input type="number"
+								name="billingPhoneNo" class="form-control" placeholder="Phone Number"></input>
+							</div>
 						</div>
 					</div>
 					<c:if test="${hideUserCreate == false}">
 						<div id="accountInfo">
 							<h4 class="bg-light border-bottom">Account Information</h4>
 							<div class="input-group mt-3 d-flex flex-column">
-								<input type="email" name="email" placeholder="Email Address"></input>
-								<input type="password" name="password" placeholder="Password"></input>
+								<div class="form-group">
+									<input type="email" class="form-control" name="email" id="email" placeholder="Email Address"></input>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" name="password" id="password" placeholder="Password"></input>
+								</div>
 							</div>
 						</div>
 					</c:if>
 					<div id="paymentInfo">
 						<h4 class="bg-light border-bottom">Payment Information</h4>
 						<div class="input-group mt-3 d-flex flex-column">
-							<input type="text" name="nameOnCard" placeholder="Name on Card"></input>
-							<div>
-								<input type="number" name="ccNum"
-									placeholder="Credit Card Number"></input> <input type="number"
-									name="cardCVV" placeholder="CVV"></input>
+							<div class="form-group">
+								<input type="text" class="form-control" name="nameOnCard" id="nameOnCard" placeholder="Name on Card"></input>
 							</div>
+							<div class="form-group d-flex flex-row justify-content-between">
+							
+								<input type="number" class="form-control w-50" name="ccNum" id="ccNum"
+									placeholder="Credit Card Number"></input>
+								<input type="number"
+									name="cardCVV" class="form-control w-25" id="cardCVV" placeholder="CVV"></input> 
+							</div>
+							
 							<div class="d-flex flex-row">
 								<div id="expiryMonthInfo" class="d-flex flex-column">
 									<label for="expiryMonth">Expiry Month:</label> <select

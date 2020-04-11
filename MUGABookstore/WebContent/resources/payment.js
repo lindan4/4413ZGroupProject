@@ -11,4 +11,3 @@ function toggleBilling() {
 		billDiv.style.display = "none";
 	}
 }
-
