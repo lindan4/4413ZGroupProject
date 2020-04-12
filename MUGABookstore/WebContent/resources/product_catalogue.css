@@ -1,5 +1,5 @@
-.product-list-item {
-    list-style-type: none;
+.product-catalogue {
+    padding: 1rem
 }
 
 .product-image {}
@@ -10,25 +10,47 @@
     display: block;
     font-weight: bold;
     text-align: center;
+    min-height: 3rem;
 }
 
 .product-description {
     font-size: 0.75rem;
     color: #4d555c;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2rem;
+
+
+}
+
+.book-cover {
+    object-fit: cover;
+    width: 100%;
+    max-width: 12rem;
+    height: 17.5rem;
+}
+
+.product-cost-box {
+    position: relative;
 }
 
 .product-cost {
+    position: absolute;
+    top: 5%;
+    left: 76.5%;
+    transform: translate(-50%, -50%);
     display: block;
     text-align: center;
     font-size: 1.125rem;
+    color: white;
+    padding: 0.5rem;
+    background: #E59285;
 }
 
 @media (min-width: 75rem) {
-    .product-list-item {
-        display: inline-grid;
-        width: 25%;
-    }
-
     .container {
         width: 73.125rem;
         margin-left: auto;

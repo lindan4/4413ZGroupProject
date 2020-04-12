@@ -24,8 +24,20 @@ public class BookModel {
 	@Autowired
 	private BookReviewDAO brDao;
 
-	public List<BookBean> listBooks(int limit) throws Exception {
-		return this.bDao.listBooks(limit);
+	public List<BookBean> listBooks(int limit) {
+		return this.bDao.listBooks(limit, 0);
+	}
+
+	public List<BookBean> listBooks(Integer limit, Integer offset) {
+		return this.bDao.listBooks(limit, offset);
+	}
+
+	public List<BookBean> listBooks(Integer limit, Integer offset, String categoryFilter) {
+		return this.bDao.listBooks(limit, offset, categoryFilter);
+	}
+
+	public List<BookBean> listBooks(Integer limit, String categoryFilter) {
+		return this.bDao.listBooks(limit, 0, categoryFilter);
 	}
 
 	public TreeMap<String,BookBean> retrieveBookQuery(String query) throws Exception {
