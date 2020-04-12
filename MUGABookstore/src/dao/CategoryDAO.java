@@ -23,7 +23,7 @@ public class CategoryDAO {
 
     public List<CategoryBean> listCategories(Integer limit, Integer offset) {
         final List<CategoryBean> categories = jdbcTemplate.query(
-                "SELECT * FROM Category LIMIT ? OFFSET ?;",
+                "SELECT * FROM Category ORDER BY category_id DESC LIMIT ? OFFSET ?;",
                 categoryRowMapper, limit, offset);
 
         return categories;
