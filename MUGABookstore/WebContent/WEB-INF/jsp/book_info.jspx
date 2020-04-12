@@ -27,7 +27,17 @@
         <div class="container book-info-container">
             <div class="row">
                 <div class="col-md-3">
-                    <h5>Categories</h5>
+                    <a href="${pageContext.request.contextPath}/product-catalogue">
+                        <h5>Book Categories</h5>
+                    </a>
+                    <hr style="width: 100%"/>
+                    <div>
+                        <c:forEach var="category" items="${bookInformation.categories}">
+                            <a href="${pageContext.request.contextPath}/product-catalogue?category=${category}">
+                                <p>${category}</p>
+                            </a>
+                        </c:forEach>
+                    </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
