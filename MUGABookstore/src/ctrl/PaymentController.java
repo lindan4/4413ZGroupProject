@@ -1,6 +1,10 @@
 package ctrl;
 
+
 import java.util.Map;
+
+import java.sql.SQLException;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -17,11 +21,15 @@ import bean.AddressBean;
 import bean.ShoppingCartBean;
 import bean.UserBean;
 import model.ShoppingCartModel;
+import model.UserModel;
 
 @Controller
 public class PaymentController {
 	@Autowired
 	private ShoppingCartModel shoppingCartModel;
+
+	@Autowired
+	private UserModel userModel;
 
 	@RequestMapping(value = "/processCart", params = "checkoutCart", method = RequestMethod.POST)
 	public ModelAndView checkoutSelected(HttpSession session, @SessionAttribute("shoppingCart") ShoppingCartBean sb) {
@@ -72,6 +80,27 @@ public class PaymentController {
 		mv.addObject("sbCart", sb);
 		mv.addObject("addressBean", ab);
 		return mv;
+	}
+
+	@RequestMapping(value = "/signInUser", method = RequestMethod.POST)
+	public ModelAndView signIn(@RequestParam(value = "email") String email,
+			@RequestParam(value = "password") String password, @SessionAttribute("shoppingCart") ShoppingCartBean sb, HttpSession session)
+			throws SQLException, Exception {
+
+		ModelAndView mv = new ModelAndView("null");
+		UserBean user = userModel.getUserByEmail(email, password);
+
+		if (user == null) {
+			mv.addObject("loginError", "The email or password is incorrect! Please try again.");
+			// m.addAttribute("loginError", "The email or password is incorrect! Please try
+			// again.");
+			return new ModelAndView("payment_account_type");
+		}
+
+		session.setAttribute("loggedInUser", user);
+		//mv.addObject("userLoggedIn", user);
+		
+		return this.billingInfo(sb, session);
 	}
 
 }

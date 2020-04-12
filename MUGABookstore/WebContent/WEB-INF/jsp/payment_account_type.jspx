@@ -28,12 +28,12 @@
 					<div id="headerAccArea" class="border-bottom bg-light pt-2">
 						<h4>Sign In as User</h4>
 					</div>
-					<form action="signinUser" method="POST">
+					<form action="signInUser" method="POST">
 						<div class="input-group mt-3" id="emailArea">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon1">Email</span>
 							</div>
-							<input type="email" class="form-control" name="email" placeholder="doe@example.com"></input>
+							<input type="email" class="form-control" name="email" id="email" placeholder="doe@example.com"></input>
 						
 						
 						</div>
@@ -42,7 +42,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon2">Password</span>
 							</div>
-							<input type="password" class="form-control" name="password" placeholder="******"></input>
+							<input type="password" class="form-control" name="password" id="password" placeholder="******"></input>
 						</div>
 						<div class="btn-toolbar mt-3">
 							<button action="submit" name="signinOrigin" value="checkout" class="btn mr-2 btn-dark">LOG IN</button>

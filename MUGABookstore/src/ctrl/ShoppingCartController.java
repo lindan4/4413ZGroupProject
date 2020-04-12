@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import bean.BookBean;
 import bean.ShoppingCartBean;
+import bean.UserBean;
 import model.ShoppingCartModel;
+import model.UserModel;
 
 @Controller
 @SessionAttributes("shoppingCart")
@@ -25,38 +29,43 @@ public class ShoppingCartController {
 
 	@Autowired
 	private ShoppingCartModel shoppingCartModel;
-	
-	@RequestMapping(value="/cart", method = RequestMethod.GET)
+
+	@Autowired
+	private UserModel userModel;
+
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public ModelAndView showCartContent(@ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) {
 		ModelAndView mv = new ModelAndView("shopping_cart");
 		mv.addObject("shoppingCart", shoppingCart);
 		mv.addObject("shoppingCartCount", shoppingCart.getShoppingBean().size());
 		mv.addObject("cartCost", shoppingCartModel.calculateTotal(shoppingCart));
-		
-		
+
 		return mv;
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-	public String addToCart(Model model, @RequestParam String bid, @ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
-		
+	public String addToCart(Model model, @RequestParam String bid,
+			@ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
+
 		shoppingCartModel.addToShoppingCart(bid, shoppingCart);
 
 		return "redirect:/cart";
 	}
-	
+
 	@RequestMapping(value = "/processCart", params = "updateCart", method = RequestMethod.POST)
-	public String updateCartValue(Model model, @RequestParam Map<String, String> booksToUpdate, @ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
+	public String updateCartValue(Model model, @RequestParam Map<String, String> booksToUpdate,
+			@ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
 		shoppingCartModel.updateShoppingCart(booksToUpdate, shoppingCart);
 		return "redirect:/cart";
 	}
-	
-	//Feel iffy about placing this here. Might change.
+
+	// Feel iffy about placing this here. Might change.
 	@ModelAttribute("shoppingCart")
 	public ShoppingCartBean getShoppingCartBean() {
 		return new ShoppingCartBean();
 	}
-	
+
+
+
 }
