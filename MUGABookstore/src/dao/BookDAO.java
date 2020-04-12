@@ -214,7 +214,7 @@ public class BookDAO {
         return resultBean;
     }
 
-    public BookBean getBookByID(String bid) throws Exception, SQLException {
+    public BookBean getBookByID(String bid) {
         final List<BookBean> books = jdbcTemplate.query("SELECT * FROM Book where bid=?", bookRowMapper, bid);
 
 

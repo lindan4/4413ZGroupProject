@@ -44,7 +44,7 @@ public class BookModel {
 		return bDao.retrieveBookQuery(query);
 	}
 	
-	public BookBean getBookByID(String bid) throws Exception {
+	public BookBean getBookByID(String bid) {
 		return bDao.getBookByID(bid);
 	}
 
