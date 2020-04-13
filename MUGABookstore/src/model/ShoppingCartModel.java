@@ -1,7 +1,9 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,14 @@ public class ShoppingCartModel {
 			
 		}
 		return total;
+	}
+	
+	public List<String> getBID(ShoppingCartBean sb) {
+		List<String> s = new ArrayList<String>();
+		for(BookBean bb : sb.getShoppingBean().keySet()) {
+			s.add(bb.getBid());
+		}
+		return s;
 	}
 	
 

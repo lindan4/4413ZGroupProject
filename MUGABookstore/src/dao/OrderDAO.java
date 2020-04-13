@@ -49,16 +49,22 @@ public class OrderDAO {
 
 	public void addBookOrderItem(String bid, double price) throws SQLException {
 
-		int id = this.getOrderId();
-		
+		int o = this.getOrderId();
 		String query = "insert into poitem(id, bid, price) values(?,?,?)";
-		jdbcTemplate.update(query, id, bid, price);
+		jdbcTemplate.update(query, o, bid, price);
 
 	}
 
 	public int getOrderId() throws SQLException {
 
-		String query = "select max(id) as max_id from po";
+		String query = "select max(id) from po";
+		int id = jdbcTemplate.queryForObject(query, Integer.class);
+		return (id + 1);
+	}
+	
+	public int getItemOrderId() throws SQLException {
+
+		String query = "select max(id) from poitem";
 		int id = jdbcTemplate.queryForObject(query, Integer.class);
 		return (id + 1);
 	}

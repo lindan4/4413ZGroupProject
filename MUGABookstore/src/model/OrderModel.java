@@ -47,6 +47,7 @@ public class OrderModel {
 	public void orderBookItem(String bid, double price) throws SQLException {
 
 		try {
+			int o = oDao.getOrderId();
 			oDao.addBookOrderItem(bid, price);
 		} catch (Exception e) {
 			e.printStackTrace();

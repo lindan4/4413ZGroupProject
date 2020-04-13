@@ -20,6 +20,6 @@ public class ShoppingCartBean {
 		this.shoppingBean = hashMap;
 	}
 	
-	
+
 
 }

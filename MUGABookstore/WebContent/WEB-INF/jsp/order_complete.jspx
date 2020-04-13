@@ -23,6 +23,7 @@
 			
 			<h1>Order Success</h1>
 			
+			<h2>Hi, ${userBean.firstname} thanks for shopping with us!</h2>
 			<div>shipping details</div>
 		
 		</div>

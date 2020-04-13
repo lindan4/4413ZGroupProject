@@ -171,7 +171,7 @@
 								</div>
 								<div class="form-group">
 									<span id="passwordError" style="display: none">Please
-										create a password.</span> <input type="password" class="form-control"
+										create a password (Length must be greater than 5).</span> <input type="password" class="form-control"
 										name="password" id="password" placeholder="Password"></input>
 								</div>
 							</div>
