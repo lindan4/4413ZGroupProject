@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import bean.AddressBean;
 import bean.OrderBean;
+import bean.ShoppingCartBean;
 import dao.AddressDAO;
 import dao.OrderDAO;
 
@@ -27,15 +28,32 @@ public class OrderModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getAddressId() throws SQLException {
+		
+	return aDao.getAddressId();
+		
+	}
 
-	public void orderBook(int id, String lastname, String firstname, String status, int aid) throws SQLException {
+	public void orderBook(String lastname, String firstname, String status, int aid) throws SQLException {
 
 		try {
-			oDao.addBookOrder(id, lastname, firstname, status, aid);
+			oDao.addBookOrder(lastname, firstname, status, aid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void orderBookItem(String bid, double price) throws SQLException {
+
+		try {
+			oDao.addBookOrderItem(bid, price);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	
 }

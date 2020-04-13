@@ -13,9 +13,7 @@ public class ShoppingCartDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void addToShoppingCart(String bid, ShoppingCartBean sb) {
-		
-		
-		
 	}
+	
 
 }

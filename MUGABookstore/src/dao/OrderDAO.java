@@ -1,8 +1,10 @@
 package dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import bean.AddressBean;
 import bean.BookBean;
+import bean.BookReviewBean;
 import bean.OrderBean;
 import bean.ShoppingCartBean;
 import bean.UserBean;
@@ -36,29 +39,28 @@ public class OrderDAO {
 		return jdbcTemplate.query(query, orderRowMapper);
 	}
 
-	public void addBookOrder(int oid, String lastname, String firstname, String status, int aid) throws SQLException {
+	public void addBookOrder(String lastname, String firstname, String status, int aid) throws SQLException {
 
+		int id = this.getOrderId();
 		String query = "insert into po(id, lname, fname, STATUS, address) values(?,?,?,?,?)";
-		jdbcTemplate.update(query, oid, lastname, firstname, status, aid);
+		jdbcTemplate.update(query, id, lastname, firstname, status, aid);
 
 	}
 
-	public void addBookOrderItem(int oid, BookBean bb) throws SQLException{
+	public void addBookOrderItem(String bid, double price) throws SQLException {
+
+		int id = this.getOrderId();
 		
-		String bid = bb.getBid();
-		double price = bb.getPrice();
 		String query = "insert into poitem(id, bid, price) values(?,?,?)";
-		jdbcTemplate.update(query, oid, bid, price);
+		jdbcTemplate.update(query, id, bid, price);
 
 	}
-	
-	/*
+
 	public int getOrderId() throws SQLException {
-		ResultSet rs;
+
 		String query = "select max(id) as max_id from po";
-		*/
-		
-		
+		int id = jdbcTemplate.queryForObject(query, Integer.class);
+		return (id + 1);
 	}
 
-
+}

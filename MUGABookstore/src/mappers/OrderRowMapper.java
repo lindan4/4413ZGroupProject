@@ -19,6 +19,7 @@ public class OrderRowMapper implements RowMapper<OrderBean> {
 		order.setLname(rs.getString("lname"));
 		order.setFname(rs.getString("fname"));
 		order.setStatus(rs.getString("status"));
+		order.setAddress(rs.getInt("address"));
 
 		return order;
 

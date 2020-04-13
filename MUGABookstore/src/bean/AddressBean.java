@@ -14,6 +14,7 @@ public class AddressBean {
 	}
 	
 	public AddressBean(int id, String street, String city, String pvOrSt, String country, String postOrZip, String phoneNo) {
+		this.setId(id);
 		this.setStreet(street);
 		this.setCity(city);
 		this.setPvOrSt(pvOrSt);

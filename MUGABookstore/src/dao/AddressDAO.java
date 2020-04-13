@@ -23,13 +23,21 @@ public class AddressDAO {
 		String city = ab.getCity();
 		String country = ab.getCountry();
 		String post = ab.getPostOrZip();
-		int id = ab.getId();
+		//int id = ab.getId();
+		int id = this.getAddressId();
 		
 		String query = "insert into address(id, street, province, country, zip, phone) values(?,?,?,?,?,?)";
 		jdbcTemplate.update(query, id, street, province, country, post, phone);
 		
 	}
 	
+	
+	public int getAddressId() throws SQLException {
+
+		String query = "select max(id) from address";
+		int aid = jdbcTemplate.queryForObject(query, Integer.class);
+		return (aid + 1);
+	}
 	
 	
 	

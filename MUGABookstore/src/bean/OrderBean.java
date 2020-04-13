@@ -5,7 +5,7 @@ public class OrderBean {
 	private int id;
 	private String status;
 	private String bid;
-	private String address;
+	private int address;
 	private String fname;
 	private String lname;
 	private String price;
@@ -14,15 +14,14 @@ public class OrderBean {
 
 	}
 
-	public OrderBean(int id, String status, String fname, String lname, String address) {
+	public OrderBean(int id, String fname, String lname, String status, int address) {
 		super();
 		this.setId(id);
 		this.setStatus(status);
-		//this.setBid(bid);
 		this.setAddress(address);
 		this.setFname(fname);
 		this.setLname(lname);
-		//this.setPrice(price);
+
 	}
 
 	public int getId() {
@@ -49,11 +48,11 @@ public class OrderBean {
 		this.bid = bid;
 	}
 
-	public String getAddress() {
+	public int getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(int address) {
 		this.address = address;
 	}
 
