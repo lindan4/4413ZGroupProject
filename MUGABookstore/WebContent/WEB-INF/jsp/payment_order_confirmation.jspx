@@ -19,6 +19,7 @@
 <body>
 	<div class="container">
 		<div class="row">
+			<form action="orderComplete" method="GET">
 			<div class="col">
 				<div id="orderConfirmationInfo">
 					<h4 class="bg-light border-bottom">Order Confirmation</h4>
@@ -71,9 +72,8 @@
 								<span class="font-weight-bold">Postal/Zip Code: </span>${addressBean.postOrZip}</p>
 							<p>
 								<span class="font-weight-bold">Phone Number: </span>${addressBean.phoneNo}</p>
-
-
-
+								
+							<p> <span class="font-weight-bold">Email Address:</span>${userBean.email}</p>
 
 						</div>
 					</div>
@@ -82,13 +82,13 @@
 					<div id="paymentInfo"></div>
 					<div id="confirmOrDeny" class="btn-toolbar">
 						<button action="submit" class="btn btn-dark mr-2"
-							name="confirmOrder" value="true">CONFIRM ORDER</button>
+							name="confirmOrder" value="true" >CONFIRM ORDER</button>
 						<button class="btn btn-dark" name="cancelOrder" type="button"
 							action="${pageContext.request.contextPath}/cart">CANCEL</button>
 					</div>
 				</div>
 			</div>
-
+			</form>
 		</div>
 	</div>
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import bean.AddressBean;
 import bean.ShoppingCartBean;
 import bean.UserBean;
+import model.OrderModel;
 import model.ShoppingCartModel;
 import model.UserModel;
 
@@ -29,6 +31,9 @@ public class PaymentController {
 
 	@Autowired
 	private UserModel userModel;
+
+	@Autowired
+	private OrderModel orderModel;
 
 	@RequestMapping(value = "/processCart", params = "checkoutCart", method = RequestMethod.POST)
 	public ModelAndView checkoutSelected(HttpSession session, @SessionAttribute("shoppingCart") ShoppingCartBean sb) {
@@ -64,9 +69,8 @@ public class PaymentController {
 
 	@RequestMapping(value = "/submitBillInfo", params = "submitBillingPost", method = RequestMethod.POST)
 	public ModelAndView goToConfirmation(@SessionAttribute("shoppingCart") ShoppingCartBean sb,
-			@RequestParam Map<String, String> allRequestParams, HttpSession session) throws SQLException, Exception {
+			@RequestParam Map<String, String> allRequestParams) throws SQLException, Exception {
 
-		
 		ModelAndView mv = new ModelAndView("payment_order_confirmation");
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
 		String fName = allRequestParams.get("orderFirstName");
@@ -79,29 +83,45 @@ public class PaymentController {
 		String shipCountry = allRequestParams.get("shippingCountry");
 		String shipPostOrZip = allRequestParams.get("shippingPostal/zipcode");
 		String shipPhoneNo = allRequestParams.get("shippingPhoneNo");
-		AddressBean ab = new AddressBean(shippingAddress, shippingCity, shipProv, shipCountry, shipPostOrZip,
+		AddressBean ab = new AddressBean(4, shippingAddress, shippingCity, shipProv, shipCountry, shipPostOrZip,
 				shipPhoneNo);
 		UserBean ub = new UserBean(fName, lName, email, password, "customer");
 
 		/*
-		if (session.getAttribute("loggedInUser") == null) {
-			try {
-
-				userModel.registerUser(ub);
-
-			} catch (DuplicateKeyException e) {
-				mv = new ModelAndView("payment_billing_info");
-				mv.addObject("errorMessage",
-						"ERROR: There is already a MUGA Bookstore account associated with this email address. Please go to the Login page.");
-			}
-		}
-		*/
+		 * if (session.getAttribute("loggedInUser") == null) { try {
+		 * 
+		 * userModel.registerUser(ub);
+		 * 
+		 * } catch (DuplicateKeyException e) { mv = new
+		 * ModelAndView("payment_billing_info"); mv.addObject("errorMessage",
+		 * "ERROR: There is already a MUGA Bookstore account associated with this email address. Please go to the Login page."
+		 * ); } }
+		 */
+		
+		
 
 		mv.addObject("sbTotal", totalSbPrice);
 		mv.addObject("sbCart", sb);
 		mv.addObject("addressBean", ab);
 		mv.addObject("userBean", ub);
 		return mv;
+	}
+	
+	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
+	public ModelAndView placeOrder(@SessionAttribute("shoppingCart") ShoppingCartBean sb,
+			@RequestParam Map<String, String> allRequestParams, @ModelAttribute("ab") AddressBean ab,
+			@ModelAttribute("ub") UserBean ub) throws SQLException {
+		
+		ModelAndView mv = new ModelAndView("order_complete");
+		String fName = allRequestParams.get("orderFirstName");
+		String lName = allRequestParams.get("orderLastName");
+		String shippingAddress = allRequestParams.get("shippingAddress");
+
+		orderModel.addAddress(ab);
+		orderModel.orderBook(4, "Smith", "James", "ORDERED", 3);
+
+		return mv;
+
 	}
 
 	@RequestMapping(value = "/signInUser", method = RequestMethod.POST)

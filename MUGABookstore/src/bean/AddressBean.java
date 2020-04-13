@@ -7,8 +7,13 @@ public class AddressBean {
 	private String country;
 	private String postOrZip;
 	private String phoneNo;
+	private int id;
 	
-	public AddressBean(String street, String city, String pvOrSt, String country, String postOrZip, String phoneNo) {
+	public AddressBean() {
+		
+	}
+	
+	public AddressBean(int id, String street, String city, String pvOrSt, String country, String postOrZip, String phoneNo) {
 		this.setStreet(street);
 		this.setCity(city);
 		this.setPvOrSt(pvOrSt);
@@ -16,6 +21,17 @@ public class AddressBean {
 		this.setPostOrZip(postOrZip);
 		this.setPhoneNo(phoneNo);
 	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	public String getStreet() {
 		return street;
