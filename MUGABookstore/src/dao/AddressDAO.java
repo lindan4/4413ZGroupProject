@@ -26,7 +26,7 @@ public class AddressDAO {
 		//int id = ab.getId();
 		int id = this.getAddressId();
 		
-		String query = "insert into address(id, street, province, country, zip, phone) values(?,?,?,?,?,?)";
+		String query = "insert into Address(id, street, province, country, zip, phone) values(?,?,?,?,?,?)";
 		jdbcTemplate.update(query, id, street, province, country, post, phone);
 		
 	}
@@ -34,7 +34,7 @@ public class AddressDAO {
 	
 	public int getAddressId() throws SQLException {
 
-		String query = "select max(id) from address";
+		String query = "select max(id) from Address";
 		int aid = jdbcTemplate.queryForObject(query, Integer.class);
 		return (aid + 1);
 	}

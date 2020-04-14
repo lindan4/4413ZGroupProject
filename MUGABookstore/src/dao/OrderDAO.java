@@ -35,14 +35,14 @@ public class OrderDAO {
 	}
 
 	public List<OrderBean> listOrders() throws Exception {
-		String query = "SELECT * FROM po";
+		String query = "SELECT * FROM PO";
 		return jdbcTemplate.query(query, orderRowMapper);
 	}
 
 	public void addBookOrder(String lastname, String firstname, String status, int aid) throws SQLException {
 
 		int id = this.getOrderId();
-		String query = "insert into po(id, lname, fname, STATUS, address) values(?,?,?,?,?)";
+		String query = "insert into PO(id, lname, fname, STATUS, address) values(?,?,?,?,?)";
 		jdbcTemplate.update(query, id, lastname, firstname, status, aid);
 
 	}
@@ -50,21 +50,21 @@ public class OrderDAO {
 	public void addBookOrderItem(String bid, double price) throws SQLException {
 
 		int o = this.getOrderId();
-		String query = "insert into poitem(id, bid, price) values(?,?,?)";
+		String query = "insert into POItem(id, bid, price) values(?,?,?)";
 		jdbcTemplate.update(query, o, bid, price);
 
 	}
 
 	public int getOrderId() throws SQLException {
 
-		String query = "select max(id) from po";
+		String query = "select max(id) from PO";
 		int id = jdbcTemplate.queryForObject(query, Integer.class);
 		return (id + 1);
 	}
 	
 	public int getItemOrderId() throws SQLException {
 
-		String query = "select max(id) from poitem";
+		String query = "select max(id) from POItem";
 		int id = jdbcTemplate.queryForObject(query, Integer.class);
 		return (id + 1);
 	}
