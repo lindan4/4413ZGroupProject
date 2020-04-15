@@ -11,8 +11,9 @@
 		omit-xml-declaration="true" />
 	<html>
 <head>
-	<title>Checkout - Select Account Type</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+<title>Checkout - Select Account Type</title>
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
 </head>
 <body>
 
@@ -30,22 +31,28 @@
 					</div>
 					<form action="signInUser" method="POST">
 						<div class="input-group mt-3" id="emailArea">
+							<span style="color:red" id="loginError">${loginError}</span>
 							<div class="input-group-prepend">
+
 								<span class="input-group-text" id="basic-addon1">Email</span>
 							</div>
-							<input type="email" class="form-control" name="email" id="email" placeholder="doe@example.com"></input>
-						
-						
+
+							<input type="email" class="form-control" name="email" id="email"
+								placeholder="doe@example.com"></input>
+
+
 						</div>
-	
+
 						<div class="input-group mt-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon2">Password</span>
 							</div>
-							<input type="password" class="form-control" name="password" id="password" placeholder="******"></input>
+							<input type="password" class="form-control" name="password"
+								id="password" placeholder="******"></input>
 						</div>
 						<div class="btn-toolbar mt-3">
-							<button action="submit" name="signinOrigin" value="checkout" class="btn mr-2 btn-dark">LOG IN</button>
+							<button action="submit" name="signinOrigin" value="checkout"
+								class="btn mr-2 btn-dark">LOG IN</button>
 						</div>
 					</form>
 				</div>
@@ -53,12 +60,14 @@
 			<div class="col-md-4 border rounded">
 				<div id="guestUserCheckout">
 					<div id="headerGuestArea" class="border-bottom bg-light pt-2">
-						<h4>Checkout as Guest</h4>	
+						<h4>Checkout as Guest</h4>
 					</div>
-					<p class="pt-2">You can create an account as you are making your purchase.</p>
+					<p class="pt-2">You can create an account as you are making
+						your purchase.</p>
 					<form action="orderBillingInfo" method="POST">
 						<div class="btn-toolbar mt-3">
-							<button action="submit" name="guestContinue" value="true" class="btn mr-2 btn-dark">CONTINUE</button>
+							<button action="submit" name="guestContinue" value="true"
+								class="btn mr-2 btn-dark">CONTINUE</button>
 						</div>
 					</form>
 				</div>
@@ -70,5 +79,5 @@
 	</div>
 
 </body>
-</html>
+	</html>
 </jsp:root>

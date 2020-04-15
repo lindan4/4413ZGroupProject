@@ -111,7 +111,7 @@ public class PaymentController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderComplete", method = RequestMethod.POST)
 	public ModelAndView placeOrder(@SessionAttribute("shoppingCart") ShoppingCartBean sb,
 			@SessionAttribute("userBean") UserBean ub, @SessionAttribute("addressBean") AddressBean ab)
 			throws SQLException {
@@ -122,13 +122,12 @@ public class PaymentController {
 		String fName = ub.getFirstname();
 		String lName = ub.getLastname();
 		int sid = ab.getId();
-		String s = shoppingCartModel.getBID(sb).toString();
+		//String s = shoppingCartModel.getBID(sb).toString();
 
-		System.out.println(s);
+		//System.out.println(s);
 		orderModel.addAddress(ab);
-		orderModel.orderBook(fName, lName, "ORDERED", sid);
+		orderModel.orderBook(fName, lName, sid);
 		//Insert into poitem
-		//orderModel.orderBookItem(s, totalSbPrice);
 
 		return mv;
 
@@ -139,13 +138,13 @@ public class PaymentController {
 			@RequestParam(value = "password") String password, @SessionAttribute("shoppingCart") ShoppingCartBean sb,
 			HttpSession session) throws SQLException, Exception {
 
-		ModelAndView mv = new ModelAndView("null");
+		ModelAndView mv = new ModelAndView("payment_account_type");
 		UserBean user = userModel.getUserByEmail(email, password);
 
 		if (user == null) {
 			mv.addObject("loginError", "The email or password is incorrect! Please try again.");
-
-			return new ModelAndView("payment_account_type");
+			//mv = new ModelAndView("payment_account_type");
+			return mv;
 		}
 
 		session.setAttribute("loggedInUser", user);

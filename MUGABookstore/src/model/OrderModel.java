@@ -17,33 +17,33 @@ public class OrderModel {
 
 	@Autowired
 	private OrderDAO oDao;
-	
+
 	@Autowired
 	private AddressDAO aDao;
-	
+
 	public void addAddress(AddressBean ab) {
 		try {
 			aDao.insertAddress(ab);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public int getAddressId() throws SQLException {
-		
-	return aDao.getAddressId();
-		
-	}
-
-	public void orderBook(String lastname, String firstname, String status, int aid) throws SQLException {
-
-		try {
-			oDao.addBookOrder(lastname, firstname, status, aid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public int getAddressId() throws SQLException {
+
+		return aDao.getAddressId();
+
+	}
+
+	public void orderBook(String lastname, String firstname, int aid) throws SQLException {
+
+		try {
+			oDao.addBookOrder(lastname, firstname, aid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void orderBookItem(String bid, double price) throws SQLException {
 
 		try {
@@ -53,8 +53,5 @@ public class OrderModel {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
+
 }

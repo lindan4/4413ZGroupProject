@@ -39,12 +39,19 @@ public class OrderDAO {
 		return jdbcTemplate.query(query, orderRowMapper);
 	}
 
-	public void addBookOrder(String lastname, String firstname, String status, int aid) throws SQLException {
+	public void addBookOrder(String lastname, String firstname, int aid) throws SQLException {
 
 		int id = this.getOrderId();
-		String query = "insert into PO(id, lname, fname, STATUS, address) values(?,?,?,?,?)";
-		jdbcTemplate.update(query, id, lastname, firstname, status, aid);
+		String sOrdered = "ORDERED";
+		String sDenied = "DENIED";
 
+		String query = "insert into PO(id, lname, fname, STATUS, address) values(?,?,?,?,?)";
+		if (id % 3 == 0) {
+			jdbcTemplate.update(query, id, lastname, firstname, sDenied, aid);
+
+		} else {
+			jdbcTemplate.update(query, id, lastname, firstname, sOrdered, aid);
+		}
 	}
 
 	public void addBookOrderItem(String bid, double price) throws SQLException {
@@ -61,7 +68,7 @@ public class OrderDAO {
 		int id = jdbcTemplate.queryForObject(query, Integer.class);
 		return (id + 1);
 	}
-	
+
 	public int getItemOrderId() throws SQLException {
 
 		String query = "select max(id) from POItem";
