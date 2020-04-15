@@ -56,7 +56,7 @@ public class OrderDAO {
 
 	public void addBookOrderItem(String bid, double price) throws SQLException {
 
-		int o = this.getOrderId();
+		int o = (this.getOrderId()-1);
 		String query = "insert into POItem(id, bid, price) values(?,?,?)";
 		jdbcTemplate.update(query, o, bid, price);
 

@@ -75,13 +75,13 @@ public class ShoppingCartModel {
 		return total;
 	}
 
-	public void insertWithBID(String bid, ShoppingCartBean sb) throws SQLException {
+	public void insertWithBID(ShoppingCartBean sb) throws SQLException {
 		List<String> s = new ArrayList<>();
 		//BookBean bb = bDao.getBookByID(bid);
 
 		
 		for (BookBean bb : sb.getShoppingBean().keySet()) {
-			s.add(bb.getBid());
+				oDao.addBookOrderItem(bb.getBid(), bb.getPrice());
 		}
 			
 	}

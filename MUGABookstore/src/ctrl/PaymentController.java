@@ -122,12 +122,11 @@ public class PaymentController {
 		String fName = ub.getFirstname();
 		String lName = ub.getLastname();
 		int sid = ab.getId();
-		//String s = shoppingCartModel.getBID(sb).toString();
-
-		//System.out.println(s);
+		
 		orderModel.addAddress(ab);
 		orderModel.orderBook(fName, lName, sid);
 		//Insert into poitem
+		shoppingCartModel.insertWithBID(sb);
 
 		return mv;
 
