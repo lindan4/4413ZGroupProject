@@ -46,6 +46,7 @@
 						<th>Firstname</th>
 						<th>Lastname</th>
 						<th>Email</th>
+						<th>Order Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +54,7 @@
 						<td>${loggedInUser.firstname}</td>
 						<td>${loggedInUser.lastname}</td>
 						<td>${loggedInUser.email}</td>
+						<td>${status}</td>
 					</tr>
 				</tbody>
 			</table>

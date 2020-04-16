@@ -1,8 +1,10 @@
 package ctrl;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import java.util.TimeZone;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +32,7 @@ import model.ShoppingCartModel;
 import model.UserModel;
 
 @Controller
-@SessionAttributes({"addressBean", "userBean"})
+@SessionAttributes({ "addressBean", "userBean" })
 public class PaymentController {
 	@Autowired
 	private ShoppingCartModel shoppingCartModel;
@@ -75,7 +77,7 @@ public class PaymentController {
 
 	@RequestMapping(value = "/submitBillInfo", params = "submitBillingPost", method = RequestMethod.POST)
 	public ModelAndView goToConfirmation(@SessionAttribute("shoppingCart") ShoppingCartBean sb,
-			@RequestParam Map<String, String> allRequestParams, AddressBean a) throws SQLException, Exception {
+			@RequestParam Map<String, String> allRequestParams, AddressBean a, HttpSession session) throws SQLException, Exception {
 
 		ModelAndView mv = new ModelAndView("payment_order_confirmation");
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
@@ -89,20 +91,21 @@ public class PaymentController {
 		String shipCountry = allRequestParams.get("shippingCountry");
 		String shipPostOrZip = allRequestParams.get("shippingPostal/zipcode");
 		String shipPhoneNo = allRequestParams.get("shippingPhoneNo");
-		AddressBean ab = new AddressBean(orderModel.getAddressId(), shippingAddress, shippingCity, shipProv, shipCountry, shipPostOrZip,
-				shipPhoneNo);
+		AddressBean ab = new AddressBean(orderModel.getAddressId(), shippingAddress, shippingCity, shipProv,
+				shipCountry, shipPostOrZip, shipPhoneNo);
 		UserBean ub = new UserBean(fName, lName, email, password, "customer");
 
-		/*
-		 * if (session.getAttribute("loggedInUser") == null) { try {
-		 * 
-		 * userModel.registerUser(ub);
-		 * 
-		 * } catch (DuplicateKeyException e) { mv = new
-		 * ModelAndView("payment_billing_info"); mv.addObject("errorMessage",
-		 * "ERROR: There is already a MUGA Bookstore account associated with this email address. Please go to the Login page."
-		 * ); } }
-		 */
+		if (session.getAttribute("loggedInUser") == null) {
+			try {
+
+				userModel.registerUser(ub);
+
+			} catch (DuplicateKeyException e) {
+				mv = new ModelAndView("payment_billing_info");
+				mv.addObject("errorMessage",
+	"ERROR: There is already a MUGA Bookstore account associated with this email address. Please go to the Login page.");
+			}
+		}
 
 		mv.addObject("sbTotal", totalSbPrice);
 		mv.addObject("sbCart", sb);
@@ -118,14 +121,16 @@ public class PaymentController {
 
 		ModelAndView mv = new ModelAndView("order_complete");
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
+		Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
 		String fName = ub.getFirstname();
 		String lName = ub.getLastname();
+		String email = ub.getEmail();
 		int sid = ab.getId();
-		
+		Date date = new Date();
 		orderModel.addAddress(ab);
-		orderModel.orderBook(fName, lName, sid);
-		//Insert into poitem
+		orderModel.orderBook(fName, lName, sid, date, email);
+		// Insert into poitem
 		shoppingCartModel.insertWithBID(sb);
 
 		return mv;
@@ -142,7 +147,7 @@ public class PaymentController {
 
 		if (user == null) {
 			mv.addObject("loginError", "The email or password is incorrect! Please try again.");
-			//mv = new ModelAndView("payment_account_type");
+			// mv = new ModelAndView("payment_account_type");
 			return mv;
 		}
 

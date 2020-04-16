@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,10 @@ public class OrderModel {
 
 	}
 
-	public void orderBook(String lastname, String firstname, int aid) throws SQLException {
+	public void orderBook(String lastname, String firstname, int aid, Date date, String email) throws SQLException {
 
 		try {
-			oDao.addBookOrder(lastname, firstname, aid);
+			oDao.addBookOrder(lastname, firstname, aid, date, email);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,5 +54,18 @@ public class OrderModel {
 			e.printStackTrace();
 		}
 	}
+	
+	public Date updateOrderStatus(String email, Date date) throws SQLException
+	{
+		return oDao.updateOrderStatus(email, date);
+		
+	}
+	
+	public Date getOrderDate(String email) {
+		return oDao.getOrderDate(email);
+	}
+	
+	
+	
 
 }

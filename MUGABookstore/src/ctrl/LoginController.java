@@ -16,14 +16,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.UserBean;
 import model.UserModel;
 
 @Controller
-//@SessionAttributes("loggedInUser")
+@SessionAttributes("loggedInUser")
 public class LoginController {
 
 	public static final String LOGIN_STATUS = "login_status";
@@ -83,12 +85,10 @@ public class LoginController {
 	 */
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		session.removeAttribute("loggedInUser");
-		
-
+	public String logout(HttpSession session, SessionStatus status) {
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		session.setAttribute("loggedInUser", null);
+		status.setComplete();
 		return "redirect:/";
 	}
 
