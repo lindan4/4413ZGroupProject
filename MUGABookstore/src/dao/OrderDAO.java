@@ -3,6 +3,7 @@ package dao;
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -82,8 +83,8 @@ public class OrderDAO {
 
 		Date today = new Date();
 
-		String update = "UPDATE po SET status='PROCESSED' WHERE email=?";
-		String currentDate = "SELECT date FROM po WHERE email=?";
+		String update = "UPDATE PO SET status='PROCESSED' WHERE email=?";
+		String currentDate = "SELECT date FROM PO WHERE email=?";
 		Date result = jdbcTemplate.queryForObject(currentDate, new String[] { email }, Date.class);
 
 		if (today.after(result)) {
@@ -95,7 +96,7 @@ public class OrderDAO {
 
 
 	public Date getOrderDate(String email) {
-		String currentDate = "SELECT date FROM po WHERE email=?";
+		String currentDate = "SELECT date FROM PO WHERE email=?";
 		try {
 			Date results = (Date) jdbcTemplate.queryForObject(currentDate, new Object[] { email }, Date.class);
 			return results;
