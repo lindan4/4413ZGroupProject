@@ -74,7 +74,8 @@ CREATE TABLE PO
 INSERT INTO PO(id, lname, fname, STATUS, address, date, email)
 VALUES (1, 'John', 'White', 'PROCESSED', '1', '2020-04-16', 'johnwhite@example.com'),
        (2, 'Peter', 'Black', 'DENIED', '2', '2020-04-16', 'pb@example.com'),
-       (3, 'Andy', 'Green', 'ORDERED', '3', '2020-04-16', 'agreen@example.com');
+       (3, 'Andy', 'Green', 'ORDERED', '3', '2020-04-16', 'agreen@example.com'),
+       (4, 'Andy', 'Green', 'ORDERED', '4', '2020-04-16', 'agreen@example.com');
 
 DROP TABLE IF EXISTS
     POItem;
@@ -94,7 +95,8 @@ CREATE TABLE POItem
 INSERT INTO POItem(id, bid, price)
 VALUES (1, 'b0001', 20),
        (2, 'b0002', 201),
-       (3, 'b0003', 100);
+       (3, 'b0003', 100),
+       (4, 'b0003', 100);
 
 Drop TABLE IF EXISTS VisitEvent;
 CREATE TABLE VisitEvent

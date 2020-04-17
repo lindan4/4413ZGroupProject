@@ -6,9 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.time.Month;
+import java.time.Year;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -187,6 +187,20 @@ public class BookDAO {
         }
 
         return books;
+    }
+
+    public List<BookBean> listBooksSoldDuringMonth(Year year, Month month) {
+        final String query = "" +
+                "SELECT book.*, count(book.bid) as count FROM Book as book " +
+                "INNER JOIN (SELECT bid FROM POItem as poItem " +
+                "   INNER JOIN (SELECT * FROM PO) as po " +
+                "       ON YEAR(po.date) = ? AND MONTH(po.date) = ? AND poItem.id = po.id " +
+                "   ) as poItem " +
+                "ON book.bid = poItem.bid " +
+                "GROUP BY book.bid";
+
+        return jdbcTemplate.query(
+                query, bookRowMapper, year.getValue(), month.getValue());
     }
 
     public TreeMap<String, BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {
