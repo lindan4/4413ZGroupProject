@@ -119,6 +119,8 @@ CREATE TABLE PO(
     STATUS ENUM
         ('ORDERED', 'PROCESSED', 'DENIED') NOT NULL,
         address INT UNSIGNED NOT NULL,
+	date DATE NOT NULL,
+	email VARCHAR(256) NOT NULL,
         PRIMARY KEY(id),
         INDEX(address),
         FOREIGN KEY(address) REFERENCES Address(id) ON DELETE CASCADE
@@ -130,29 +132,34 @@ INSERT INTO PO(
     id,
     lname,
     fname,
-STATUS
-    ,
-    address
+STATUS,
+    address,
+date,
+email
 )
-VALUES(1, 'John', 'White', 'PROCESSED', '1');
+VALUES(1, 'John', 'White', 'PROCESSED', '1', '04/16/20', 'johnwhite@example.com');
 INSERT INTO PO(
     id,
     lname,
     fname,
 STATUS
     ,
-    address
+    address,
+date,
+email
 )
-VALUES(2, 'Peter', 'Black', 'DENIED', '2');
+VALUES(2, 'Peter', 'Black', 'DENIED', '2', '04/16/20', 'pb@example.com');
 INSERT INTO PO(
     id,
     lname,
     fname,
 STATUS
     ,
-    address
+    address,
+date,
+email
 )
-VALUES(3, 'Andy', 'Green', 'ORDERED', '3');
+VALUES(3, 'Andy', 'Green', 'ORDERED', '3', '04/16/20', 'agreen@example.com');
 #
 #
 /* Items on order
