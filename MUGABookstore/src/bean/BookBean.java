@@ -1,5 +1,7 @@
 package bean;
 
+import org.springframework.lang.Nullable;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ public class BookBean implements Comparable<BookBean> {
 	private BigDecimal isbn;
 	private int pages;
 	private double rating;
+
+	@Nullable
+	private Integer count;
 
 	@Override
 	public boolean equals(Object o) {
@@ -163,6 +168,14 @@ public class BookBean implements Comparable<BookBean> {
 	public void setCategories(List<String> categories) {
 		this.categories = categories;
 	}
-	
-	
+
+
+	@Nullable
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(@Nullable Integer count) {
+		this.count = count;
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,6 +28,15 @@ public class BookRowMapper implements RowMapper<BookBean> {
         book.setRating_count(rs.getInt("rating_count"));
         book.setImageUrl(rs.getString("image_url"));
         book.setPrice(rs.getDouble("price"));
+
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columns = rsmd.getColumnCount();
+        for (int x = 1; x <= columns; x++) {
+            if ("count".equals(rsmd.getColumnName(x))) {
+                book.setCount(rs.getInt("count"));
+            }
+        }
+
         book.setAuthors(new ArrayList<>());
         book.setCategories(new ArrayList<>());
 

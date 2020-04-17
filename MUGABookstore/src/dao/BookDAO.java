@@ -189,15 +189,18 @@ public class BookDAO {
         return books;
     }
 
-    public Map<BookBean, Integer> listBooksSoldDuringMonth(Year year, Month month) {
-        final String query = "SELECT DISTINCT * FROM Book as book\n" +
-                "INNER JOIN (SELECT DISTINCT bid FROM POItem\n" +
-                "\tINNER JOIN (SELECT * FROM PO) as po\n" +
-                "\t\tON YEAR(po.date) = '2020' AND MONTH(po.date) = '04'\n" +
-                "\t) as poItem\n" +
-                "ON book.bid = poItem.bid;";
+    public List<BookBean> listBooksSoldDuringMonth(Year year, Month month) {
+        final String query = "" +
+                "SELECT book.*, count(book.bid) as count FROM Book as book " +
+                "INNER JOIN (SELECT bid FROM POItem as poItem " +
+                "   INNER JOIN (SELECT * FROM PO) as po " +
+                "       ON YEAR(po.date) = ? AND MONTH(po.date) = ? AND poItem.id = po.id " +
+                "   ) as poItem " +
+                "ON book.bid = poItem.bid " +
+                "GROUP BY book.bid";
 
-        return new HashMap<BookBean, Integer>();
+        return jdbcTemplate.query(
+                query, bookRowMapper, year.getValue(), month.getValue());
     }
 
     public TreeMap<String, BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {

@@ -4,6 +4,8 @@ import dao.BookDAO;
 import dao.BookReviewDAO;
 
 import java.sql.SQLException;
+import java.time.Month;
+import java.time.Year;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
@@ -46,6 +48,10 @@ public class BookModel {
 	
 	public BookBean getBookByID(String bid) {
 		return bDao.getBookByID(bid);
+	}
+
+	public List<BookBean> listBooksSoldDuringMonth(Year year, Month month) {
+		return bDao.listBooksSoldDuringMonth(year, month);
 	}
 
 	
