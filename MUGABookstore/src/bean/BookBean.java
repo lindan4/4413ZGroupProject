@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BookBean implements Comparable<BookBean> {
 	
@@ -15,6 +16,32 @@ public class BookBean implements Comparable<BookBean> {
 	private BigDecimal isbn;
 	private int pages;
 	private double rating;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		BookBean bookBean = (BookBean) o;
+		return pages == bookBean.pages &&
+				Double.compare(bookBean.rating, rating) == 0 &&
+				rating_count == bookBean.rating_count &&
+				Double.compare(bookBean.price, price) == 0 &&
+				Objects.equals(bid, bookBean.bid) &&
+				Objects.equals(title, bookBean.title) &&
+				Objects.equals(description, bookBean.description) &&
+				Objects.equals(edition, bookBean.edition) &&
+				Objects.equals(format, bookBean.format) &&
+				Objects.equals(isbn, bookBean.isbn) &&
+				Objects.equals(imageUrl, bookBean.imageUrl) &&
+				Objects.equals(authors, bookBean.authors) &&
+				Objects.equals(categories, bookBean.categories);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bid, title, description, edition, format, isbn, pages, rating, rating_count, imageUrl, price, authors, categories);
+	}
+
 	private int rating_count;
 	private String imageUrl;
 	private double price;
