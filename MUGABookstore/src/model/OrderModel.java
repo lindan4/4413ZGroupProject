@@ -12,6 +12,7 @@ import bean.OrderBean;
 import bean.ShoppingCartBean;
 import dao.AddressDAO;
 import dao.OrderDAO;
+import rx.OrderSubmittedEventPublisher;
 
 @Component
 public class OrderModel {
@@ -21,6 +22,9 @@ public class OrderModel {
 
 	@Autowired
 	private AddressDAO aDao;
+
+	@Autowired
+	private OrderSubmittedEventPublisher publisher;
 
 	public void addAddress(AddressBean ab) {
 		try {
@@ -40,6 +44,7 @@ public class OrderModel {
 
 		try {
 			oDao.addBookOrder(lastname, firstname, aid, date, email);
+			this.publisher.publish();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

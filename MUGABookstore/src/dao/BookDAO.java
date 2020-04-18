@@ -48,14 +48,14 @@ public class BookDAO {
 
         final List<AuthorBean> authors = jdbcTemplate.query(
                 "SELECT author.* " +
-                "FROM Author as author " +
-                "INNER JOIN (SELECT bookAuthor.author_id " +
-                    "FROM BookAuthor as bookAuthor " +
-                    "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
-                    "ON bookAuthor.bid = book.bid) AS bookAuthors " +
-                "ON bookAuthors.author_id = author.author_id " +
-                "GROUP BY author_id"
-            , authorRowMapper, limit, offset);
+                        "FROM Author as author " +
+                        "INNER JOIN (SELECT bookAuthor.author_id " +
+                        "FROM BookAuthor as bookAuthor " +
+                        "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
+                        "ON bookAuthor.bid = book.bid) AS bookAuthors " +
+                        "ON bookAuthors.author_id = author.author_id " +
+                        "GROUP BY author_id"
+                , authorRowMapper, limit, offset);
         final Map<String, AuthorBean> authorsMap = authors.stream().collect(
                 Collectors.toMap(AuthorBean::getAuthorId, authorBean -> authorBean));
 
@@ -63,12 +63,12 @@ public class BookDAO {
                 "SELECT bookAuthors.* " +
                         "FROM Author as author " +
                         "INNER JOIN (SELECT bookAuthor.* " +
-                            "FROM BookAuthor as bookAuthor " +
-                            "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
-                            "ON bookAuthor.bid = book.bid) AS bookAuthors " +
+                        "FROM BookAuthor as bookAuthor " +
+                        "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
+                        "ON bookAuthor.bid = book.bid) AS bookAuthors " +
                         "ON bookAuthors.author_id = author.author_id " +
                         "GROUP BY id;",
-            bookAuthorRowMapper, limit, offset);
+                bookAuthorRowMapper, limit, offset);
 
         for (BookAuthorBean bookAuthor : bookAuthors) {
             final BookBean book = booksMap.get(bookAuthor.getBid());
@@ -78,15 +78,15 @@ public class BookDAO {
 
         final List<CategoryBean> categories = jdbcTemplate.query(
                 "SELECT category.* " +
-                "FROM Category as category " +
-                "INNER JOIN (" +
-                    "SELECT bookCategory.* FROM BookCategory as bookCategory " +
-                    "INNER JOIN (" +
+                        "FROM Category as category " +
+                        "INNER JOIN (" +
+                        "SELECT bookCategory.* FROM BookCategory as bookCategory " +
+                        "INNER JOIN (" +
                         "SELECT bid FROM Book LIMIT ? OFFSET ?) as book " +
-                    "ON bookCategory.bid = book.bid) as bookCategories " +
-                "ON bookCategories.category_id = category.category_id " +
-                "GROUP BY category_id",
-            categoryRowMapper, limit, offset);
+                        "ON bookCategory.bid = book.bid) as bookCategories " +
+                        "ON bookCategories.category_id = category.category_id " +
+                        "GROUP BY category_id",
+                categoryRowMapper, limit, offset);
 
         final Map<String, CategoryBean> categoryMap = categories.stream().collect(
                 Collectors.toMap(CategoryBean::getCategory_id, categoryBean -> categoryBean));
@@ -95,9 +95,9 @@ public class BookDAO {
                 "SELECT bookCategories.* " +
                         "FROM Category as category " +
                         "INNER JOIN (SELECT bookCategory.* " +
-                            "FROM BookCategory as bookCategory " +
-                            "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
-                            "ON bookCategory.bid = book.bid) as bookCategories " +
+                        "FROM BookCategory as bookCategory " +
+                        "INNER JOIN (SELECT bid FROM Book LIMIT ? OFFSET ?) AS book " +
+                        "ON bookCategory.bid = book.bid) as bookCategories " +
                         "ON bookCategories.category_id = category.category_id",
                 bookCategoryRowMapper, limit, offset
         );
@@ -197,10 +197,22 @@ public class BookDAO {
                 "       ON YEAR(po.date) = ? AND MONTH(po.date) = ? AND poItem.id = po.id " +
                 "   ) as poItem " +
                 "ON book.bid = poItem.bid " +
-                "GROUP BY book.bid";
+                "GROUP BY book.bid " +
+                "ORDER BY count DESC";
 
         return jdbcTemplate.query(
                 query, bookRowMapper, year.getValue(), month.getValue());
+    }
+
+    public List<BookBean> top10BooksSoldLifetime() {
+        final String query = "" +
+                "SELECT book.*, count(book.bid) as count FROM Book as book " +
+                "INNER JOIN (SELECT * FROM POItem) as poItem " +
+                "ON book.bid = poItem.bid " +
+                "GROUP BY book.bid " +
+                "ORDER BY count DESC";
+
+        return jdbcTemplate.query(query, bookRowMapper);
     }
 
     public TreeMap<String, BookBean> retrieveBookQuery(String queryInput) throws Exception, SQLException {

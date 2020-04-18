@@ -58,6 +58,10 @@ public class BookModel {
 	public LinkedList<BookReviewBean> retrieveBookReviews(String bid) throws Exception {
 		return brDao.retrieveBookReviews(bid);
 	}
+
+	public List<BookBean> top10BooksSoldLifetime() {
+		return bDao.top10BooksSoldLifetime();
+	}
 	
 	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws Exception {
 		brDao.publishReview(bid, reviewerName, rating, content, dateString);
