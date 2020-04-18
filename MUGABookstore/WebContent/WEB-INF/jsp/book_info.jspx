@@ -149,7 +149,7 @@
                                            placeholder="Type Review Here">
                                         <c:out value=""/>
                                     </input>
-                                    <button name="submitBid" class="btn btn-primary" value="${bookInformation.bid}">Submit
+                                    <button name="submitBid" id="submitBid" class="btn btn-primary" value="${bookInformation.bid}">Submit
                                     </button>
                                 </form>
                             </div>

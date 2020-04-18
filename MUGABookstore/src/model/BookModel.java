@@ -64,6 +64,9 @@ public class BookModel {
 	}
 	
 	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws Exception {
-		brDao.publishReview(bid, reviewerName, rating, content, dateString);
+		String filteredContent = content.replace("<", "&lt;");
+		filteredContent = filteredContent.replace(">", "&gt;");
+		
+		brDao.publishReview(bid, reviewerName, rating, filteredContent, dateString);
 	}
 }
