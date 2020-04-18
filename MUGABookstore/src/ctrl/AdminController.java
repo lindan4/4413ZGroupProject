@@ -1,10 +1,12 @@
 package ctrl;
 
 import bean.BookBean;
+import bean.UserBean;
 import dto.BooksSoldReportDTO;
 import model.BookModel;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,9 +33,23 @@ public class AdminController {
 
 
     @GetMapping(value = "/admin")
-    public ModelAndView adminDashboard() {
-        final ModelAndView mv = new ModelAndView("admin_dashboard");
-        return mv;
+    public String adminDashboard(HttpSession session, Model m) {
+    	if (session.getAttribute("loggedInUser") == null) {
+    		m.addAttribute("admin", false);
+    		return "home";
+    	}
+    	else {
+	    	UserBean ub = (UserBean) session.getAttribute("loggedInUser"); 
+	//        final ModelAndView mv = new ModelAndView("admin_dashboard");
+	    	if (ub.getType().equals("Administrator")) {
+	    		m.addAttribute("admin", true);
+	            return "admin_dashboard";
+	    	}
+	    	else {
+	    		m.addAttribute("admin", false);
+	            return "home";
+	    	}
+    	}
     }
 
     @PostMapping(value = "/admin")

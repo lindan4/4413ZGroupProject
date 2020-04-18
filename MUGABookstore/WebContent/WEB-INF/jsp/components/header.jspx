@@ -27,14 +27,8 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${fn:contains(pageContext.request.requestURI, 'admin')}">
-                    <li class="nav-item active">
-                        <a href="${pageContext.request.contextPath}/admin" class="nav-link">
-                            Admin Dashboard
-                        </a>
-                    </li>
-                </c:if>
-                <c:if test="${not fn:contains(pageContext.request.requestURI, 'admin')}">
+
+                <c:if test="${(not fn:contains(pageContext.request.requestURI, 'admin')) and loggedInUser.type == 'Administrator'}">
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/admin" class="nav-link">
                             Admin Dashboard
