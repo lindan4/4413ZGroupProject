@@ -4,6 +4,9 @@ import bean.BookBean;
 import dto.BooksSoldReportDTO;
 import model.BookModel;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +32,13 @@ public class AdminController {
         this.bookModel = bookModel;
     }
 
-
     @GetMapping(value = "/admin")
     public ModelAndView adminDashboard() {
         final ModelAndView mv = new ModelAndView("admin_dashboard");
+
+        final List<BookBean> booksLifetime = this.bookModel.top10BooksSoldLifetime();
+        mv.addObject("booksLifetime", booksLifetime);
+
         return mv;
     }
 
@@ -57,6 +63,8 @@ public class AdminController {
 
         }
 
+        final List<BookBean> booksLifetime = this.bookModel.top10BooksSoldLifetime();
+        mv.addObject("booksLifetime", booksLifetime);
         return mv;
     }
 }
