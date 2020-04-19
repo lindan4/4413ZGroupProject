@@ -37,3 +37,12 @@
 .checked {
     color: orange;
 }
+
+.ratingBox {
+    margin-right: 0.5rem;
+    display: inline;
+}
+
+.rating-bubble {
+    margin-right: 0.25rem;
+}

@@ -133,24 +133,37 @@
                         <div class="col-md-12">
                             <div>
                                 <h5 style="margin-top: 1rem">Your Rating</h5>
-                                <form action="submitReview" onsubmit="return validateReview();" style="display: flex; flex-direction: column" method="post">
+                                <form action="submitReview" onsubmit="return validateReview();"
+                                      style="display: flex; flex-direction: column" method="post">
                                     <div id="ratingStarsSet">
-                                        <input type="radio" class="ratingBox" name="star" value="1"
-                                               id="oneStar">1</input>
-                                        <input type="radio" class="ratingBox" name="star" value="2"
-                                               id="twoStar">2</input>
-                                        <input type="radio" class="ratingBox" name="star" value="3"
-                                               id="threeStar">3</input>
-                                        <input type="radio" class="ratingBox" name="star" value="4"
-                                               id="fourStar">4</input>
-                                        <input type="radio" class="ratingBox" name="star" value="5"
-                                               id="fiveStar">5</input>
+                                        <div class="ratingBox">
+                                            <input type="radio" class="rating-bubble" name="star" value="1"
+                                                   id="oneStar">1</input>
+                                        </div>
+                                        <div class="ratingBox">
+                                            <input type="radio" class="rating-bubble" name="star" value="2"
+                                                   id="twoStar">2</input>
+                                        </div>
+                                        <div class="ratingBox">
+                                            <input type="radio" class="rating-bubble" name="star" value="3"
+                                                   id="threeStar">3</input>
+                                        </div>
+                                        <div class="ratingBox">
+                                            <input type="radio" class="rating-bubble" name="star" value="4"
+                                                   id="fourStar">4</input>
+                                        </div>
+                                        <div class="ratingBox">
+                                            <input type="radio" class="rating-bubble" name="star" value="5"
+                                                   id="fiveStar">5</input>
+                                        </div>
                                     </div>
-                                    <input class="form-control" type="text" name="reviewInputContent" id="reviewInputContent"
+                                    <input class="form-control" type="text" name="reviewInputContent"
+                                           id="reviewInputContent"
                                            placeholder="Type Review Here">
                                         <c:out value=""/>
                                     </input>
-                                    <button name="submitBid" id="submitBid" class="btn btn-primary" value="${bookInformation.bid}">Submit
+                                    <button name="submitBid" id="submitBid" class="btn btn-primary"
+                                            value="${bookInformation.bid}">Submit
                                     </button>
                                 </form>
                             </div>
