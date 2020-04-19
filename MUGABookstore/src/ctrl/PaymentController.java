@@ -32,7 +32,7 @@ import model.ShoppingCartModel;
 import model.UserModel;
 
 @Controller
-@SessionAttributes({ "addressBean", "userBean" })
+@SessionAttributes({ "addressBean", "userBean", "shoppingCart" })
 public class PaymentController {
 	@Autowired
 	private ShoppingCartModel shoppingCartModel;
@@ -109,7 +109,7 @@ public class PaymentController {
 		}
 
 		mv.addObject("sbTotal", totalSbPrice);
-		mv.addObject("sbCart", sb);
+		mv.addObject("shoppingCart", sb);
 		mv.addObject("addressBean", ab);
 		mv.addObject("userBean", ub);
 		return mv;
@@ -126,11 +126,12 @@ public class PaymentController {
 
 		String fName = ub.getFirstname();
 		String lName = ub.getLastname();
+//		System.out.println(lName);
 		String email = ub.getEmail();
 		int sid = ab.getId();
 		Date date = new Date();
 		orderModel.addAddress(ab);
-		orderModel.orderBook(fName, lName, sid, date, email);
+		orderModel.orderBook(lName, fName, sid, date, email);
 		// Insert into poitem
 		shoppingCartModel.insertWithBID(sb);
 

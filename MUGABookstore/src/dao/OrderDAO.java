@@ -40,6 +40,12 @@ public class OrderDAO {
 		String query = "SELECT * FROM PO";
 		return jdbcTemplate.query(query, orderRowMapper);
 	}
+	
+	public List<OrderBean> getOrdersByEmail(String email) throws Exception {
+		String query = "SELECT * FROM PO WHERE email like ?";
+		return jdbcTemplate.query(query, orderRowMapper, email);
+		
+	}
 
 	public void addBookOrder(String lastname, String firstname, int aid, Date date, String email) throws SQLException {
 
@@ -57,11 +63,11 @@ public class OrderDAO {
 		}
 	}
 
-	public void addBookOrderItem(String bid, double price) throws SQLException {
+	public void addBookOrderItem(String bid, double price, int quantity) throws SQLException {
 
 		int o = (this.getOrderId() - 1);
-		String query = "INSERT IGNORE INTO POItem(id, bid, price) VALUES(?,?,?)";
-		jdbcTemplate.update(query, o, bid, price);
+		String query = "INSERT IGNORE INTO POItem(id, bid, price, quantity) VALUES(?,?,?,?)";
+		jdbcTemplate.update(query, o, bid, price, quantity);
 
 	}
 
@@ -86,13 +92,22 @@ public class OrderDAO {
 
 		return jdbcTemplate.query(query, orderRowMapper, bid);
 	}
+	
+	public String getOrderStatusByOid(String oid) {
+		String query = "SELECT STATUS FROM PO WHERE id = ?";
+		List<?> result = jdbcTemplate.queryForList(query,  oid);
+		Map<String, Object> ms = (Map<String, Object>) result.get(0);
+		String status = (String) ms.get("STATUS");
+		return status;
+		
+	}
 
 	public Date updateOrderStatus(final String email, final Date d) throws SQLException {
 
 		final Date today = new Date();
 
-		final String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email=?";
-		final String currentDateQuery = "SELECT date FROM PO WHERE email=?";
+		final String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email = ?";
+		final String currentDateQuery = "SELECT date FROM PO WHERE email = ?";
 
 		final String poOrderCountQuery = "SELECT count(date) from PO where email = ?";
 
@@ -112,7 +127,7 @@ public class OrderDAO {
 
 
 	public Date getOrderDate(String email) {
-		String currentDate = "SELECT date FROM PO WHERE email=?";
+		String currentDate = "SELECT date FROM PO WHERE email = ?";
 		try {
 			Date results = (Date) jdbcTemplate.queryForObject(currentDate, new Object[] { email }, Date.class);
 			return results;
@@ -120,6 +135,12 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<?> getPOItemsByOrderID(String oid) throws Exception {
+		String query = "SELECT bid, price, quantity FROM POITEM WHERE id = ?";
+		return jdbcTemplate.queryForList(query, oid);
+		
 	}
 
 

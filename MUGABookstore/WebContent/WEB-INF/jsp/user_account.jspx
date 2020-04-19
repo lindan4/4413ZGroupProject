@@ -58,7 +58,7 @@
                 </tr>
                 </tbody>
             </table>
-
+			<a href="${pageContext.request.contextPath}/orders">View My Orders</a>
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
 
         </div>

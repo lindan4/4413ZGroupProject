@@ -81,7 +81,8 @@ public class ShoppingCartModel {
 
 		
 		for (BookBean bb : sb.getShoppingBean().keySet()) {
-				oDao.addBookOrderItem(bb.getBid(), bb.getPrice());
+				int quantity = sb.getShoppingBean().get(bb);
+				oDao.addBookOrderItem(bb.getBid(), bb.getPrice(), quantity);
 		}
 			
 	}

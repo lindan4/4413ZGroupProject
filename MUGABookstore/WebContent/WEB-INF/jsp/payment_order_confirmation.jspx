@@ -36,7 +36,7 @@
                         Your Order</h4>
                     <div id="shoppingCartInfo"
                          class="input-group mt-3 d-flex flex-column panel">
-                        <c:forEach var="tuple" items="${sbCart.shoppingBean}">
+                        <c:forEach var="tuple" items="${shoppingCart.shoppingBean}">
                             <div class="pItem d-flex flex-row justify-content-between">
                                 <div class="col-md-5 ">
                                     <p>${tuple.key.title}</p>
@@ -90,6 +90,12 @@
                 <h4 class="bg-light border-bottom">Shipping Information</h4>
                 <div id="shippingDetails"
                      class="input-group mt-3 d-flex flex-column">
+                     <p>
+                        <span class="font-weight-bold">First Name: </span>${userBean.firstname}</p>
+                    
+                    <p>
+                        <span class="font-weight-bold">Last Name: </span>${userBean.lastname}</p>
+                    
                     <p>
                         <span class="font-weight-bold">Address: </span>${addressBean.street}</p>
                     <p>
@@ -104,7 +110,7 @@
                         <span class="font-weight-bold">Phone Number: </span>${addressBean.phoneNo}</p>
 
                     <p>
-                        <span class="font-weight-bold">Email Address:</span>${userBean.email}</p>
+                        <span class="font-weight-bold">Email Address: </span>${userBean.email}</p>
 
                 </div>
             </div>

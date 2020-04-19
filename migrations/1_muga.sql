@@ -83,8 +83,8 @@ CREATE TABLE POItem
 (
     id    INT UNSIGNED NOT NULL,
     bid   VARCHAR(20)  NOT NULL,
-    price INT UNSIGNED NOT NULL,
-    PRIMARY KEY (id, bid),
+    price REAL NOT NULL,
+    quantity INT NOT NULL,
     INDEX (id),
     FOREIGN KEY (id) REFERENCES PO (id) ON DELETE CASCADE,
     INDEX (bid),
@@ -92,11 +92,12 @@ CREATE TABLE POItem
 );
 
 
-INSERT INTO POItem(id, bid, price)
-VALUES (1, 'b0001', 20),
-       (2, 'b0002', 201),
-       (3, 'b0003', 100),
-       (4, 'b0003', 100);
+INSERT INTO POItem(id, bid, price, quantity)
+VALUES (1, 'b0001', 20.00, 1),
+       (1, 'b0005', 20.00, 2),
+       (2, 'b0002', 201.00, 1),
+       (3, 'b0003', 100.00, 1),
+       (4, 'b0003', 100.00, 1);
 
 Drop TABLE IF EXISTS VisitEvent;
 CREATE TABLE VisitEvent
