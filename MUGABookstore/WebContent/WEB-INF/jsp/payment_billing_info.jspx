@@ -1,295 +1,325 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
-		pageEncoding="ISO-8859-1" session="true" />
-	<jsp:output doctype-root-element="html"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		omit-xml-declaration="true" />
-	<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Checkout - Billing Information</title>
-<link rel="stylesheet"
-	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/payment.css" type="text/css" />
-<script type="text/javascript" src="resources/payment.js">
-	;
-</script>
-<script type="text/javascript" src="resources/billing.js">
-	;
-</script>
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+    <jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+                        pageEncoding="ISO-8859-1" session="true"/>
+    <jsp:output doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+                omit-xml-declaration="true"/>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Checkout - Billing Information</title>
+        <link rel="stylesheet"
+              href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/order.css" type="text/css"/>
+        <link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
+        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
+        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="resources/payment.css" type="text/css"/>
+        <script type="text/javascript" src="resources/payment.js">
+            ;
+        </script>
+        <script type="text/javascript" src="resources/billing.js">
+            ;
+        </script>
 
-</head>
-<body>
+    </head>
+    <body>
 
-	<div class="container">
-		<div class="row mt-5 d-flex justify-content-between pb-5">
+    <jsp:include page="./components/header.jspx"/>
+    <div class="container">
+        <div class="row mt-5 d-flex justify-content-between pb-5">
 
-			<div class="col-md-5 border border-black">
-				<form action="submitBillInfo" method="POST"
-					onsubmit="return validate();">
-					<div id="nameInfo" class="pb-2 d-flex flex-column">
-						<h4 class="bg-light border-bottom">Name</h4>
+            <div class="col-md-5 border border-black">
+                <form action="submitBillInfo" method="POST"
+                      onsubmit="return validate();">
+                    <div id="nameInfo" class="pb-2 d-flex flex-column">
+                        <h4 class="bg-light border-bottom">Name</h4>
 
 
-						<div class="input-group d-flex justify-content-between">
+                        <div class="input-group d-flex justify-content-between">
 
-							<c:choose>
-								<c:when test="${empty loggedInUser.firstname}">
+                            <c:choose>
+                                <c:when test="${empty loggedInUser.firstname}">
 
-									<div class="form-group">
+                                    <div class="form-group">
 										<span id="nameError" style="display: none">Please enter
 											first name.</span> <input type="text" class="form-control"
-											name="orderFirstName" id="orderFirstName"
-											placeholder="First Name"></input>
-									</div>
-									<div class="form-group">
+                                                                      name="orderFirstName" id="orderFirstName"
+                                                                      placeholder="First Name"></input>
+                                    </div>
+                                    <div class="form-group">
 										<span id="lastError" style="display: none">Please enter
 											last name.</span> <input type="text" class="form-control"
-											name="orderLastName" id="orderLastName"
-											placeholder="Last Name"></input>
-									</div>
-								</c:when>
-								<c:otherwise>
-									<div class="form-group">
+                                                                     name="orderLastName" id="orderLastName"
+                                                                     placeholder="Last Name"></input>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="form-group">
 
-										<label class="form-control" name="orderFirstNameLabel"
-											id="orderFirstName">${loggedInUser.firstname}</label>
-									</div>
-									<div class="form-group">
-										<label class="form-control" name="orderLastNameLabel"
-											id="orderLastNameLabel">${loggedInUser.lastname}</label>
-									</div>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</div>
-					<div id="shippingAddressInfo" class="pb-2">
-						<h4 class="bg-light border-bottom">Shipping Address
-							Information</h4>
-						<div class="input-group mt-3 d-flex flex-column">
-							<div class="form-group">
+                                        <label class="form-control" name="orderFirstNameLabel"
+                                               id="orderFirstName">${loggedInUser.firstname}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control" name="orderLastNameLabel"
+                                               id="orderLastNameLabel">${loggedInUser.lastname}</label>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                    <div id="shippingAddressInfo" class="pb-2">
+                        <h4 class="bg-light border-bottom">Shipping Address
+                            Information</h4>
+                        <div class="input-group mt-3 d-flex flex-column">
+                            <div class="form-group">
 								<span id="shippingAddressError" style="display: none">Please
 									enter a valid address.</span> <input type="text" class="form-control"
-									name="shippingAddress" id="shippingAddress"
-									placeholder="Address"></input>
-							</div>
+                                                                         name="shippingAddress" id="shippingAddress"
+                                                                         placeholder="Address"></input>
+                            </div>
 
 
-							<div class="form-group">
+                            <div class="form-group">
 								<span id="shippingCityError" style="display: none">Please
 									enter a city.</span> <input type="text" class="form-control"
-									name="shippingCity" id="shippingCity" placeholder="City"></input>
-							</div>
-							<div class="form-group">
+                                                                name="shippingCity" id="shippingCity"
+                                                                placeholder="City"></input>
+                            </div>
+                            <div class="form-group">
 								<span id="shippingStateError" style="display: none">Please
 									enter a valid State or Province.</span> <input type="text"
-									class="form-control" name="shippingState/Province"
-									id="shippingState/Province" placeholder="State/Province"></input>
-							</div>
-							<div class="form-group">
+                                                                                   class="form-control"
+                                                                                   name="shippingState/Province"
+                                                                                   id="shippingState/Province"
+                                                                                   placeholder="State/Province"></input>
+                            </div>
+                            <div class="form-group">
 								<span id="shippingCountryError" style="display: none">Please
 									enter a valid Country.</span> <input type="text" class="form-control"
-									name="shippingCountry" id="shippingCountry"
-									placeholder="Country"></input>
-							</div>
+                                                                         name="shippingCountry" id="shippingCountry"
+                                                                         placeholder="Country"></input>
+                            </div>
 
-							<div class="form-group">
+                            <div class="form-group">
 								<span id="shippingPostalError" style="display: none">Please
 									enter a valid Postal or Zip code.</span> <input type="text"
-									class="form-control" name="shippingPostal/zipcode"
-									id="shippingPostal" placeholder="Postal Code/Zip Code"></input>
+                                                                                    class="form-control"
+                                                                                    name="shippingPostal/zipcode"
+                                                                                    id="shippingPostal"
+                                                                                    placeholder="Postal Code/Zip Code"></input>
 
-							</div>
-							<div class="form-group">
+                            </div>
+                            <div class="form-group">
 								<span id="shippingPhoneError" style="display: none">Please
 									enter a valid Phone number.</span> <input type="number"
-									class="form-control" name="shippingPhoneNo"
-									id="shippingPhoneNo" placeholder="Phone Number"></input>
-							</div>
-							<div>
-								<label for="infoAndDiff" class="pr-2">Billing
-									Information Is Different</label> <input type="checkbox"
-									name="infoAddDiff" id="infoAddDiff" onclick="toggleBilling();"></input>
-							</div>
+                                                                              class="form-control"
+                                                                              name="shippingPhoneNo"
+                                                                              id="shippingPhoneNo"
+                                                                              placeholder="Phone Number"></input>
+                            </div>
+                            <div>
+                                <label for="infoAndDiff" class="pr-2">Billing
+                                    Information Is Different</label> <input type="checkbox"
+                                                                            name="infoAddDiff" id="infoAddDiff"
+                                                                            onclick="toggleBilling();"></input>
+                            </div>
 
-						</div>
-					</div>
-					<div id="billingAddressInfo" class="pb-2" style="display: none;">
-						<h4 class="bg-light border-bottom">Billing Address
-							Information</h4>
-						<div class="input-group mt-3 d-flex flex-column">
-							<div class="form-group">
+                        </div>
+                    </div>
+                    <div id="billingAddressInfo" class="pb-2" style="display: none;">
+                        <h4 class="bg-light border-bottom">Billing Address
+                            Information</h4>
+                        <div class="input-group mt-3 d-flex flex-column">
+                            <div class="form-group">
 								<span id="billingAddressError" style="display: none">Please
 									enter a valid address.</span> <input type="text" class="form-control"
-									name="billingAddress" id="billingAddress" placeholder="Address"></input>
-							</div>
-							<div class="form-group">
+                                                                         name="billingAddress" id="billingAddress"
+                                                                         placeholder="Address"></input>
+                            </div>
+                            <div class="form-group">
 								<span id="billingCityError" style="display: none">Please
 									enter a city.</span> <input type="text" class="form-control"
-									name="billingCity" id="billingCity" placeholder="City"></input>
-							</div>
-							<div class="form-group">
+                                                                name="billingCity" id="billingCity"
+                                                                placeholder="City"></input>
+                            </div>
+                            <div class="form-group">
 								<span id="billingProvinceError" style="display: none">Please
 									enter a valid State or Province.</span> <input type="text"
-									class="form-control" name="billingState/province"
-									id="billingState/province" placeholder="State/Province"></input>
-							</div>
-							<div class="form-group">
+                                                                                   class="form-control"
+                                                                                   name="billingState/province"
+                                                                                   id="billingState/province"
+                                                                                   placeholder="State/Province"></input>
+                            </div>
+                            <div class="form-group">
 								<span id="billingCountryError" style="display: none">Please
 									enter a country.</span> <input type="text" name="billingCountry"
-									class="form-control" id="billingCountry" placeholder="Country"></input>
-							</div>
+                                                                   class="form-control" id="billingCountry"
+                                                                   placeholder="Country"></input>
+                            </div>
 
-							<div class="form-group">
+                            <div class="form-group">
 								<span id="billingPostalError" style="display: none">Please
 									enter a valid Postal or Zip code.</span> <input type="text"
-									class="form-control" name="billingPostal/zipcode"
-									id="billingPostal/zipcode" placeholder="Postal Code/Zip Code"></input>
-							</div>
+                                                                                    class="form-control"
+                                                                                    name="billingPostal/zipcode"
+                                                                                    id="billingPostal/zipcode"
+                                                                                    placeholder="Postal Code/Zip Code"></input>
+                            </div>
 
-							<div class="form-group">
+                            <div class="form-group">
 								<span id="billingPhoneError" style="display: none">Please
 									enter a valid phone number.</span> <input type="number"
-									name="billingPhoneNo" id="billingPhoneNo" class="form-control"
-									placeholder="Phone Number"></input>
-							</div>
-						</div>
-					</div>
+                                                                              name="billingPhoneNo" id="billingPhoneNo"
+                                                                              class="form-control"
+                                                                              placeholder="Phone Number"></input>
+                            </div>
+                        </div>
+                    </div>
 
-					<c:if test="${hideUserCreate == false}">
-						<div id="accountInfo">
-							<h4 class="bg-light border-bottom">Account Information</h4>
-							<div class="input-group mt-3 d-flex flex-column">
-								<div class="form-group">
-									<span id="customerExistsError" class="text-danger">${errorMessage}</span>
-									<span id="emailError" style="display: none">Please enter
+                    <c:if test="${hideUserCreate == false}">
+                        <div id="accountInfo">
+                            <h4 class="bg-light border-bottom">Account Information</h4>
+                            <div class="input-group mt-3 d-flex flex-column">
+                                <div class="form-group">
+                                    <span id="customerExistsError" class="text-danger">${errorMessage}</span>
+                                    <span id="emailError" style="display: none">Please enter
 										a valid email.</span> <input type="email" class="form-control"
-										name="email" id="email" placeholder="Email Address"></input>
-								</div>
-								<div class="form-group">
+                                                                     name="email" id="email"
+                                                                     placeholder="Email Address"></input>
+                                </div>
+                                <div class="form-group">
 									<span id="passwordError" style="display: none">Please
-										create a password (Length must be greater than 5).</span> <input type="password" class="form-control"
-										name="password" id="password" placeholder="Password"></input>
-								</div>
-							</div>
-						</div>
-					</c:if>
+										create a password (Length must be greater than 5).</span> <input type="password"
+                                                                                                         class="form-control"
+                                                                                                         name="password"
+                                                                                                         id="password"
+                                                                                                         placeholder="Password"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </c:if>
 
-					<div id="paymentInfo">
-						<h4 class="bg-light border-bottom">Payment Information</h4>
-						<div class="input-group mt-3 d-flex flex-column">
-							<div class="form-group">
+                    <div id="paymentInfo">
+                        <h4 class="bg-light border-bottom">Payment Information</h4>
+                        <div class="input-group mt-3 d-flex flex-column">
+                            <div class="form-group">
 								<span id="cardholderError" style="display: none">Please
 									enter the name of the cardholder.</span> <input type="text"
-									class="form-control" name="nameOnCard" id="nameOnCard"
-									placeholder="Name on Card"></input>
-							</div>
-							<div class="form-group d-flex flex-row justify-content-between">
+                                                                                    class="form-control"
+                                                                                    name="nameOnCard" id="nameOnCard"
+                                                                                    placeholder="Name on Card"></input>
+                            </div>
+                            <div class="form-group d-flex flex-row justify-content-between">
 								<span id="ccError" style="display: none">Please enter a
 									valid credit card.</span> <input type="number"
-									class="form-control w-50" name="ccNum" id="ccNum"
-									placeholder="Credit Card Number"></input> <span id="cvvError"
-									style="display: none">Please enter a valid cvv.</span> <input
-									type="number" name="cardCVV" class="form-control w-25"
-									id="cardCVV" placeholder="CVV"></input>
-							</div>
+                                                                     class="form-control w-50" name="ccNum" id="ccNum"
+                                                                     placeholder="Credit Card Number"></input> <span
+                                    id="cvvError"
+                                    style="display: none">Please enter a valid cvv.</span> <input
+                                    type="number" name="cardCVV" class="form-control w-25"
+                                    id="cardCVV" placeholder="CVV"></input>
+                            </div>
 
-							<div class="d-flex flex-row">
-								<div id="expiryMonthInfo" class="d-flex flex-column">
-									<label for="expiryMonth">Expiry Month:</label> <select
-										id="expiryMonth" name="expiryMonth" required="required"
-										class="browser-default custom-select">
-										<option selected="selected">MM</option>
-										<option value="1">01 - Jan</option>
-										<option value="2">02 - Feb</option>
-										<option value="3">03 - Mar</option>
-										<option value="4">04 - Apr</option>
-										<option value="5">05 - May</option>
-										<option value="6">06 - Jun</option>
-										<option value="7">07 - Jul</option>
-										<option value="8">08 - Aug</option>
-										<option value="9">09 - Sept</option>
-										<option value="10">10 - Oct</option>
-										<option value="11">11 - Nov</option>
-										<option value="12">12 - Dec</option>
-									</select>
-								</div>
-								<div id="expiryYearInfo" class="d-flex flex-column">
-									<label for="expiryYear">Expiry Year:</label> <select
-										id="expiryYear" name="expiryYear" required="required"
-										class="browser-default custom-select">
-										<option selected="selected">YYYY</option>
-										<option value="2020">2020</option>
-										<option value="2021">2021</option>
-										<option value="2022">2022</option>
-										<option value="2023">2023</option>
-										<option value="2024">2024</option>
-										<option value="2025">2025</option>
-										<option value="2026">2026</option>
-										<option value="2027">2027</option>
-										<option value="2028">2028</option>
-										<option value="2029">2029</option>
-										<option value="2030">2030</option>
-										<option value="2031">2031</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="btn-toolbar mt-4">
-						<button class="btn btn-dark mr-2" name="cancelBillingPost"
-							type="button" onclick="history.back();" value="back">CANCEL</button>
-						<button action="submit" class="btn btn-dark"
-							name="submitBillingPost" value="true">NEXT</button>
-					</div>
-				</form>
-			</div>
+                            <div class="d-flex flex-row">
+                                <div id="expiryMonthInfo" class="d-flex flex-column">
+                                    <label for="expiryMonth">Expiry Month:</label> <select
+                                        id="expiryMonth" name="expiryMonth" required="required"
+                                        class="browser-default custom-select">
+                                    <option selected="selected">MM</option>
+                                    <option value="1">01 - Jan</option>
+                                    <option value="2">02 - Feb</option>
+                                    <option value="3">03 - Mar</option>
+                                    <option value="4">04 - Apr</option>
+                                    <option value="5">05 - May</option>
+                                    <option value="6">06 - Jun</option>
+                                    <option value="7">07 - Jul</option>
+                                    <option value="8">08 - Aug</option>
+                                    <option value="9">09 - Sept</option>
+                                    <option value="10">10 - Oct</option>
+                                    <option value="11">11 - Nov</option>
+                                    <option value="12">12 - Dec</option>
+                                </select>
+                                </div>
+                                <div id="expiryYearInfo" class="d-flex flex-column">
+                                    <label for="expiryYear">Expiry Year:</label> <select
+                                        id="expiryYear" name="expiryYear" required="required"
+                                        class="browser-default custom-select">
+                                    <option selected="selected">YYYY</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                                    <option value="2031">2031</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar mt-4">
+                        <button class="btn btn-dark mr-2" name="cancelBillingPost"
+                                type="button" onclick="history.back();" value="back">CANCEL
+                        </button>
+                        <button action="submit" class="btn btn-dark"
+                                name="submitBillingPost" value="true">NEXT
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-			<div class="col-md-4">
-				<div id="purchaseOrderArea" class="border">
-					<h4 class="bg-light border-bottom border-dark text-center">Purchase
-						Order</h4>
-					<c:forEach var="tuple" items="${sbCart.shoppingBean}">
-						<div class="pItem d-flex flex-row justify-content-between">
-							<div class="col-md-5">
-								<p>${tuple.key.title}</p>
-							</div>
-							<div class="col-md-3">
-								<p>x${tuple.value}</p>
-							</div>
-							<div class="col-md-5">
-								<p>
-									<f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
-					<div
-						class="border-top d-flex pt-2 flex-row justify-content-between"
-						id="cartTotal">
-						<div class="col-md-5">
-							<p>Total Price</p>
-						</div>
-						<div class="col-md-3">
-							<p></p>
-						</div>
-						<div class="col-md-5">
-							<p>
-								<f:formatNumber type="currency">${sbTotal}</f:formatNumber>
-							</p>
-						</div>
-					</div>
+            <div class="col-md-4">
+                <div id="purchaseOrderArea" class="border">
+                    <h4 class="bg-light border-bottom border-dark text-center">Purchase
+                        Order</h4>
+                    <c:forEach var="tuple" items="${sbCart.shoppingBean}">
+                        <div class="pItem d-flex flex-row justify-content-between">
+                            <div class="col-md-5">
+                                <p>${tuple.key.title}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>x${tuple.value}</p>
+                            </div>
+                            <div class="col-md-5">
+                                <p>
+                                    <f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber>
+                                </p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <div
+                            class="border-top d-flex pt-2 flex-row justify-content-between"
+                            id="cartTotal">
+                        <div class="col-md-5">
+                            <p>Total Price</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p></p>
+                        </div>
+                        <div class="col-md-5">
+                            <p>
+                                <f:formatNumber type="currency">${sbTotal}</f:formatNumber>
+                            </p>
+                        </div>
+                    </div>
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-</body>
-	</html>
+    <jsp:include page="./components/footer.jspx"/>
+    </body>
+    </html>
 </jsp:root>
