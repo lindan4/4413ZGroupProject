@@ -60,7 +60,7 @@ public class OrderDAO {
 	public void addBookOrderItem(String bid, double price) throws SQLException {
 
 		int o = (this.getOrderId() - 1);
-		String query = "insert into POItem(id, bid, price) values(?,?,?)";
+		String query = "INSERT IGNORE INTO POItem(id, bid, price) VALUES(?,?,?)";
 		jdbcTemplate.update(query, o, bid, price);
 
 	}
