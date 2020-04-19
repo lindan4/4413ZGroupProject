@@ -35,7 +35,7 @@
         <div class="row mt-5 d-flex justify-content-between pb-5">
 
             <div class="col-md-5 border border-black">
-                <form action="submitBillInfo" method="POST"
+                <form action="submitBillInfo" method="post"
                       onsubmit="return validate();">
                     <div id="nameInfo" class="pb-2 d-flex flex-column">
                         <h4 class="bg-light border-bottom">Name</h4>
@@ -272,7 +272,7 @@
                         <button class="btn btn-dark mr-2" name="cancelBillingPost"
                                 type="button" onclick="history.back();" value="back">CANCEL
                         </button>
-                        <button action="submit" class="btn btn-dark"
+                        <button type="submit" class="btn btn-dark"
                                 name="submitBillingPost" value="true">NEXT
                         </button>
                     </div>
