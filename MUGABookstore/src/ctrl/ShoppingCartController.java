@@ -60,6 +60,13 @@ public class ShoppingCartController {
 		return "redirect:/cart";
 	}
 
+	@RequestMapping(value = "/processCart", params = "removeBookFromCart", method = RequestMethod.POST)
+	public String removeBookFromCart(Model model, @RequestParam Map<String, String> booksToUpdate,
+			@ModelAttribute("shoppingCart") ShoppingCartBean shoppingCart) throws SQLException, Exception {
+		shoppingCartModel.updateShoppingCart(booksToUpdate, shoppingCart);
+		return "redirect:/cart";
+	}
+
 	// Feel iffy about placing this here. Might change.
 	@ModelAttribute("shoppingCart")
 	public ShoppingCartBean getShoppingCartBean() {
