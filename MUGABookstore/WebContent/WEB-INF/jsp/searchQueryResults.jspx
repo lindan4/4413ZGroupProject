@@ -58,7 +58,7 @@
 								<p class="itemCategory">${tuple.categories[0]}</p>
 								<c:if test="${queryResultCount gt 1}">
 									<p>,&#160;</p>
-									<a href="#" data-toggle="popover" style="color: black;" title="Other Categories" data-placement="right" data-content="Blah" class="additionalCategory">...</a>
+									<a href="#" data-toggle="popover" style="color: black;" title="See Book Information for Other Categories" data-placement="right" data-trigger="focus" class="additionalCategory">...</a>
 								</c:if>
 							</div>
 							
