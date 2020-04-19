@@ -9,6 +9,7 @@
 
 .homeSection {
 	display: block;
+	margin-bottom: 10rem;
 }
 
 #searchBar > input {
@@ -80,6 +81,7 @@
 #reviewInputContent {
 	width: 400px;
 	height: 100px;
+	margin-bottom: 1rem;
 }
 
 .reviewItem {
