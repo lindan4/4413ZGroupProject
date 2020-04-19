@@ -84,10 +84,12 @@
 						<div class="itemResultLeft">
 							<p class="itemName">${tuple.title}</p>
 							<div class="d-flex flex-row">
-								<p class="itemCategory">Category:  </p>
-								<c:forEach var="category" items="${tuple.categories}">
-									<p class="itemCategory">${category}, </p>
-								</c:forEach>
+								<p class="itemCategory">Category:&#160;</p>
+								<p class="itemCategory">${tuple.categories[0]}</p>
+								<c:if test="${queryResultCount gt 1}">
+									<p>,&#160;</p>
+									<a href="#" data-toggle="popover" style="color: black;" title="Other Categories" data-content="Blah" class="additionalCategory">...</a>
+								</c:if>
 							</div>
 							
 						</div>
