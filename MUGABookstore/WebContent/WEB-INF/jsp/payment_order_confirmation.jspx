@@ -1,124 +1,129 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
-		pageEncoding="ISO-8859-1" session="true" />
-	<jsp:output doctype-root-element="html"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		omit-xml-declaration="true" />
-	<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Order Confirmation</title>
-<link rel="stylesheet"
-	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/index.css" type="text/css"
-	title="cse4413" media="screen, print" />
-<link rel="stylesheet" href="resources/navigation.css" type="text/css" />
-<link rel="stylesheet" href="resources/common.css" type="text/css" />
-<link rel="stylesheet"
-	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/order.css" type="text/css" />
-</head>
-<body>
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+    <jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+                        pageEncoding="ISO-8859-1" session="true"/>
+    <jsp:output doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+                omit-xml-declaration="true"/>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Order Confirmation</title>
+        <link rel="stylesheet"
+              href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/index.css" type="text/css"
+              title="cse4413" media="screen, print"/>
+        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
+        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
+        <link rel="stylesheet"
+              href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/order.css" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-	<div class="container">
+    </head>
+    <body>
 
-		<form action="orderComplete" method="POST">
-			<div class="row">
-				<div id="orderConfirmationInfo" class="col">
-					<h4 class="bg-light border-bottom">Review
-						Your Order</h4>
-					<div id="shoppingCartInfo"
-						class="input-group mt-3 d-flex flex-column panel">
-						<c:forEach var="tuple" items="${sbCart.shoppingBean}">
-							<div class="pItem d-flex flex-row justify-content-between">
-								<div class="col-md-5 ">
-									<p>${tuple.key.title}</p>
-								</div>
-								<div class="col-md-3 ">
-									<p>x${tuple.value}</p>
-								</div>
-								<div class="col-md-5">
-									<p>
-										<f:formatNumber type="currency">${tuple.value * tuple.key.price}</f:formatNumber>
-									</p>
-								</div>
+    <jsp:include page="./components/header.jspx"/>
+    <div class="container">
 
-							</div>
-						</c:forEach>
-						<div
-							class="border-top d-flex pt-2 flex-row justify-content-between float-right"
-							id="cartTotal">
-							<div class="col-md-5">
-								<p>Total Price</p>
-							</div>
-							<div class="col-md-3">
-								<p></p>
-							</div>
-							<div class="col-md-5">
-								<p>
-									<f:formatNumber type="currency">${sbTotal}</f:formatNumber>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="shippingOptions" class="col-md-3">
-					<h4 class="bg-light border-bottom">Shipping
-						Method</h4>
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input"
-							id="basicShipping"></input><label class="custom-control-label"
-							for="basicShipping">Basic Shipping</label>
-							<input type="checkbox" class="custom-control-input"
-							id="standardShipping"></input><label class="custom-control-label"
-							for="standardShipping">Default unchecked</label>
-							<input type="checkbox" class="custom-control-input"
-							id="defaultUnchecked"></input><label class="custom-control-label"
-							for="defaultUnchecked">Default unchecked</label>
-					</div>
-				</div>
-			</div>
-			<div id="shippingInfo">
-				<h4 class="bg-light border-bottom">Shipping Information</h4>
-				<div id="shippingDetails"
-					class="input-group mt-3 d-flex flex-column">
-					<p>
-						<span class="font-weight-bold">Address: </span>${addressBean.street}</p>
-					<p>
-						<span class="font-weight-bold">City: </span>${addressBean.city}</p>
-					<p>
-						<span class="font-weight-bold">State/Province: </span>${addressBean.pvOrSt}</p>
-					<p>
-						<span class="font-weight-bold">Country: </span>${addressBean.country}</p>
-					<p>
-						<span class="font-weight-bold">Postal/Zip Code: </span>${addressBean.postOrZip}</p>
-					<p>
-						<span class="font-weight-bold">Phone Number: </span>${addressBean.phoneNo}</p>
+        <form action="orderComplete" method="POST">
+            <div class="row">
+                <div id="orderConfirmationInfo" class="col">
+                    <h4 class="bg-light border-bottom">Review
+                        Your Order</h4>
+                    <div id="shoppingCartInfo"
+                         class="input-group mt-3 d-flex flex-column panel">
+                        <c:forEach var="tuple" items="${sbCart.shoppingBean}">
+                            <div class="pItem d-flex flex-row justify-content-between">
+                                <div class="col-md-5 ">
+                                    <p>${tuple.key.title}</p>
+                                </div>
+                                <div class="col-md-3 ">
+                                    <p>x${tuple.value}</p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p>
+                                        <f:formatNumber
+                                                type="currency">${tuple.value * tuple.key.price}</f:formatNumber>
+                                    </p>
+                                </div>
 
-					<p>
-						<span class="font-weight-bold">Email Address:</span>${userBean.email}</p>
+                            </div>
+                        </c:forEach>
+                        <div
+                                class="border-top d-flex pt-2 flex-row justify-content-between float-right"
+                                id="cartTotal">
+                            <div class="col-md-5">
+                                <p>Total Price</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p></p>
+                            </div>
+                            <div class="col-md-5">
+                                <p>
+                                    <f:formatNumber type="currency">${sbTotal}</f:formatNumber>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="shippingOptions" class="col-md-3">
+                    <h4 class="bg-light border-bottom">Shipping
+                        Method</h4>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input"
+                               id="basicShipping"></input><label class="custom-control-label"
+                                                                 for="basicShipping">Basic Shipping</label>
+                        <input type="checkbox" class="custom-control-input"
+                               id="standardShipping"></input><label class="custom-control-label"
+                                                                    for="standardShipping">Default unchecked</label>
+                        <input type="checkbox" class="custom-control-input"
+                               id="defaultUnchecked"></input><label class="custom-control-label"
+                                                                    for="defaultUnchecked">Default unchecked</label>
+                    </div>
+                </div>
+            </div>
+            <div id="shippingInfo">
+                <h4 class="bg-light border-bottom">Shipping Information</h4>
+                <div id="shippingDetails"
+                     class="input-group mt-3 d-flex flex-column">
+                    <p>
+                        <span class="font-weight-bold">Address: </span>${addressBean.street}</p>
+                    <p>
+                        <span class="font-weight-bold">City: </span>${addressBean.city}</p>
+                    <p>
+                        <span class="font-weight-bold">State/Province: </span>${addressBean.pvOrSt}</p>
+                    <p>
+                        <span class="font-weight-bold">Country: </span>${addressBean.country}</p>
+                    <p>
+                        <span class="font-weight-bold">Postal/Zip Code: </span>${addressBean.postOrZip}</p>
+                    <p>
+                        <span class="font-weight-bold">Phone Number: </span>${addressBean.phoneNo}</p>
 
-				</div>
-			</div>
+                    <p>
+                        <span class="font-weight-bold">Email Address:</span>${userBean.email}</p>
 
-
-
-			<div id="confirmOrDeny" class="btn-toolbar">
-				<button action="submit" class="btn btn-dark mr-2"
-					name="confirmOrder" value="true">CONFIRM ORDER</button>
-				<button class="btn btn-dark" name="cancelOrder" type="button"
-					action="${pageContext.request.contextPath}/home">KEEP
-					SHOPPING</button>
-			</div>
-		</form>
-
-	</div>
+                </div>
+            </div>
 
 
-</body>
-	</html>
+            <div id="confirmOrDeny" class="btn-toolbar">
+                <button action="submit" class="btn btn-dark mr-2"
+                        name="confirmOrder" value="true">CONFIRM ORDER
+                </button>
+                <button class="btn btn-dark" name="cancelOrder" type="button"
+                        action="${pageContext.request.contextPath}/home">KEEP
+                    SHOPPING
+                </button>
+            </div>
+        </form>
+
+    </div>
+    <jsp:include page="./components/footer.jspx"/>
+
+    </body>
+    </html>
 </jsp:root>

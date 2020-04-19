@@ -3,22 +3,22 @@
  */
 
 function validateReview() {
-	var isOk = true;
+	let isOk = true;
 	
-	var firstStar = document.getElementById("oneStar"); 
-	var secondStar = document.getElementById("twoStar"); 
-	var thirdStar = document.getElementById("threeStar");
-	var fourthStar = document.getElementById("fourStar");
-	var fifthStar = document.getElementById("fiveStar");
+	const firstStar = document.getElementById("oneStar");
+	const secondStar = document.getElementById("twoStar");
+	const thirdStar = document.getElementById("threeStar");
+	const fourthStar = document.getElementById("fourStar");
+	const fifthStar = document.getElementById("fiveStar");
 	
-	var reviewInputContent = document.getElementById("reviewInputContent");
+	const reviewInputContent = document.getElementById("reviewInputContent");
 	
-	if (!firstStar.checked && !secondStar.checked && !thirdStar.checked && !fourStar.checked && !fifthStar.checked) {
+	if (!firstStar.checked && !secondStar.checked && !thirdStar.checked && !fourthStar.checked && !fifthStar.checked) {
 		isOk = false;
 		alert("Please select a rating from 1 to 5.");
 	}
 	
-	if (reviewInputContent.value == "") {
+	if (reviewInputContent.value === "") {
 		isOk = false;
 		alert("Please type in a review.");
 	} 

@@ -70,6 +70,7 @@
             </div>
         </div>
     </section>
+    <jsp:include page="./components/footer.jspx"/>
     </body>
 
     </html>
