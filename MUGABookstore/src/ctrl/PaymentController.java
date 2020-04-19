@@ -102,6 +102,7 @@ public class PaymentController {
 
 			} catch (DuplicateKeyException e) {
 				mv = new ModelAndView("payment_billing_info");
+				mv.addObject("hideUserCreate", false);
 				mv.addObject("errorMessage",
 	"ERROR: There is already a MUGA Bookstore account associated with this email address. Please go to the Login page.");
 			}
