@@ -79,6 +79,14 @@ public class OrderDAO {
 		return (id + 1);
 	}
 
+	public List<OrderBean> getOrdersByBID(final String bid) {
+		final String query = "SELECT * from PO as po \n" +
+				"INNER JOIN (SELECT * FROM POItem WHERE bid = ?) as poItem\n" +
+				"ON poItem.id = po.id;";
+
+		return jdbcTemplate.query(query, orderRowMapper, bid);
+	}
+
 	public Date updateOrderStatus(String email, Date d) throws SQLException {
 
 		Date today = new Date();

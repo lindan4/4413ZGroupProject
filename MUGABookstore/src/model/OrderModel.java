@@ -40,6 +40,10 @@ public class OrderModel {
 
 	}
 
+	public List<OrderBean> getOrdersByBID(final String bid) {
+		return oDao.getOrdersByBID(bid);
+	}
+
 	public void orderBook(String lastname, String firstname, int aid, Date date, String email) throws SQLException {
 
 		try {
