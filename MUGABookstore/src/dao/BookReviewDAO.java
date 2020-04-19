@@ -33,6 +33,8 @@ public class BookReviewDAO {
 			String reviewerName = (String) itemMap.get("reviewer_name");
 			int rating = (int) itemMap.get("rating");
 			String content = (String) itemMap.get("content");
+			content = content.replace("<", "&lt;");
+			content = content.replace(">", "&gt;");			
 			Date date = (Date) itemMap.get("reviewDate");
 			String dateString = date.toString();
 			brb.add(new BookReviewBean(bid, reviewerName, rating, content, dateString));
@@ -43,6 +45,8 @@ public class BookReviewDAO {
 	
 	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws SQLException {
 		Date publishedDate = Date.valueOf(dateString);
+		
+			
 		
 		String query = "insert into BookReview(bid, reviewer_name, rating, content, reviewDate) values(?, ?, ?, ?, ?)";
 		jdbcTemplate.update(query, bid, reviewerName, rating, content, publishedDate);

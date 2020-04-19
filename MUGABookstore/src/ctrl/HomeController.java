@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import bean.BookBean;
 import bean.BookReviewBean;
+import bean.UserBean;
 import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.TreeMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -78,15 +81,23 @@ public class HomeController {
 		return mv;
 	}
 	@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
-	public String submitReview(@RequestParam String submitBid, @RequestParam String reviewInputContent, @RequestParam int star) {
+	public String submitReview(@RequestParam String submitBid, @RequestParam String reviewInputContent, @RequestParam int star, HttpSession session) {
 		
 		
 		try {
 			Date date = new Date(System.currentTimeMillis());
 			String formattedDate = date.toString();
+			String namePlaceholder = "Unknown";
+			
+			if(session.getAttribute("loggedInUser") != null) {
+				UserBean ub = (UserBean) session.getAttribute("loggedInUser");
+				namePlaceholder = ub.getFirstname();
+				
+			}
+			
 			
 			//"Unknown is a placeholder until we can get accounts working."
-			bookModel.publishReview(submitBid, "Unknown", star, reviewInputContent, formattedDate);
+			bookModel.publishReview(submitBid, namePlaceholder, star, reviewInputContent, formattedDate);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
