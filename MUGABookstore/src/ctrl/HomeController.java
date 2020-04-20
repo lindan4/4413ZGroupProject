@@ -27,7 +27,7 @@ public class HomeController {
 	private BookModel bookModel;
 
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/Start"}, method = RequestMethod.GET)
 	public ModelAndView returnHome() {
 
 		
