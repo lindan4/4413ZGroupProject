@@ -38,26 +38,8 @@
                 <h1 class="text-center">Account Details</h1>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5 d-flex flex-column">
 
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th>Order Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>${loggedInUser.firstname}</td>
-                    <td>${loggedInUser.lastname}</td>
-                    <td>${loggedInUser.email}</td>
-                    <td>${status}</td>
-                </tr>
-                </tbody>
-            </table>
 			<a href="${pageContext.request.contextPath}/orders">View My Orders</a>
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
 
