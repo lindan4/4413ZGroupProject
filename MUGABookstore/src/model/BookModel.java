@@ -2,6 +2,7 @@ package model;
 
 import dao.BookDAO;
 import dao.BookReviewDAO;
+import helper.HelperLib;
 
 import java.sql.SQLException;
 import java.time.Month;
@@ -64,9 +65,7 @@ public class BookModel {
 	}
 	
 	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws Exception {
-		String filteredContent = content.replace("<", "&lt;");
-		filteredContent = filteredContent.replace(">", "&gt;");
 		
-		brDao.publishReview(bid, reviewerName, rating, filteredContent, dateString);
+		brDao.publishReview(bid, reviewerName, rating, content, dateString);
 	}
 }

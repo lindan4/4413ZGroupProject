@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import bean.UserBean;
 import dao.UserDAO;
+import helper.HelperLib;
 
 @Controller
 public class RegistrationController {
@@ -46,9 +47,12 @@ public class RegistrationController {
 		ModelAndView mv = null;
 
 		try {
-			ud.registerUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(),
+			String filteredFirstName = HelperLib.xssPrevent(user.getFirstname());
+			String filteredLastName = HelperLib.xssPrevent(user.getLastname());
+			String filteredEmail = HelperLib.xssPrevent(user.getEmail());
+			ud.registerUser(filteredFirstName, filteredLastName, filteredEmail, user.getPassword(),
 					user.getType());
-			mv = new ModelAndView("login", "firstname", user.getFirstname());
+			mv = new ModelAndView("login", "firstname", filteredFirstName);
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 			mv = new ModelAndView("register");

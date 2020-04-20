@@ -34,7 +34,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import bean.UserBean;
 import dao.UserDAO;
-import helper.RandomStringGenerator;
+import helper.HelperLib;
 import model.UserModel;
 
 
@@ -58,7 +58,7 @@ public class BookReviewXSSTest {
 	
 	@Test
 	public void insertXSSReview() {
-		String rando = RandomStringGenerator.generateRandomString(20);
+		String rando = HelperLib.generateRandomString(20);
 		
 		wb.get("http://localhost:8080/MUGABookstore/bookinfo?bid=b0586");
 		wb.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

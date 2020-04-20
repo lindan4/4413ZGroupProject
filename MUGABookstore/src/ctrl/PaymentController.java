@@ -27,6 +27,7 @@ import bean.AddressBean;
 import bean.BookBean;
 import bean.ShoppingCartBean;
 import bean.UserBean;
+import helper.HelperLib;
 import model.OrderModel;
 import model.ShoppingCartModel;
 import model.UserModel;
@@ -81,16 +82,16 @@ public class PaymentController {
 
 		ModelAndView mv = new ModelAndView("payment_order_confirmation");
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
-		String fName = allRequestParams.get("orderFirstName");
-		String lName = allRequestParams.get("orderLastName");
-		String email = allRequestParams.get("email");
+		String fName = HelperLib.xssPrevent(allRequestParams.get("orderFirstName"));
+		String lName = HelperLib.xssPrevent(allRequestParams.get("orderLastName"));
+		String email = HelperLib.xssPrevent(allRequestParams.get("email"));
 		String password = allRequestParams.get("password");
-		String shippingAddress = allRequestParams.get("shippingAddress");
-		String shippingCity = allRequestParams.get("shippingCity");
-		String shipProv = allRequestParams.get("shippingState/Province");
-		String shipCountry = allRequestParams.get("shippingCountry");
-		String shipPostOrZip = allRequestParams.get("shippingPostal/zipcode");
-		String shipPhoneNo = allRequestParams.get("shippingPhoneNo");
+		String shippingAddress = HelperLib.xssPrevent(allRequestParams.get("shippingAddress"));
+		String shippingCity = HelperLib.xssPrevent(allRequestParams.get("shippingCity"));
+		String shipProv = HelperLib.xssPrevent(allRequestParams.get("shippingState/Province"));
+		String shipCountry = HelperLib.xssPrevent(allRequestParams.get("shippingCountry"));
+		String shipPostOrZip = HelperLib.xssPrevent(allRequestParams.get("shippingPostal/zipcode"));
+		String shipPhoneNo = HelperLib.xssPrevent(allRequestParams.get("shippingPhoneNo"));
 		AddressBean ab = new AddressBean(orderModel.getAddressId(), shippingAddress, shippingCity, shipProv,
 				shipCountry, shipPostOrZip, shipPhoneNo);
 		UserBean ub = new UserBean(fName, lName, email, password, "customer");

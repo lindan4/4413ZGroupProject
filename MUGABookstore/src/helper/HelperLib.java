@@ -2,14 +2,14 @@ package helper;
 
 import java.security.SecureRandom;
 
-public class RandomStringGenerator {
+public class HelperLib {
 	
 	final private static String lowercaseLetters = "abcdefghijklmnopqrstuvwyxz123456789";
 	final private static String uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 	
     final private static SecureRandom random = new SecureRandom();
 
-	private RandomStringGenerator() {}
+	private HelperLib() {}
 
 	
 	public static String generateRandomString(int length) {
@@ -23,5 +23,11 @@ public class RandomStringGenerator {
 			a = a + letter;
 		}
 		return a;
+	}
+	
+	public static String xssPrevent(String content) {
+		String filteredContent = content.replace("<", "&lt;");
+		filteredContent = filteredContent.replace(">", "&gt;");
+		return filteredContent;
 	}
 }

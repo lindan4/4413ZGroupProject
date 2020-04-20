@@ -15,6 +15,7 @@ import bean.ShoppingCartBean;
 import dao.AddressDAO;
 import dao.BookDAO;
 import dao.OrderDAO;
+import helper.HelperLib;
 import rx.OrderSubmittedEventPublisher;
 
 @Component
@@ -53,7 +54,11 @@ public class OrderModel {
 	public void orderBook(String lastname, String firstname, int aid, Date date, String email) throws SQLException {
 
 		try {
-			oDao.addBookOrder(lastname, firstname, aid, date, email);
+			String filteredLastName = HelperLib.xssPrevent(lastname);
+			String filteredFirstName = HelperLib.xssPrevent(firstname);
+			String filteredEmail = HelperLib.xssPrevent(email);
+
+			oDao.addBookOrder(filteredLastName, filteredFirstName, aid, date, filteredEmail);
 			this.publisher.publish();
 		} catch (Exception e) {
 			e.printStackTrace();

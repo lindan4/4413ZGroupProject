@@ -30,17 +30,9 @@ public class UserAccountController {
 			throws SQLException {
 		ModelAndView mv = new ModelAndView("user_account");
 		String statusOrder = "";
-		// Date orderDate = orderModel.getOrderDate(u.getEmail());
+
 		orderModel.updateOrderStatuses(u.getEmail());
 
-//		if (d.after(orderDate)) {
-//			statusOrder = "PROCESSED";
-//
-//		} else {
-//			statusOrder = "ORDERED";
-//
-//		}
-//		mv.addObject("status", statusOrder);
 
 		return mv;
 

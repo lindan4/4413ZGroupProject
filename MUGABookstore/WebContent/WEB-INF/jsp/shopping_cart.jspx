@@ -88,7 +88,7 @@
                                 <button action="submit" name="updateCart" value="true"
                                         class="btn mr-2 btn-dark">UPDATE
                                 </button>
-                                <button action="submit" name="checkoutCart" value="true" class="btn btn-dark">CHECKOUT
+                                <button action="submit" name="checkoutCart" value="true" class="btn btn-dark">PAYMENT
                                 </button>
                             </div>
 

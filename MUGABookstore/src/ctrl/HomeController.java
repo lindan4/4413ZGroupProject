@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import bean.BookBean;
 import bean.BookReviewBean;
 import bean.UserBean;
+import helper.HelperLib;
 import model.BookModel;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,11 +41,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/searchQuery", method = RequestMethod.POST)
 	public ModelAndView returnSearchResults(@RequestParam String searchQuery) {
+		
 		ModelAndView mv = new ModelAndView("searchQueryResults");
 
 		if (!searchQuery.isEmpty()) {
 			try {
-				TreeMap<String,BookBean> bb = bookModel.retrieveBookQuery(searchQuery);
+				String filteredSearchQuery = HelperLib.xssPrevent(searchQuery);
+				TreeMap<String,BookBean> bb = bookModel.retrieveBookQuery(filteredSearchQuery);
 				mv.addObject("queryResults", bb.values());
 				mv.addObject("queryResultCount", bb.size());
 				
@@ -97,7 +100,8 @@ public class HomeController {
 			
 			
 			//"Unknown is a placeholder until we can get accounts working."
-			bookModel.publishReview(submitBid, namePlaceholder, star, reviewInputContent, formattedDate);
+			String filteredContent = HelperLib.xssPrevent(reviewInputContent);
+			bookModel.publishReview(submitBid, namePlaceholder, star, filteredContent, formattedDate);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
