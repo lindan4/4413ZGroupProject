@@ -45,8 +45,8 @@ public class ProductCatalogueController {
         return mv;
     }
 
-    @RequestMapping(value = "/product-catalogue/{bid}", method = RequestMethod.GET)
-    public Object getProductInfo(@PathVariable("bid") String bid) {
+    @RequestMapping(value = "/rest/products", method = RequestMethod.GET)
+    public Object getProductInfo(@RequestParam String bid) {
         final BookBean book = this.bookModel.getBookByID(bid);
 
         if (book != null) {
