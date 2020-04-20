@@ -1,15 +1,15 @@
 package mappers;
 
-import bean.BookBean;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import bean.BookBean;
 
 @Component
 public class BookRowMapper implements RowMapper<BookBean> {

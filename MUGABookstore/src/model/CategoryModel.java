@@ -1,10 +1,11 @@
 package model;
 
-import bean.CategoryBean;
-import dao.CategoryDAO;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import bean.CategoryBean;
+import dao.CategoryDAO;
 
 @Component
 public class CategoryModel {

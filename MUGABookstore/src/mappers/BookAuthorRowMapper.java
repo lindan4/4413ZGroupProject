@@ -1,12 +1,12 @@
 package mappers;
 
-import bean.AuthorBean;
-import bean.BookAuthorBean;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import bean.BookAuthorBean;
 
 @Component
 public class BookAuthorRowMapper implements RowMapper<BookAuthorBean> {

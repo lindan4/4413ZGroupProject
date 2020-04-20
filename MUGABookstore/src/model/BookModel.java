@@ -1,10 +1,5 @@
 package model;
 
-import dao.BookDAO;
-import dao.BookReviewDAO;
-import helper.HelperLib;
-
-import java.sql.SQLException;
 import java.time.Month;
 import java.time.Year;
 import java.util.LinkedList;
@@ -13,10 +8,11 @@ import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import bean.BookBean;
 import bean.BookReviewBean;
+import dao.BookDAO;
+import dao.BookReviewDAO;
 
 @Component
 public class BookModel {

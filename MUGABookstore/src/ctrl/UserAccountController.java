@@ -1,7 +1,6 @@
 package ctrl;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import bean.OrderBean;
-import bean.ShoppingCartBean;
 import bean.UserBean;
 import model.OrderModel;
 

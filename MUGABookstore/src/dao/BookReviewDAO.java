@@ -2,11 +2,6 @@ package dao;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-
-import bean.BookBean;
-import bean.BookReviewBean;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +9,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import bean.BookReviewBean;
 
 @Component
 public class BookReviewDAO {
