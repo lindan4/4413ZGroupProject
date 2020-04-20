@@ -26,6 +26,7 @@ public class HelperLib {
 		return a;
 	}
 	
+	//Modify string to replace '<' and '/>' with their respective HTML escape characters to prevent XSS  
 	public static String xssPrevent(String content) {
 		String filteredContent = content.replace("<", "&lt;");
 		filteredContent = filteredContent.replace(">", "&gt;");

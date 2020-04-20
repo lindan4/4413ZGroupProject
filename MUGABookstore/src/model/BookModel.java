@@ -43,15 +43,17 @@ public class BookModel {
 		return bDao.retrieveBookQuery(query);
 	}
 	
+	//Retreve book instance, based on bid, from database
 	public BookBean getBookByID(String bid) {
 		return bDao.getBookByID(bid);
 	}
 
+	//Retrieve books sold during month from database
 	public List<BookBean> listBooksSoldDuringMonth(Year year, Month month) {
 		return bDao.listBooksSoldDuringMonth(year, month);
 	}
 
-	
+	//Get all book reviews associated with a book using bid
 	public LinkedList<BookReviewBean> retrieveBookReviews(String bid) throws Exception {
 		return brDao.retrieveBookReviews(bid);
 	}

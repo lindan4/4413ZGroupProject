@@ -11,12 +11,11 @@ import dao.CategoryDAO;
 public class CategoryModel {
     private final CategoryDAO categoryDAO;
 
-    public CategoryModel(
-            final CategoryDAO categoryDAO
-    ) {
+    public CategoryModel(final CategoryDAO categoryDAO) {
         this.categoryDAO = categoryDAO;
     }
 
+    //List categories from books and categories table
     public List<CategoryBean> listCategories(Integer limit, Integer offset) {
         return this.categoryDAO.listCategories(limit, offset);
     }

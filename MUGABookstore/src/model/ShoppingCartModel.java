@@ -22,10 +22,10 @@ public class ShoppingCartModel {
 	@Autowired
 	private OrderDAO oDao;
 
+	//Add item to shopping cart
 	public void addToShoppingCart(String bid, ShoppingCartBean sb) throws SQLException, Exception {
 		BookBean bb = bDao.getBookByID(bid);
-		// If the user has an account, then they must have a record in the database, add
-		// it there
+		
 
 		if (sb.getShoppingBean().containsKey(bb)) {
 			// Get item
@@ -65,6 +65,7 @@ public class ShoppingCartModel {
 
 	}
 
+	//Calculate shopping cart total
 	public double calculateTotal(ShoppingCartBean sb) {
 		double total = 0;
 
@@ -75,6 +76,7 @@ public class ShoppingCartModel {
 		return total;
 	}
 
+	//Insert POItems from shopping cart once purchase is complete
 	public void insertWithBID(ShoppingCartBean sb) throws SQLException {
 		List<String> s = new ArrayList<>();
 		//BookBean bb = bDao.getBookByID(bid);
