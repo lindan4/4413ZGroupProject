@@ -39,29 +39,34 @@
 			</div>
 		</div>
 		<div class="row mt-5">
-
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Order ID</th>
-						<th>Status</th>
-						<th></th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<form action="viewOrderInformation" method="GET">
-						<c:forEach var="tuple" items="${listUserOrders}">
-							<tr>
-								<td>${tuple.id}</td>
-								<td>${tuple.status}</td>
-								<td><button action="submit" name="viewOrder" id="viewOrder"
-										value="${tuple.id}">View Order Information</button></td>
-							</tr>
-						</c:forEach>
-					</form>
-				</tbody>
-			</table>
+			<c:if test="${fetchedOrderCount gt 0}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Order ID</th>
+							<th>Status</th>
+							<th></th>
+	
+						</tr>
+					</thead>
+					<tbody>
+						<form action="viewOrderInformation" method="GET">
+							<c:forEach var="tuple" items="${listUserOrders}">
+								<tr>
+									<td>${tuple.id}</td>
+									<td>${tuple.status}</td>
+									<td><button action="submit" name="viewOrder" id="viewOrder"
+											value="${tuple.id}">View Order Information</button></td>
+								</tr>
+							</c:forEach>
+						</form>
+					</tbody>
+				</table>
+			</c:if>
+			
+			<c:if test="${fetchedOrderCount le 0}">
+				<h3>No orders have been placed.</h3>
+			</c:if>
 
 		</div>
 

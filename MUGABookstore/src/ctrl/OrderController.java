@@ -54,6 +54,7 @@ public class OrderController {
 			ModelAndView mv = new ModelAndView("account_orders");
 			List<OrderBean> obList = orderModel.getOrdersByEmail(ub.getEmail());
 			mv.addObject("listUserOrders", obList);
+			mv.addObject("fetchedOrderCount", obList.size());
 			return mv;
 			
 			
