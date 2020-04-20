@@ -89,12 +89,13 @@
 							</table>
 							<div class="btn-toolbar float-right">
 								<button action="submit" name="updateCart" value="true"
-									class="btn mr-2 btn-dark">UPDATE</button>
+									class="btn mr-2 btn-dark">UPDATE COST</button>
 								<button action="submit" name="checkoutCart" value="true"
 									class="btn btn-dark">PAYMENT</button>
 							</div>
 
 						</form>
+						
 					</c:otherwise>
 				</c:choose>
 			</div>
