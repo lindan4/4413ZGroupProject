@@ -25,13 +25,17 @@ public class UserAccountController {
 	@RequestMapping(value = "/user_account", method = RequestMethod.GET)
 	public ModelAndView showUserAccount(@SessionAttribute("loggedInUser") UserBean u, HttpSession session, OrderBean ob)
 			throws SQLException {
-		ModelAndView mv = new ModelAndView("user_account");
-		String statusOrder = "";
-
-		orderModel.updateOrderStatuses(u.getEmail());
-
-
-		return mv;
+		if (session.getAttribute("loggedInUser") == null) {
+			return new ModelAndView("redirect:/login");
+			
+		}
+		else {
+			ModelAndView mv = new ModelAndView("user_account");
+			orderModel.updateOrderStatuses(u.getEmail());
+	
+	
+			return mv;
+		}
 
 	}
 
