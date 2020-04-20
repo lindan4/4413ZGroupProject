@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+
+#expiryMonth, #expiryYear {
+	padding-left: 4px;
+}
+
+#expiryYearInfo {
+	margin-left: 25%;
+}

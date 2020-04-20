@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+    <jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+                        pageEncoding="ISO-8859-1" session="true"/>
+    <jsp:output doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+                omit-xml-declaration="true"/>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>MUGA Bookstore - Search Results</title>
+        <link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
+        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
+        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
+        <link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+    <body>
+    <section class="homeSection">
+        <jsp:include page="./components/header.jspx"/>
+        <div id="mainpageHeaderDiv">
+            <h1>MUGA BOOKSTORE</h1>
+        </div>
+	
+		<div id="searchBar" class="mainElements">
+			<form action="searchQuery" method="POST">
+				<input type="text" id="searchQuery" name="searchQuery" placeholder="Search"></input>
+				<button>Search</button>
+			</form>
+		</div>
+	
+		<div id="results" class="mainElements">
+			<c:choose>
+				<c:when test="${queryResultCount le 0 }">
+					<p>There are no results.</p>
+				</c:when>
+				
+				<c:when test="${queryResultCount eq 1 }">
+					<p>There is 1 result.</p>
+				</c:when>
+				
+				<c:otherwise>
+					<p>There are ${queryResultCount} results.</p>
+				</c:otherwise>
+				
+			</c:choose>
+			
+			<c:if test="${queryResultCount ge 1}">
+				<c:forEach var="tuple" items="${queryResults}">
+					<div class="itemResult">
+						<div class="itemResultLeft">
+							<p class="itemName">${tuple.title}</p>
+							<div class="d-flex flex-row">
+								<p class="itemCategory">Category:&#160;</p>
+								<p class="itemCategory">${tuple.categories[0]}</p>
+								<c:if test="${queryResultCount gt 1}">
+									<p>,&#160;</p>
+									<a href="#" data-toggle="popover" style="color: black;" title="See Book Information for Other Categories" data-placement="right" data-trigger="focus" class="additionalCategory">...</a>
+								</c:if>
+							</div>
+							
+						</div>
+						<div class="itemResultRight">
+							<p class="itemPrice"><f:formatNumber type="currency">${tuple.price}</f:formatNumber></p>
+							<form action="bookinfo" method="GET">
+								<button name="bid" class="itemButton" value="${tuple.bid}">View</button>
+							</form>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>		
+			
+			
+			
+			
+			
+		</div>	
+	
+	
+	</section>
+	<jsp:include page="./components/footer.jspx"/>
+    </body>
+    </html>
+</jsp:root>
