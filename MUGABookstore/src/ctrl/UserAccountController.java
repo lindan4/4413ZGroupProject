@@ -29,19 +29,18 @@ public class UserAccountController {
 	public ModelAndView showUserAccount(@SessionAttribute("loggedInUser") UserBean u, HttpSession session, OrderBean ob)
 			throws SQLException {
 		ModelAndView mv = new ModelAndView("user_account");
-		Date d = new Date();
 		String statusOrder = "";
 		// Date orderDate = orderModel.getOrderDate(u.getEmail());
-		Date orderDate = orderModel.updateOrderStatus(u.getEmail(), d);
+		orderModel.updateOrderStatuses(u.getEmail());
 
-		if (d.after(orderDate)) {
-			statusOrder = "PROCESSED";
-
-		} else {
-			statusOrder = "ORDERED";
-
-		}
-		mv.addObject("status", statusOrder);
+//		if (d.after(orderDate)) {
+//			statusOrder = "PROCESSED";
+//
+//		} else {
+//			statusOrder = "ORDERED";
+//
+//		}
+//		mv.addObject("status", statusOrder);
 
 		return mv;
 

@@ -102,27 +102,44 @@ public class OrderDAO {
 		
 	}
 
-	public Date updateOrderStatus(final String email, final Date d) throws SQLException {
+	public void updateOrderStatuses(final String email) throws SQLException {
+		
+		String fetchQuery = "SELECT * FROM PO WHERE email = ? AND status = ?";
+		List<?> orders = jdbcTemplate.queryForList(fetchQuery, email, "ORDERED");
+		Date today = new Date();
+		
+		
+		String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email = ? AND id = ?";
+		for (int i = 0; i < orders.size(); i++) {
+			Map<String, Object> mp = (Map<String, Object>) orders.get(i);
+			Date date = (Date) mp.get("Date");
+			long id = (long) mp.get("id");
+			if (today.after(date)) {
+				jdbcTemplate.update(updateQuery, email, id);
 
-		final Date today = new Date();
-
-		final String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email = ?";
-		final String currentDateQuery = "SELECT date FROM PO WHERE email = ?";
-
-		final String poOrderCountQuery = "SELECT count(date) from PO where email = ?";
-
-		final Integer poOrderCount = jdbcTemplate.queryForObject(poOrderCountQuery,  new String[] { email }, Integer.class);
-
-		if (poOrderCount != null && poOrderCount > 0) {
-			final Date result = jdbcTemplate.queryForObject(currentDateQuery, new String[] { email }, Date.class);
-
-			if (today.after(result)) {
-				jdbcTemplate.update(updateQuery, email);
 			}
-			return result;
+
 		}
 
-		return today;
+//		final Date today = new Date();
+//
+//		final String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email = ?";
+//		final String currentDateQuery = "SELECT date FROM PO WHERE email = ?";
+//
+//		final String poOrderCountQuery = "SELECT count(date) from PO where email = ?";
+//
+//		final Integer poOrderCount = jdbcTemplate.queryForObject(poOrderCountQuery,  new String[] { email }, Integer.class);
+//
+//		if (poOrderCount != null && poOrderCount > 0) {
+//			final Date result = jdbcTemplate.queryForObject(currentDateQuery, new String[] { email }, Date.class);
+//
+//			if (today.after(result)) {
+//				jdbcTemplate.update(updateQuery, email);
+//			}
+//			return result;
+//		}
+//
+//		return today;
 	}
 
 

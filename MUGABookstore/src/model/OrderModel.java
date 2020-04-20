@@ -25,7 +25,7 @@ public class OrderModel {
 
 	@Autowired
 	private AddressDAO aDao;
-	
+
 	@Autowired
 	private BookDAO bDao;
 
@@ -69,26 +69,25 @@ public class OrderModel {
 //			e.printStackTrace();
 //		}
 //	}
-	
-	public Date updateOrderStatus(String email, Date date) throws SQLException
-	{
-		return oDao.updateOrderStatus(email, date);
-		
+
+	public void updateOrderStatuses(String email) throws SQLException {
+		oDao.updateOrderStatuses(email);
+
 	}
-	
+
 	public String getOrderStatusByOid(String oid) {
 		return oDao.getOrderStatusByOid(oid);
-		
+
 	}
-	
+
 	public Date getOrderDate(String email) {
 		return oDao.getOrderDate(email);
 	}
-	
+
 	public List<OrderBean> getOrdersByEmail(String email) throws Exception {
 		return oDao.getOrdersByEmail(email);
 	}
-	
+
 	public ShoppingCartBean getPOItemsByOrderID(String oid) throws Exception {
 		ShoppingCartBean sb = new ShoppingCartBean();
 		List<?> poItems = oDao.getPOItemsByOrderID(oid);
@@ -99,13 +98,10 @@ public class OrderModel {
 			int quantity = (int) itemMap.get("quantity");
 			BookBean bb = bDao.getBookByID(bid);
 			sb.getShoppingBean().put(bb, quantity);
-			
+
 		}
 		return sb;
-		
+
 	}
-	
-	
-	
 
 }
