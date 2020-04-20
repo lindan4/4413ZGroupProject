@@ -33,8 +33,8 @@ public class OrderController {
 	}
 
 
-	@RequestMapping(value = "/orders/{bid}", method = RequestMethod.GET)
-	public Object getOrdersByBid(@PathVariable("bid") String bid) {
+	@RequestMapping(value = "/rest/orders", method = RequestMethod.GET)
+	public Object getOrdersByBid(@RequestParam() String bid) {
 		final List<OrderBean> orders = this.orderModel.getOrdersByBID(bid);
 
 
