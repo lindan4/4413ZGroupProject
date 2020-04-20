@@ -25,6 +25,7 @@ public class UserAccountController {
 	@RequestMapping(value = "/user_account", method = RequestMethod.GET)
 	public ModelAndView showUserAccount(@SessionAttribute("loggedInUser") UserBean u, HttpSession session, OrderBean ob)
 			throws SQLException {
+		//Redirect visitor to login page if they are not logged in
 		if (session.getAttribute("loggedInUser") == null) {
 			return new ModelAndView("redirect:/login");
 			
@@ -41,18 +42,4 @@ public class UserAccountController {
 
 }
 
-/*
- * @RequestMapping(value="/user_account", method = RequestMethod.GET) public
- * ModelAndView showOrderStatus(String email, Date date) throws SQLException {
- * 
- * ModelAndView mv = new ModelAndView("user_account"); Date d = new Date(); Date
- * orderDate = orderModel.getOrderDate(email);
- * orderModel.updateOrderStatus(email, date);
- * 
- * if(d.after(orderDate)) { mv.addObject("status", "PROCESSED"); } else {
- * mv.addObject("status", "ORDERED");
- * 
- * } return mv;
- * 
- * }
- */
+

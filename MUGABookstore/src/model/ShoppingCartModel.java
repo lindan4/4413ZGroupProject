@@ -39,6 +39,8 @@ public class ShoppingCartModel {
 
 	public void updateShoppingCart(Map<String, String> updateQt, ShoppingCartBean sb) throws SQLException, Exception {
 		// If user has account, then also update in database
+		// Depending on the button pressed in the shopping cart page (UPDATE or PAYMENT), eacn of them emit a value that
+		// we check for under the "containsKey" invocations and execute a method depending on the operation requested
 		if (updateQt.containsKey("updateCart")) {
 			for (String bookId : updateQt.keySet()) {
 				if (!bookId.equals("updateCart")) {
