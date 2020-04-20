@@ -4,7 +4,7 @@ Spring MVC Application
 
 
 ## Overview  
-This is the codebase for our bookstore page
+The MUGA Bookstore is an online bookstore that allows users to browse and purchase books. A user can register for an account, or use the convenient guest checkout feature. Users can browse the product catalogue, submit a book review, and select, add or remove books to/from their shopping cart.
 
 
 ## Installation
