@@ -9,10 +9,10 @@ public class GetOrdersByBIDTest {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         final String bid = "b0001";
-        final String severletContext = "MUGABookstore_war_exploded";
+        final String url = "https://mugabookstore.mybluemix.net/rest/orders?bid=" + bid;
 
         final Response result = client.newCall(new Request.Builder()
-                .url("http://localhost:8080/" + severletContext + "/orders/" + bid)
+                .url(url)
                 .build())
                 .execute();
 
