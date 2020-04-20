@@ -30,7 +30,6 @@
 	                <h1>Order Success!</h1>
 	
 	                <h2>Hi ${userBean.firstname}. Thanks for shopping with us!</h2>
-	                <h4>Shipping Details</h4>
                 </c:if>
                 <c:if test="${trApp == false}">
                 	<h1>Credit Card Authorization Failed!</h1>

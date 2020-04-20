@@ -129,13 +129,14 @@ public class PaymentController {
 //		System.out.println(lName);
 		String email = ub.getEmail();
 		int sid = ab.getId();
+		int newSid = sid + 1;
 		Date date = new Date();
 		orderModel.addAddress(ab);
 		orderModel.orderBook(lName, fName, sid, date, email);
 		// Insert into poitem
 		boolean transactionApproved;
 		shoppingCartModel.insertWithBID(sb);
-		if (sid % 3 == 0) {
+		if (newSid % 3 == 0) {
 			transactionApproved = false;
 		}
 		else {
