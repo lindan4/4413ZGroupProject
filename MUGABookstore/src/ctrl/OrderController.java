@@ -63,20 +63,26 @@ public class OrderController {
 	
 	@RequestMapping(value = "/viewOrderInformation", method = RequestMethod.GET)
 	public ModelAndView viewOrderInformation(@RequestParam("viewOrder") String oid, HttpSession session) throws Exception {
-		if (session.getAttribute("loggedInUser") == null) {
-			return new ModelAndView("redirect:/login");
-			
+		try {
+			if (session.getAttribute("loggedInUser") == null) {
+				return new ModelAndView("redirect:/login");
+				
+			}
+			else {
+				ShoppingCartBean sb = orderModel.getPOItemsByOrderID(oid);
+				double price = sModel.calculateTotal(sb);
+				String orderStatus = orderModel.getOrderStatusByOid(oid);
+				ModelAndView mv = new ModelAndView("account_order_details");
+				mv.addObject("oid", oid);
+				mv.addObject("orderItemList", sb);
+				mv.addObject("orderStatus", orderStatus);
+				mv.addObject("orderPrice", price);
+				return mv;
+			}
 		}
-		else {
-			ShoppingCartBean sb = orderModel.getPOItemsByOrderID(oid);
-			double price = sModel.calculateTotal(sb);
-			String orderStatus = orderModel.getOrderStatusByOid(oid);
-			ModelAndView mv = new ModelAndView("account_order_details");
-			mv.addObject("oid", oid);
-			mv.addObject("orderItemList", sb);
-			mv.addObject("orderStatus", orderStatus);
-			mv.addObject("orderPrice", price);
-			return mv;
+		catch (Exception e) {
+			return new ModelAndView("error");
+
 		}
 	}
 	
