@@ -62,9 +62,15 @@
 							here</a>
 						<hr class="right"></hr>
 					</div>
+					
 
 
 				</form>
+				<c:if test="${accountCreated == true}">
+					<div class="panel-body mt-5">
+						<p style="color: green;">${successMessage}</p>
+					</div>
+				</c:if>
 			</div>
 		</div>
 

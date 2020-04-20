@@ -52,7 +52,10 @@ public class RegistrationController {
 			String filteredEmail = HelperLib.xssPrevent(user.getEmail());
 			ud.registerUser(filteredFirstName, filteredLastName, filteredEmail, user.getPassword(),
 					user.getType());
+			
 			mv = new ModelAndView("login", "firstname", filteredFirstName);
+			mv.addObject("successMessage", "Account successfully created! Please login.");
+			mv.addObject("accountCreated", true);
 		} catch (DuplicateKeyException e) {
 			e.printStackTrace();
 			mv = new ModelAndView("register");
