@@ -32,6 +32,7 @@ public class UserAccountController {
 		}
 		else {
 			ModelAndView mv = new ModelAndView("user_account");
+			//Update order statuses when they attempt to view account info
 			orderModel.updateOrderStatuses(u.getEmail());
 	
 	

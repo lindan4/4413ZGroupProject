@@ -44,11 +44,8 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://muga-server.mysql.database.azure.com:3306/muga_database?useSSL=true" />
-
-		<property name="username" value="muga@muga-server" />
-		<property name="password" value="eecs4413!" />
+		<property name="url" value="jdbc:mysql://localhost:3306/muga_database" />
+		<property name="username" value="root" />
 	</bean>
 
 
