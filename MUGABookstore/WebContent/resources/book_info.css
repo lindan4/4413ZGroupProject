@@ -1,48 +1,48 @@
 .book-info-container {
-    padding-top: 2rem
+	padding-top: 2rem
 }
 
 .book-cover {
-    object-fit: cover;
-    width: 100%;
+	object-fit: cover;
+	width: 100%;
 }
 
 .details-panel {
-    margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .book-price {
-    font-size: 1.5rem;
-    font-weight: 600;
+	font-size: 1.5rem;
+	font-weight: 600;
 }
 
 .stars-container {
-    margin-bottom: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .rating-comment-container {
-    margin-top: 0.25rem;
+	margin-top: 0.25rem;
 }
 
 .rating-comment {
-    color: #696969;
-    font-weight: 500;
-    font-size: 0.8rem;
+	color: #696969;
+	font-weight: 500;
+	font-size: 0.8rem;
 }
 
 .rating {
-    font-size: 0.8rem;
+	font-size: 0.8rem;
 }
 
 .checked {
-    color: orange;
+	color: orange;
 }
 
 .ratingBox {
-    margin-right: 0.5rem;
-    display: inline;
+	margin-right: 0.5rem;
+	display: inline;
 }
 
 .rating-bubble {
-    margin-right: 0.25rem;
+	margin-right: 0.25rem;
 }

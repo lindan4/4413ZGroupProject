@@ -31,10 +31,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView returnHome() {
-//		String query = "select * from book";
-//		
-//		List<?> results = jdbcTemplate.queryForList(query);
-//		System.out.println(results.toString());
+
 		
 		return new ModelAndView("home");
 	}
@@ -47,6 +44,8 @@ public class HomeController {
 		if (!searchQuery.isEmpty()) {
 			try {
 				String filteredSearchQuery = HelperLib.xssPrevent(searchQuery);
+				
+				//Search query is invoked from here
 				TreeMap<String,BookBean> bb = bookModel.retrieveBookQuery(filteredSearchQuery);
 				mv.addObject("queryResults", bb.values());
 				mv.addObject("queryResultCount", bb.size());
@@ -54,7 +53,8 @@ public class HomeController {
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ModelAndView mvError = new ModelAndView("error");
+				return mvError;
 			}
 		}
 		else {
@@ -78,8 +78,8 @@ public class HomeController {
 
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ModelAndView mvError = new ModelAndView("error");
+			return mvError;
 		}
 		return mv;
 	}
@@ -92,6 +92,7 @@ public class HomeController {
 			String formattedDate = date.toString();
 			String namePlaceholder = "Unknown";
 			
+			//If a user is logged in while posting a review, then get their first name and use it
 			if(session.getAttribute("loggedInUser") != null) {
 				UserBean ub = (UserBean) session.getAttribute("loggedInUser");
 				namePlaceholder = ub.getFirstname();
@@ -99,12 +100,10 @@ public class HomeController {
 			}
 			
 			
-			//"Unknown is a placeholder until we can get accounts working."
 			String filteredContent = HelperLib.xssPrevent(reviewInputContent);
 			bookModel.publishReview(submitBid, namePlaceholder, star, filteredContent, formattedDate);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "error";
 		}
 		
 		return "redirect:/bookinfo?bid=" + submitBid;

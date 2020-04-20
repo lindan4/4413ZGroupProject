@@ -12,6 +12,7 @@ public class HelperLib {
 	private HelperLib() {}
 
 	
+	//Create a random code consisting of uppercase letters and lowercase letters.
 	public static String generateRandomString(int length) {
 		String a = "";
 		

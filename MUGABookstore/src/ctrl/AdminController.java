@@ -36,6 +36,7 @@ public class AdminController {
         this.bookModel = bookModel;
     }
 
+    //Navigation to admin page
     @GetMapping(value = "/admin")
     public String adminDashboard(HttpSession session, Model m) {
     	if (session.getAttribute("loggedInUser") == null) {
@@ -58,7 +59,7 @@ public class AdminController {
     	}
     }
 
-
+    //Shows book statistics
     @PostMapping(value = "/admin")
     public ModelAndView bookSoldReport(
             HttpSession session,

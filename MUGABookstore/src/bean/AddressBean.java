@@ -3,12 +3,17 @@ package bean;
 public class AddressBean {
 	private String street;
 	private String city;
+	
+	//Province or state
 	private String pvOrSt;
 	private String country;
+	
+	//Postal code or zip code
 	private String postOrZip;
 	private String phoneNo;
 	private int id;
 	
+	//Store address information
 	public AddressBean() {
 		
 	}

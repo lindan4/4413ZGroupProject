@@ -65,24 +65,6 @@ public class LoginController {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
-	 * verifyLogin(@RequestParam(value = "email") String email,
-	 * 
-	 * @RequestParam(value = "password") String
-	 * password, @ModelAttribute("loggedInUser") UserBean u, Model m) throws
-	 * SQLException, Exception {
-	 * 
-	 * ModelAndView mv = null; u = userModel.getUserByEmail(email, password); if (u
-	 * == null) { m.addAttribute("loginError",
-	 * "This email or password is incorrect! Please try again."); return "login"; }
-	 * 
-	 * m.addAttribute("loggedInUser", u); return "redirect:/";
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, SessionStatus status) {

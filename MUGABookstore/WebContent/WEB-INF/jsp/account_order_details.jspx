@@ -38,11 +38,13 @@
 				<h1 class="text-center">Order Details</h1>
 			</div>
 		</div>
-		
+
 		<div class="row mt-5 d-flex flex-column">
-			<p><span class="font-weight-bold">Order ID: </span>${oid}</p>
-			<p><span class="font-weight-bold">Order Status: </span>${orderStatus}</p>
-			
+			<p>
+				<span class="font-weight-bold">Order ID: </span>${oid}</p>
+			<p>
+				<span class="font-weight-bold">Order Status: </span>${orderStatus}</p>
+
 			<table class="table table-borderless">
 				<tr>
 					<th>Item</th>
@@ -54,12 +56,12 @@
 						<td>
 							<div class="col-lg-5">${tuple.key.title}</div>
 						</td>
-						<td>				
-							<p id="${tuple.key.bid}" name="${tuple.key.bid}">${tuple.value}</p>					
+						<td>
+							<p id="${tuple.key.bid}" name="${tuple.key.bid}">${tuple.value}</p>
 						</td>
 						<c:set var="itemTotal" value="${tuple.value * tuple.key.price}" />
 						<td><f:formatNumber type="currency">${itemTotal}</f:formatNumber></td>
-						
+
 					</tr>
 				</c:forEach>
 				<tr>

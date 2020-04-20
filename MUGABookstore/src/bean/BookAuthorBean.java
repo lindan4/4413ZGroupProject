@@ -1,6 +1,7 @@
 package bean;
 
 public class BookAuthorBean {
+	//bid = book id
     private String bid;
 
     private String authorId;

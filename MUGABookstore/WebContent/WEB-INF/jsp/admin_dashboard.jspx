@@ -1,93 +1,102 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-          xmlns:c="http://java.sun.com/jsp/jstl/core"
-          xmlns:f="http://java.sun.com/jsp/jstl/fmt"
-          version="2.0" xmlns:form="http://www.springframework.org/tags/form">
-    <jsp:directive.page contentType="text/html; charset=ISO-8859-1"
-                        pageEncoding="ISO-8859-1" session="false"/>
-    <jsp:output doctype-root-element="html"
-                doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-                omit-xml-declaration="true"/>
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Admin Dashboard</title>
-        <link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
-        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
-        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="resources/admin_dashboard.css" type="text/css"/>
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0"
+	xmlns:form="http://www.springframework.org/tags/form">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="false" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="resources/index.css" type="text/css"
+	title="cse4413" media="screen, print" />
+<link rel="stylesheet" href="resources/navigation.css" type="text/css" />
+<link rel="stylesheet" href="resources/common.css" type="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="resources/admin_dashboard.css"
+	type="text/css" />
 
-        <link rel="stylesheet" href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js">;</script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
-                integrity="sha256-nkP8cj5xaTdWK/BsZl+57ZCE/Y/i4UNtbNTpgH+6Taw=" crossorigin="anonymous">;</script>
-        <script type="text/javascript" src="resources/order-submitted-listener.js">;</script>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js">;</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+	integrity="sha256-nkP8cj5xaTdWK/BsZl+57ZCE/Y/i4UNtbNTpgH+6Taw="
+	crossorigin="anonymous">;</script>
+<script type="text/javascript"
+	src="resources/order-submitted-listener.js">;</script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    </head>
-    <body>
-    <section>
-        <jsp:include page="./components/header.jspx"/>
-        <div class="admin-dashboard-container">
-            <div>
-                <form method="post" action="${pageContext.request.contextPath}/admin">
-                    <h2>Books Sold Per Month Report </h2>
-                    <div class="form-group">
-                        <label id="date">Report Date: </label>
-                        <input name="date" aria-label="date" type="month"
-                               value="${reportDate != null ? reportDate : '2020-04'}"/>
-                        <button type="submit">Submit</button>
-                    </div>
-                </form>
+</head>
+<body>
+	<section>
+		<jsp:include page="./components/header.jspx" />
+		<div class="admin-dashboard-container">
+			<div>
+				<form method="post"
+					action="${pageContext.request.contextPath}/admin">
+					<h2>Books Sold Per Month Report</h2>
+					<div class="form-group">
+						<label id="date">Report Date: </label> <input name="date"
+							aria-label="date" type="month"
+							value="${reportDate != null ? reportDate : '2020-04'}" />
+						<button type="submit">Submit</button>
+					</div>
+				</form>
 
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">BID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total Earnings</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="book" items="${books}">
-                        <tr>
-                            <td>${book.bid}</td>
-                            <td>${book.title}</td>
-                            <td>${book.count}</td>
-                            <td>${book.count * book.price}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <hr style="width: 100%"/>
-            <div class="real-time-analytics-container">
-                <h2>Top 10 Most Sold Books All Time</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">BID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Sales</th>
-                    </tr>
-                    </thead>
-                    <tbody>;
-                    <c:forEach var="book" items="${booksLifetime}">
-                        <tr>
-                            <td>${book.bid}</td>
-                            <td>${book.title}</td>
-                            <td>${book.count}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <jsp:include page="./components/footer.jspx"/>
-    </body>
-    </html>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">BID</th>
+							<th scope="col">Title</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Total Earnings</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="book" items="${books}">
+							<tr>
+								<td>${book.bid}</td>
+								<td>${book.title}</td>
+								<td>${book.count}</td>
+								<td>${book.count * book.price}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<hr style="width: 100%" />
+			<div class="real-time-analytics-container">
+				<h2>Top 10 Most Sold Books All Time</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">BID</th>
+							<th scope="col">Title</th>
+							<th scope="col">Sales</th>
+						</tr>
+					</thead>
+					<tbody>
+						;
+						<c:forEach var="book" items="${booksLifetime}">
+							<tr>
+								<td>${book.bid}</td>
+								<td>${book.title}</td>
+								<td>${book.count}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<jsp:include page="./components/footer.jspx" />
+</body>
+	</html>
 </jsp:root>

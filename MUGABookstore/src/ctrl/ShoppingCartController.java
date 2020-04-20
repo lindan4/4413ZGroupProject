@@ -67,7 +67,6 @@ public class ShoppingCartController {
 		return "redirect:/cart";
 	}
 
-	// Feel iffy about placing this here. Might change.
 	@ModelAttribute("shoppingCart")
 	public ShoppingCartBean getShoppingCartBean() {
 		return new ShoppingCartBean();
