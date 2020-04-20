@@ -60,7 +60,7 @@ public class LoginTest {
 	@Test
 	//Attempt to fetch one user using SQL injection method on email
 	public void fetchUser() throws Exception {
-		String email = " '' OR 1 = 1 LIMIT 1 -- ' ";
+		String email = "' OR 1 = 1 LIMIT 1 -- ' ]";
 		String password = "12345678";
 		
 		
