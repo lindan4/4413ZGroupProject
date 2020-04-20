@@ -74,15 +74,9 @@
                     <h4 class="bg-light border-bottom">Shipping
                         Method</h4>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input"
+                        <input type="checkbox" class="custom-control-input" readonly="readonly" checked="checked"
                                id="basicShipping"></input><label class="custom-control-label"
                                                                  for="basicShipping">Basic Shipping</label>
-                        <input type="checkbox" class="custom-control-input"
-                               id="standardShipping"></input><label class="custom-control-label"
-                                                                    for="standardShipping">Default unchecked</label>
-                        <input type="checkbox" class="custom-control-input"
-                               id="defaultUnchecked"></input><label class="custom-control-label"
-                                                                    for="defaultUnchecked">Default unchecked</label>
                     </div>
                 </div>
             </div>

@@ -71,30 +71,5 @@ public class OrderController {
 		mv.addObject("orderPrice", price);
 		return mv;
 	}
-
-	/*
-	@RequestMapping(value="/orderComplete", method=RequestMethod.GET)
-	public String showOrderDetails() {
-		return "order_complete";
-		
-	}
-	*/
-	/*
-	@RequestMapping(value="/orderComplete", method=RequestMethod.POST)
-	public ModelAndView placeOrder(@SessionAttribute("shoppingCart") ShoppingCartBean sb,
-			@RequestParam Map<String, String> allRequestParams, HttpSession session) throws SQLException {
-		
-		ModelAndView mv = new ModelAndView("order_complete");
-		//String fName = allRequestParams.get("orderFirstName");
-		//String lName = allRequestParams.get("orderLastName");
-		//String email = allRequestParams.get("email");
-		//String shippingAddress = allRequestParams.get("shippingAddress");
-		
-		orderModel.orderBook("4", "smith", "alex", "ORDERED", "4700 Keele Street");
-		
-		return mv;
-
-	}
-	*/
 	
 }
