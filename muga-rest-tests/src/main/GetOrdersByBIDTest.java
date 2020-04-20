@@ -1,16 +1,16 @@
-import okhttp3.HttpUrl;
+package main;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
 
-public class GetBookByBIDTest {
+public class GetOrdersByBIDTest {
     public static void main(String[] args) throws Exception {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         final String bid = "b0001";
-        final String url = "https://mugabookstore.mybluemix.net/rest/products?bid=" + bid;
+        final String url = "https://mugabookstore.mybluemix.net/rest/orders?bid=" + bid;
 
         final Response result = client.newCall(new Request.Builder()
                 .url(url)
