@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-          xmlns:c="http://java.sun.com/jsp/jstl/core"
-          xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-          xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-    <jsp:directive.page contentType="text/html; charset=ISO-8859-1"
-                        pageEncoding="ISO-8859-1" session="true"/>
-    <jsp:output doctype-root-element="html"
-                doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-                omit-xml-declaration="true"/>
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Order Confirmation</title>
-        <link rel="stylesheet"
-              href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="resources/order.css" type="text/css"/>
-        <link rel="stylesheet" href="resources/index.css" type="text/css" title="cse4413" media="screen, print"/>
-        <link rel="stylesheet" href="resources/navigation.css" type="text/css"/>
-        <link rel="stylesheet" href="resources/common.css" type="text/css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    </head>
-    <body>
-    <jsp:include page="./components/header.jspx"/>
-    <div class="container">
-        <div class="row">
-            <div class="col">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Order Confirmation</title>
+<link rel="stylesheet"
+	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/order.css" type="text/css" />
+<link rel="stylesheet" href="resources/index.css" type="text/css"
+	title="cse4413" media="screen, print" />
+<link rel="stylesheet" href="resources/navigation.css" type="text/css" />
+<link rel="stylesheet" href="resources/common.css" type="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+	<jsp:include page="./components/header.jspx" />
+	<div class="container">
+		<div class="row">
+			<div class="col">
 				<c:if test="${trApp == true}">
-				
-	                <h1>Order Success!</h1>
-	
-	                <h2>Hi ${userBean.firstname}. Order Successfully Completed.</h2>
-	                <h2> Thanks for shopping with us!</h2>
-                </c:if>
-                <c:if test="${trApp == false}">
-                	<h1>Credit Card Authorization Failed!</h1>
-	                <h2>Hi ${userBean.firstname}. Unfortunately your credit card has been denied and thus this order has not been placed! Please try again.</h2>
-                </c:if>
 
-            </div>
-        </div>
-    </div>
-	<jsp:include page="./components/footer.jspx"/>
-    </body>
-    </html>
+					<h1>Order Success!</h1>
+
+					<h2>Hi ${userBean.firstname}. Order Successfully Completed.</h2>
+					<h2>Thanks for shopping with us!</h2>
+				</c:if>
+				<c:if test="${trApp == false}">
+					<h1>Credit Card Authorization Failed!</h1>
+					<h2>Hi ${userBean.firstname}. Unfortunately your credit card
+						has been denied and thus this order has not been placed! Please
+						try again.</h2>
+				</c:if>
+
+			</div>
+		</div>
+	</div>
+	<jsp:include page="./components/footer.jspx" />
+</body>
+	</html>
 </jsp:root>

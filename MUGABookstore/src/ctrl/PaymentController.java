@@ -1,32 +1,27 @@
 package ctrl;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bean.AddressBean;
-import bean.BookBean;
 import bean.ShoppingCartBean;
 import bean.UserBean;
+import helper.HelperLib;
 import model.OrderModel;
 import model.ShoppingCartModel;
 import model.UserModel;
@@ -81,16 +76,16 @@ public class PaymentController {
 
 		ModelAndView mv = new ModelAndView("payment_order_confirmation");
 		double totalSbPrice = shoppingCartModel.calculateTotal(sb);
-		String fName = allRequestParams.get("orderFirstName");
-		String lName = allRequestParams.get("orderLastName");
-		String email = allRequestParams.get("email");
+		String fName = HelperLib.xssPrevent(allRequestParams.get("orderFirstName"));
+		String lName = HelperLib.xssPrevent(allRequestParams.get("orderLastName"));
+		String email = HelperLib.xssPrevent(allRequestParams.get("email"));
 		String password = allRequestParams.get("password");
-		String shippingAddress = allRequestParams.get("shippingAddress");
-		String shippingCity = allRequestParams.get("shippingCity");
-		String shipProv = allRequestParams.get("shippingState/Province");
-		String shipCountry = allRequestParams.get("shippingCountry");
-		String shipPostOrZip = allRequestParams.get("shippingPostal/zipcode");
-		String shipPhoneNo = allRequestParams.get("shippingPhoneNo");
+		String shippingAddress = HelperLib.xssPrevent(allRequestParams.get("shippingAddress"));
+		String shippingCity = HelperLib.xssPrevent(allRequestParams.get("shippingCity"));
+		String shipProv = HelperLib.xssPrevent(allRequestParams.get("shippingState/Province"));
+		String shipCountry = HelperLib.xssPrevent(allRequestParams.get("shippingCountry"));
+		String shipPostOrZip = HelperLib.xssPrevent(allRequestParams.get("shippingPostal/zipcode"));
+		String shipPhoneNo = HelperLib.xssPrevent(allRequestParams.get("shippingPhoneNo"));
 		AddressBean ab = new AddressBean(orderModel.getAddressId(), shippingAddress, shippingCity, shipProv,
 				shipCountry, shipPostOrZip, shipPhoneNo);
 		UserBean ub = new UserBean(fName, lName, email, password, "customer");

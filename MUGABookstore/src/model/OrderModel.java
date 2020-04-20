@@ -15,6 +15,7 @@ import bean.ShoppingCartBean;
 import dao.AddressDAO;
 import dao.BookDAO;
 import dao.OrderDAO;
+import helper.HelperLib;
 import rx.OrderSubmittedEventPublisher;
 
 @Component
@@ -50,25 +51,21 @@ public class OrderModel {
 		return oDao.getOrdersByBID(bid);
 	}
 
+	//Add PO (purchase order information) to database
 	public void orderBook(String lastname, String firstname, int aid, Date date, String email) throws SQLException {
 
 		try {
-			oDao.addBookOrder(lastname, firstname, aid, date, email);
+			String filteredLastName = HelperLib.xssPrevent(lastname);
+			String filteredFirstName = HelperLib.xssPrevent(firstname);
+			String filteredEmail = HelperLib.xssPrevent(email);
+
+			oDao.addBookOrder(filteredLastName, filteredFirstName, aid, date, filteredEmail);
 			this.publisher.publish();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-//	public void orderBookItem(String bid, double price) throws SQLException {
-//
-//		try {
-//			int o = oDao.getOrderId();
-//			oDao.addBookOrderItem(bid, price);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public void updateOrderStatuses(String email) throws SQLException {
 		oDao.updateOrderStatuses(email);
@@ -84,10 +81,13 @@ public class OrderModel {
 		return oDao.getOrderDate(email);
 	}
 
+	//Retriever orders by email from database
 	public List<OrderBean> getOrdersByEmail(String email) throws Exception {
 		return oDao.getOrdersByEmail(email);
 	}
 
+	
+	//Retrieve POItems using its associated order id from database
 	public ShoppingCartBean getPOItemsByOrderID(String oid) throws Exception {
 		ShoppingCartBean sb = new ShoppingCartBean();
 		List<?> poItems = oDao.getPOItemsByOrderID(oid);

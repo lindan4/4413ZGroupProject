@@ -2,16 +2,17 @@ package helper;
 
 import java.security.SecureRandom;
 
-public class RandomStringGenerator {
+public class HelperLib {
 	
 	final private static String lowercaseLetters = "abcdefghijklmnopqrstuvwyxz123456789";
 	final private static String uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 	
     final private static SecureRandom random = new SecureRandom();
 
-	private RandomStringGenerator() {}
+	private HelperLib() {}
 
 	
+	//Create a random code consisting of uppercase letters and lowercase letters.
 	public static String generateRandomString(int length) {
 		String a = "";
 		
@@ -23,5 +24,12 @@ public class RandomStringGenerator {
 			a = a + letter;
 		}
 		return a;
+	}
+	
+	//Modify string to replace '<' and '/>' with their respective HTML escape characters to prevent XSS  
+	public static String xssPrevent(String content) {
+		String filteredContent = content.replace("<", "&lt;");
+		filteredContent = filteredContent.replace(">", "&gt;");
+		return filteredContent;
 	}
 }

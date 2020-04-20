@@ -1,9 +1,5 @@
 package model;
 
-import dao.BookDAO;
-import dao.BookReviewDAO;
-
-import java.sql.SQLException;
 import java.time.Month;
 import java.time.Year;
 import java.util.LinkedList;
@@ -12,10 +8,11 @@ import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import bean.BookBean;
 import bean.BookReviewBean;
+import dao.BookDAO;
+import dao.BookReviewDAO;
 
 @Component
 public class BookModel {
@@ -46,15 +43,17 @@ public class BookModel {
 		return bDao.retrieveBookQuery(query);
 	}
 	
+	//Retreve book instance, based on bid, from database
 	public BookBean getBookByID(String bid) {
 		return bDao.getBookByID(bid);
 	}
 
+	//Retrieve books sold during month from database
 	public List<BookBean> listBooksSoldDuringMonth(Year year, Month month) {
 		return bDao.listBooksSoldDuringMonth(year, month);
 	}
 
-	
+	//Get all book reviews associated with a book using bid
 	public LinkedList<BookReviewBean> retrieveBookReviews(String bid) throws Exception {
 		return brDao.retrieveBookReviews(bid);
 	}
@@ -64,9 +63,7 @@ public class BookModel {
 	}
 	
 	public void publishReview(String bid, String reviewerName, int rating, String content, String dateString) throws Exception {
-		String filteredContent = content.replace("<", "&lt;");
-		filteredContent = filteredContent.replace(">", "&gt;");
 		
-		brDao.publishReview(bid, reviewerName, rating, filteredContent, dateString);
+		brDao.publishReview(bid, reviewerName, rating, content, dateString);
 	}
 }

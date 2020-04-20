@@ -1,18 +1,17 @@
 @charset "ISO-8859-1";
 
-#mainpageHeaderDiv > h1 {
+#mainpageHeaderDiv>h1 {
 	font-family: verdana;
 	text-align: center;
 	font-size: 70px
 }
-
 
 .homeSection {
 	display: block;
 	margin-bottom: 10rem;
 }
 
-#searchBar > input {
+#searchBar>input {
 	width: 90%;
 }
 
@@ -31,7 +30,7 @@
 	background-color: #333;
 }
 
-#results > p {
+#results>p {
 	font-size: 45px;
 }
 
@@ -42,12 +41,11 @@
 	border-bottom: 2px solid black;
 }
 
-
-
-.itemResultLeft > .itemName, .itemResultRight > .itemPrice {
+.itemResultLeft>.itemName, .itemResultRight>.itemPrice {
 	font-size: 20px;
 }
-.itemResultLeft > .itemCategory {
+
+.itemResultLeft>.itemCategory {
 	color: gray;
 }
 
@@ -89,8 +87,6 @@
 	flex-direction: row;
 	border-top: 1px solid gray;
 	border-bottom: 1px solid gray;
-	
-	
 }
 
 .reviewItemRight {

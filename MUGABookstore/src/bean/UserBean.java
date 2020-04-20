@@ -1,7 +1,5 @@
 package bean;
 
-import java.util.Map;
-
 public class UserBean {
 
 	private String firstname;

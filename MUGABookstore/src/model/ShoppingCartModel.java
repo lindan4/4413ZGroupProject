@@ -2,13 +2,11 @@ package model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import bean.BookBean;
 import bean.ShoppingCartBean;
@@ -24,10 +22,10 @@ public class ShoppingCartModel {
 	@Autowired
 	private OrderDAO oDao;
 
+	//Add item to shopping cart
 	public void addToShoppingCart(String bid, ShoppingCartBean sb) throws SQLException, Exception {
 		BookBean bb = bDao.getBookByID(bid);
-		// If the user has an account, then they must have a record in the database, add
-		// it there
+		
 
 		if (sb.getShoppingBean().containsKey(bb)) {
 			// Get item
@@ -41,6 +39,8 @@ public class ShoppingCartModel {
 
 	public void updateShoppingCart(Map<String, String> updateQt, ShoppingCartBean sb) throws SQLException, Exception {
 		// If user has account, then also update in database
+		// Depending on the button pressed in the shopping cart page (UPDATE or PAYMENT), eacn of them emit a value that
+		// we check for under the "containsKey" invocations and execute a method depending on the operation requested
 		if (updateQt.containsKey("updateCart")) {
 			for (String bookId : updateQt.keySet()) {
 				if (!bookId.equals("updateCart")) {
@@ -65,6 +65,7 @@ public class ShoppingCartModel {
 
 	}
 
+	//Calculate shopping cart total
 	public double calculateTotal(ShoppingCartBean sb) {
 		double total = 0;
 
@@ -75,6 +76,7 @@ public class ShoppingCartModel {
 		return total;
 	}
 
+	//Insert POItems from shopping cart once purchase is complete
 	public void insertWithBID(ShoppingCartBean sb) throws SQLException {
 		List<String> s = new ArrayList<>();
 		//BookBean bb = bDao.getBookByID(bid);

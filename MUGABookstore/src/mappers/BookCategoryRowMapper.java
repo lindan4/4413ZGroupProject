@@ -1,11 +1,12 @@
 package mappers;
 
-import bean.BookCategoryBean;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import bean.BookCategoryBean;
 
 @Component
 public class BookCategoryRowMapper implements RowMapper<BookCategoryBean> {

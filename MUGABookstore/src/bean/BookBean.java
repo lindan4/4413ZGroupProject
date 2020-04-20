@@ -1,12 +1,11 @@
 package bean;
 
-import org.springframework.lang.Nullable;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.springframework.lang.Nullable;
 
 public class BookBean implements Comparable<BookBean> {
 	

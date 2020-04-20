@@ -1,26 +1,15 @@
 package dao;
 
-import java.util.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Component;
 
-import bean.AddressBean;
-import bean.BookBean;
-import bean.BookReviewBean;
 import bean.OrderBean;
-import bean.ShoppingCartBean;
-import bean.UserBean;
 import mappers.OrderRowMapper;
 
 @Component
@@ -121,25 +110,6 @@ public class OrderDAO {
 
 		}
 
-//		final Date today = new Date();
-//
-//		final String updateQuery = "UPDATE PO SET status='PROCESSED' WHERE email = ?";
-//		final String currentDateQuery = "SELECT date FROM PO WHERE email = ?";
-//
-//		final String poOrderCountQuery = "SELECT count(date) from PO where email = ?";
-//
-//		final Integer poOrderCount = jdbcTemplate.queryForObject(poOrderCountQuery,  new String[] { email }, Integer.class);
-//
-//		if (poOrderCount != null && poOrderCount > 0) {
-//			final Date result = jdbcTemplate.queryForObject(currentDateQuery, new String[] { email }, Date.class);
-//
-//			if (today.after(result)) {
-//				jdbcTemplate.update(updateQuery, email);
-//			}
-//			return result;
-//		}
-//
-//		return today;
 	}
 
 
