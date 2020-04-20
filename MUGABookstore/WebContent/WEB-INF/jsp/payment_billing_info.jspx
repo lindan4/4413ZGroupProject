@@ -14,7 +14,6 @@
 <title>Checkout - Billing Information</title>
 <link rel="stylesheet"
 	href="webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/order.css" type="text/css" />
 <link rel="stylesheet" href="resources/index.css" type="text/css"
 	title="cse4413" media="screen, print" />
 <link rel="stylesheet" href="resources/navigation.css" type="text/css" />
@@ -35,7 +34,7 @@
 
 			<div class="col-md-5 border border-black">
 				<form action="submitBillInfo" method="post"
-					onsubmit="return validate();">
+					onsubmit="return validate(${hideUserCreate});">
 					<div id="nameInfo" class="pb-2 d-flex flex-column">
 						<h4 class="bg-light border-bottom">Name</h4>
 
@@ -60,12 +59,16 @@
 								</c:when>
 								<c:otherwise>
 									<div class="form-group">
+									<span id="nameError" style="display: none">Please enter
+											first name.</span>
 										<input type="text" class="form-control" name="orderFirstName"
 											id="orderFirstName" readonly="readonly"
 											value="${loggedInUser.firstname}"></input>
 
 									</div>
 									<div class="form-group">
+									<span id="lastError" style="display: none">Please enter
+											last name.</span>
 										<input type="text" class="form-control" name="orderLastName"
 											id="orderLastName" readonly="readonly"
 											value="${loggedInUser.lastname}"></input>
@@ -265,6 +268,7 @@
 						<button class="btn btn-dark mr-2" name="cancelBillingPost"
 							type="button" onclick="history.back();" value="back">CANCEL
 						</button>
+						
 						<button type="submit" class="btn btn-dark"
 							name="submitBillingPost" value="true">NEXT</button>
 					</div>

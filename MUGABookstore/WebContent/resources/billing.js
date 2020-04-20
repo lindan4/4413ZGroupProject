@@ -13,7 +13,7 @@ function toggleBilling() {
 	}
 }
 
-function validate() {
+function validate(userHide) {
 	let ok = true;
 
 	/*
@@ -191,24 +191,27 @@ function validate() {
 
 	const password = document.getElementById("password");
 	const email = document.getElementById("email");
-
-	if ((email && password) == null) {
-	} else {
-
-		if (email.value === " " || (!email.value.match(validEmail))) {
-			document.getElementById("emailError").style.display = "inline";
-			document.getElementById("emailError").style.color = "red";
-			ok = false;
-		}
-		if (password.value.length <= 6 || password.value === "") {
-			document.getElementById("passwordError").style.display = "inline";
-			document.getElementById("passwordError").style.color = "red";
-			ok = false;
+	if (!password) {
+		
+		if ((email && password) == null) {
 		} else {
-			document.getElementById("passwordError").style.display = "none";
-			document.getElementById("emailError").style.display = "none";
+	
+			if (email.value === " " || (!email.value.match(validEmail))) {
+				document.getElementById("emailError").style.display = "inline";
+				document.getElementById("emailError").style.color = "red";
+				ok = false;
+			}
+			if (password.value.length <= 6 || password.value === "") {
+				document.getElementById("passwordError").style.display = "inline";
+				document.getElementById("passwordError").style.color = "red";
+				ok = false;
+			} else {
+				document.getElementById("passwordError").style.display = "none";
+				document.getElementById("emailError").style.display = "none";
+			}
 		}
 	}
+	
 
 	/*
 	 * May use Stripe

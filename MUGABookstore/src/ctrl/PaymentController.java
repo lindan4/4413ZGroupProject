@@ -126,7 +126,6 @@ public class PaymentController {
 
 		String fName = ub.getFirstname();
 		String lName = ub.getLastname();
-//		System.out.println(lName);
 		String email = ub.getEmail();
 		int sid = ab.getId();
 		int newSid = sid + 1;
