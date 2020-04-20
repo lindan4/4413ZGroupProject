@@ -6,8 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,9 +32,8 @@ public class BookReviewXSSTest {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
 		options.setPageLoadStrategy(PageLoadStrategy.NONE);
-		System.setProperty("webdriver.chrome.driver", "WebDriver/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "WebContent/resources/ChromeDriver/chromedriver.exe");
 		wb = new ChromeDriver(options);
-		wb.manage().window().maximize();
 	}
 	
 	@Test
@@ -40,8 +41,13 @@ public class BookReviewXSSTest {
 		String rando = HelperLib.generateRandomString(20);
 		
 		wb.get("http://localhost:8080/MUGABookstore/bookinfo?bid=b0586");
-		wb.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		wb.findElement(By.id("fourStar")).click();
+		wb.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+		
+		WebElement we = wb.findElement(By.id("fourStar"));
+		JavascriptExecutor executor = (JavascriptExecutor) wb;
+		executor.executeScript("arguments[0].click();", we);
+		
 
 		wb.findElement(By.id("reviewInputContent")).sendKeys("<script>alert('Boom" + rando  +"')</script>");
 		
