@@ -9,7 +9,7 @@
 			<a class="navbar-brand" href="#">MUGA</a>
 			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item"><a
-					href="${pageContext.request.contextPath}/Start" class="nav-link">Home</a>
+					href="${pageContext.request.contextPath}/" class="nav-link">Home</a>
 				</li>
 				<c:if
 					test="${fn:contains(pageContext.request.requestURI, 'catalogue')}">
